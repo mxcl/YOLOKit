@@ -1,5 +1,6 @@
 #import "MBActionSheet.m"
 #import "NSArray+mxcl.m"
+#import "NSNumber+mxcl.m"
 #import "NSString+mxcl.m"
 #import "NSThread+mxcl.m"
 #import "NSURLConnection+mxcl.m"
