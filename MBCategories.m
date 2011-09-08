@@ -6,4 +6,5 @@
 #import "UIAlertView+mxcl.m"
 #import "UIColor+mxcl.m"
 #import "UIAlertView+mxcl.m"
+#import "UIApplication+mxcl.m"
 #import "UITableView+mxcl.m"
