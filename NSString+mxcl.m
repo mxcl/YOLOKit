@@ -7,7 +7,7 @@
 
 - (NSNumber *)wordCount {
     __block int count = 0;
-    [self enumerateSubstringsInRange:range
+    [self enumerateSubstringsInRange:[self range]
                                options:NSStringEnumerationByWords
                             usingBlock:^(NSString *word,
                                          NSRange wordRange,
@@ -18,5 +18,9 @@
         }
     ];
     return [NSNumber numberWithInt:count];
+}
+
+- (NSRange)range {
+    return NSMakeRange(0, self.length);
 }
 @end
