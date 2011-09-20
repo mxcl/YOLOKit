@@ -9,3 +9,4 @@
 #import "UIAlertView+mxcl.m"
 #import "UIApplication+mxcl.m"
 #import "UITableView+mxcl.m"
+#import "UIView+mxcl.m"
