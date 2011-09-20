@@ -12,7 +12,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:msg
                                                            delegate:nil
-                                                  cancelButtonTitle:@"Cancel"
+                                                  cancelButtonTitle:@"That Sucks!"
                                                   otherButtonTitles:nil];
         [alertView show];
         [alertView release];
