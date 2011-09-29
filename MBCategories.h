@@ -10,3 +10,4 @@
 #import "UIApplication+mxcl.h"
 #import "UITableView+mxcl.h"
 #import "UIView+mxcl.h"
+#import "UIWebView+mxcl.h"
