@@ -2,4 +2,5 @@
 
 @interface UIView (mxcl)
 - (NSArray *)allSubviews;
+- (void)dumpViewTree;
 @end
