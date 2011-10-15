@@ -2,5 +2,5 @@
 
 @interface UIView (mxcl)
 - (NSArray *)allSubviews;
-- (void)dumpViewTree;
+- (void)dumpViewTree; // eg. [[[UIApplication sharedApplication] keyWindow] dumpViewTree];
 @end
