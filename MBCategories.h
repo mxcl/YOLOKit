@@ -1,9 +1,11 @@
-#import "MBActionSheet.h"
 #import "NSArray+mxcl.h"
 #import "NSNumber+mxcl.h"
 #import "NSString+mxcl.h"
-#import "NSThread+mxcl.H"
 #import "NSURLConnection+mxcl.h"
+#import "NSThread+mxcl.H"
+
+#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
+#import "MBActionSheet.h"
 #import "UIAlertView+mxcl.h"
 #import "UIColor+mxcl.h"
 #import "UIAlertView+mxcl.h"
@@ -11,3 +13,4 @@
 #import "UITableView+mxcl.h"
 #import "UIView+mxcl.h"
 #import "UIWebView+mxcl.h"
+#endif
