@@ -2,13 +2,14 @@
 
 @implementation NSArray (RubyEnumerable)
 - (NSArray *)map:(id (^)(id obj))block {
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
+    id objs[self.count];
+    int ii = 0;
     for (id item in self) {
         id o = block(item);
         if (o)
-            [array addObject:o];
+            objs[ii++] = o;
     }
-    return array;
+    return [NSArray arrayWithObjects:objs count:ii];
 }
 @end
 
