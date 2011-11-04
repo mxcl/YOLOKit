@@ -11,6 +11,16 @@
     }
     return [NSArray arrayWithObjects:objs count:ii];
 }
+
+- (id)select:(BOOL (^)(id o))block {
+    id objs[self.count];
+    int ii = 0;
+    for (id item in self) {
+        if (block(item))
+            objs[ii++] = item;
+    }
+    return [NSArray arrayWithObjects:objs count:ii];
+}
 @end
 
 

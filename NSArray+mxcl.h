@@ -2,6 +2,7 @@
 
 @interface NSArray (RubyEnumerable)
 - (id)map:(id (^)(id o))block;
+- (id)select:(BOOL (^)(id o))block;
 @end
 
 @interface NSArray (mxcl)
