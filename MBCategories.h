@@ -7,9 +7,10 @@
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "MBActionSheet.h"
 #import "UIAlertView+mxcl.h"
-#import "UIColor+mxcl.h"
 #import "UIAlertView+mxcl.h"
 #import "UIApplication+mxcl.h"
+#import "UIColor+mxcl.h"
+#import "UIImage+mxcl.h"
 #import "UITableView+mxcl.h"
 #import "UIView+mxcl.h"
 #import "UIWebView+mxcl.h"
