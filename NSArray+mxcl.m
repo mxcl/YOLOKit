@@ -33,6 +33,23 @@
             ? [self objectAtIndex:0]
             : nil;
 }
+- (id)shuffledArray {
+    switch (self.count) {
+        case 0:
+        case 1:
+            return self;
+        case 2:
+            return [NSArray arrayWithObjects:[self objectAtIndex:1], [self objectAtIndex:0], nil];
+        default: {
+            NSMutableArray *ll = [NSMutableArray arrayWithArray:self];
+            do {
+                for (int i = ll.count - 1; i > 0; --i) // Knuth-Fisher-Yates
+                    [ll exchangeObjectAtIndex:rand() % (i + 1) withObjectAtIndex:i];
+            } while ([ll isEqualToArray:self]); // dangerous!
+            return ll;
+        }
+    }
+}
 @end
 
 
