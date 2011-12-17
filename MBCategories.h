@@ -13,6 +13,7 @@
 #import "UIColor+mxcl.h"
 #import "UIImage+mxcl.h"
 #import "UITableView+mxcl.h"
+#import "UITextView+mxcl.h"
 #import "UIView+mxcl.h"
 #import "UIWebView+mxcl.h"
 #endif
