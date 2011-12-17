@@ -1,4 +1,5 @@
 #import "NSArray+mxcl.h"
+#import "NSObject+mxcl.h"
 #import "NSNumber+mxcl.h"
 #import "NSString+mxcl.h"
 #import "NSURLConnection+mxcl.h"
