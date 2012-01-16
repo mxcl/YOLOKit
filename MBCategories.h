@@ -16,4 +16,9 @@
 #import "UITextView+mxcl.h"
 #import "UIView+mxcl.h"
 #import "UIWebView+mxcl.h"
+
+static inline CGPoint MBRectGetCenter(CGRect rect) {
+    return CGPointMake(rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height / 2);
+}
+
 #endif
