@@ -3,6 +3,7 @@
 @interface NSArray (RubyEnumerable)
 - (id)map:(id (^)(id o))block;
 - (id)select:(BOOL (^)(id o))block;
+- (id)find:(BOOL (^)(id o))block;
 @end
 
 @interface NSArray (mxcl)
@@ -16,4 +17,5 @@
 
 @interface NSMutableArray (mxcl)
 - (void)sortUsingDescriptor:(NSSortDescriptor *)descriptor;
+- (id)pop;
 @end

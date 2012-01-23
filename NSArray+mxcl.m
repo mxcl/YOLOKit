@@ -21,6 +21,13 @@
     }
     return [NSArray arrayWithObjects:objs count:ii];
 }
+
+- (id)find:(BOOL (^)(id o))block {
+    for (id item in self)
+        if (block(item))
+            return item;
+    return nil;
+}
 @end
 
 
@@ -54,7 +61,19 @@
 
 
 @implementation NSMutableArray (mxcl)
+
 - (void)sortUsingDescriptor:(NSSortDescriptor *)descriptor {
     [self sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 }
+
+- (id)pop {
+    if (self.count) {
+        id o = [[[self objectAtIndex:0] retain] autorelease];
+        [self removeObjectAtIndex:0];
+        return o;
+    } else {
+        return nil;
+    }
+}
+
 @end
