@@ -4,4 +4,5 @@
 - (BOOL)matches:(NSString *)pattern;
 - (NSNumber *)wordCount;
 - (NSRange)range;
+- (NSString *)strippedString;
 @end

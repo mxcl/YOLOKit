@@ -23,4 +23,8 @@
 - (NSRange)range {
     return NSMakeRange(0, self.length);
 }
+
+- (NSString *)strippedString {
+	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
 @end
