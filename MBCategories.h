@@ -5,6 +5,8 @@
 #import "NSURLConnection+mxcl.h"
 #import "NSThread+mxcl.H"
 
+CGFloat BNRTimeBlock(void (^block)(void));
+
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "MBActionSheet.h"
 #import "UIAlertView+mxcl.h"

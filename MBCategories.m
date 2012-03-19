@@ -1,3 +1,4 @@
+#import "BNRTimeBlock.m"
 #import "NSArray+mxcl.m"
 #import "NSObject+mxcl.h"
 #import "NSNumber+mxcl.m"
