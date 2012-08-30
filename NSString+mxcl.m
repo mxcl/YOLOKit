@@ -27,4 +27,9 @@
 - (NSString *)strippedString {
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
+
+- (NSString *)chuzzle {
+    NSString *s = self.strippedString;
+    return s.length == 0 ? nil : s;
+}
 @end
