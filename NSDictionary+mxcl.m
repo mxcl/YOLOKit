@@ -3,7 +3,7 @@
 @implementation NSDictionary (mxcl)
 
 - (id)massagedStringForKey:(id)key {
-	NSString *s = [self objectForKey:key];
+	NSString *s = self[key];
 	if (![s isKindOfClass:[NSString class]])
 		return nil;
 	s = [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
