@@ -66,17 +66,12 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 		if (errorOut)
 		{
 			NSDictionary *userInfo =
-				[NSDictionary dictionaryWithObjectsAndKeys:
-					NSLocalizedStringFromTable(
+				@{NSLocalizedDescriptionKey: NSLocalizedStringFromTable(
 						@"No path found for directory in domain.",
 						@"Errors",
 					nil),
-					NSLocalizedDescriptionKey,
-					[NSNumber numberWithInteger:searchPathDirectory],
-					@"NSSearchPathDirectory",
-					[NSNumber numberWithInteger:domainMask],
-					@"NSSearchPathDomainMask",
-				nil];
+					@"NSSearchPathDirectory": @(searchPathDirectory),
+					@"NSSearchPathDomainMask": @(domainMask)};
 			*errorOut =
 				[NSError
 					errorWithDomain:DirectoryLocationDomain
@@ -89,7 +84,7 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 	//
 	// Normally only need the first path returned
 	//
-	NSString *resolvedPath = [paths objectAtIndex:0];
+	NSString *resolvedPath = paths[0];
 
 	//
 	// Append the extra path component
@@ -128,28 +123,20 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 	return resolvedPath;
 }
 
-//
-// applicationSupportDirectory
-//
-// Returns the path to the applicationSupportDirectory (creating it if it doesn't
-// exist).
-//
-- (NSString *)applicationSupportDirectory
-{
-	NSString *executableName =
-		[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
-	NSError *error;
-	NSString *result =
-		[self
-			findOrCreateDirectory:NSApplicationSupportDirectory
-			inDomain:NSUserDomainMask
-			appendPathComponent:executableName
-			error:&error];
-	if (!result)
-	{
-		NSLog(@"Unable to find or create application support directory:\n%@", error);
-	}
-	return result;
+#define MBExecutableName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"]
+
+- (NSString *)applicationSupportDirectory {
+	return [self findOrCreateDirectory:NSApplicationSupportDirectory
+                              inDomain:NSUserDomainMask
+                   appendPathComponent:MBExecutableName
+                                 error:nil];
+}
+
+- (NSString *)cacheDirectory {
+	return [self findOrCreateDirectory:NSCachesDirectory
+                              inDomain:NSUserDomainMask
+                   appendPathComponent:MBExecutableName
+                                 error:nil];
 }
 
 @end
