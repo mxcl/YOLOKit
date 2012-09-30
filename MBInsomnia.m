@@ -9,7 +9,7 @@
 
 - (void)on {
     if (!assertionID) {
-        IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("Making a rackit."), &assertionID);
+        IOPMAssertionCreateWithName(kIOPMAssertionTypeNoIdleSleep, kIOPMAssertionLevelOn, CFSTR("Making a rackit."), &assertionID);
     }
 }
 
