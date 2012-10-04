@@ -57,6 +57,15 @@
         }
     }
 }
+
+- (id)JSONData {
+    return [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:nil];
+}
+
+- (id)JSONString {
+    return [[NSString alloc] initWithData:[self JSONData] encoding:NSUTF8StringEncoding];
+}
+
 @end
 
 

@@ -13,6 +13,10 @@
 // Do not use this if there a chance that all values are equal
 // or if most of the values are equal.
 - (id)shuffledArray;
+
+- (NSData *)JSONData;
+- (NSString *)JSONString;
+
 @end
 
 @interface NSMutableArray (mxcl)
