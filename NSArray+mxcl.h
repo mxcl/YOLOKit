@@ -17,6 +17,9 @@
 - (NSData *)JSONData;
 - (NSString *)JSONString;
 
+// like Ruby, preserves sort order
+- (NSArray *)uniq;
+
 @end
 
 @interface NSMutableArray (mxcl)
