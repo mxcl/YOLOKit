@@ -8,3 +8,11 @@
 + (id)objectWithJSONString:(NSString *)json;
 
 @end
+
+
+@interface NSObject (PListCompliant)
+
+// removes [NSNull null] from NSArrays and NSDictionaries
+- (id)plistCompliantObject;
+
+@end
