@@ -50,9 +50,9 @@
         if ([obj respondsToSelector:@selector(plistCompliantObject)])
             [array addObject:[obj plistCompliantObject]];
         else if (obj != [NSNull null])
-            [array addObject:array];
+            [array addObject:obj];
     }
-    return array;
+    return [NSArray arrayWithArray:array];
 }
 
 @end

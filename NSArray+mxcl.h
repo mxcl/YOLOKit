@@ -4,6 +4,7 @@
 - (id)map:(id (^)(id o))block;
 - (id)select:(BOOL (^)(id o))block;
 - (id)find:(BOOL (^)(id o))block;
+- (id)flatten;
 @end
 
 @interface NSArray (mxcl)

@@ -1,6 +1,8 @@
 #import "NSArray+mxcl.h"
 
+
 @implementation NSArray (RubyEnumerable)
+
 - (NSArray *)map:(id (^)(id obj))block {
     id objs[self.count];
     int ii = 0;
@@ -28,6 +30,18 @@
             return item;
     return nil;
 }
+
+- (id)flatten {
+    NSMutableArray *aa = [NSMutableArray array];
+    for (id o in self) {
+        if ([o isKindOfClass:[NSArray class]])
+            [aa addObjectsFromArray:[o flatten]];
+        else
+            [aa addObject:o];
+    }
+    return aa;
+}
+
 @end
 
 
