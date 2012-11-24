@@ -6,12 +6,7 @@
 + (id)actionSheet {
     MBActionSheet *sheet = [MBActionSheet new];
     sheet.delegate = sheet;
-    return [sheet autorelease];
-}
-
-- (void)dealloc {
-    [completionBlock release];
-    [super dealloc];
+    return sheet
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {

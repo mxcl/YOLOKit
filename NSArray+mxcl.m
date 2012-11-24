@@ -3,6 +3,16 @@
 
 @implementation NSArray (RubyEnumerable)
 
+- (id)inject:(id (^)(id memo, id obj))block {
+    return [self inject:nil block:block];
+}
+
+- (id)inject:(id)memo block:(id (^)(id memo, id obj))block {
+    for (id obj in self)
+        memo = block(memo, obj);
+    return memo;
+}
+
 - (NSArray *)map:(id (^)(id obj))block {
     id objs[self.count];
     int ii = 0;
@@ -22,6 +32,12 @@
             objs[ii++] = item;
     }
     return [NSArray arrayWithObjects:objs count:ii];
+}
+
+- (id)reject:(BOOL (^)(id o))block {
+    return [self select:^BOOL(id o) {
+        return !block(o);
+    }];
 }
 
 - (id)find:(BOOL (^)(id o))block {
@@ -46,9 +62,6 @@
 
 
 @implementation NSArray (mxcl)
-- (id)sortedArrayUsingDescriptor:(NSSortDescriptor *)descriptor {
-    return [self sortedArrayUsingDescriptors:@[descriptor]];
-}
 - (id)firstObject {
     return self.count > 0
             ? self[0]
@@ -89,13 +102,9 @@
 
 @implementation NSMutableArray (mxcl)
 
-- (void)sortUsingDescriptor:(NSSortDescriptor *)descriptor {
-    [self sortUsingDescriptors:@[descriptor]];
-}
-
 - (id)pop {
     if (self.count) {
-        id o = [[self[0] retain] autorelease];
+        id o = self[0];
         [self removeObjectAtIndex:0];
         return o;
     } else {

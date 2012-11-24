@@ -8,7 +8,7 @@
 - (UITableViewCell *)dequeueReusableCellWithStyle:(UITableViewCellStyle)style {
     #define CELLID @"mxcl_UITableViewCellID"
     return [self dequeueReusableCellWithIdentifier:CELLID]
-        ?: [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:CELLID] autorelease];
+        ?: [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:CELLID];
     #undef CELLID
 }
 @end

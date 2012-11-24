@@ -4,8 +4,6 @@
 - (NSString *)localizedString {
     NSNumberFormatter *nf = [NSNumberFormatter new];
     [nf setNumberStyle: NSNumberFormatterDecimalStyle];
-    NSString *s = [nf stringFromNumber:self];
-    [nf release];
-    return s;
+    return [nf stringFromNumber:self];
 }
 @end

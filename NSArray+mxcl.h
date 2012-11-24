@@ -1,19 +1,23 @@
 #import <Foundation/Foundation.h>
 
 @interface NSArray (RubyEnumerable)
-- (id)map:(id (^)(id o))block;
-- (id)select:(BOOL (^)(id o))block;
+- (NSArray *)map:(id (^)(id o))block;
+- (NSArray *)select:(BOOL (^)(id o))block;
+- (NSArray *)reject:(BOOL (^)(id o))block;
 - (id)find:(BOOL (^)(id o))block;
-- (id)flatten;
+- (NSArray *)flatten;
+
+- (id)inject:(id (^)(id memo, id obj))block;
+- (id)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
+
 @end
 
 @interface NSArray (mxcl)
-- (id)sortedArrayUsingDescriptor:(NSSortDescriptor *)descriptor;
 - (id)firstObject;
 
 // Do not use this if there a chance that all values are equal
 // or if most of the values are equal.
-- (id)shuffledArray;
+- (NSArray *)shuffledArray;
 
 - (NSData *)JSONData;
 - (NSString *)JSONString;
@@ -24,6 +28,5 @@
 @end
 
 @interface NSMutableArray (mxcl)
-- (void)sortUsingDescriptor:(NSSortDescriptor *)descriptor;
 - (id)pop;
 @end

@@ -18,12 +18,6 @@
     }
     return self;
 }
-- (void)dealloc {
-    [data release];
-    [badblock release];
-    [block200 release];
-    [super dealloc];
-}
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (rc == 200) {
         block200(data);
@@ -48,6 +42,6 @@
     MBURLConnection *conn = [[MBURLConnection alloc] initWithRequest:rq];
     conn.badblock = badblock;
     conn.block200 = block200;
-    return [conn autorelease];
+    return conn;
 }
 @end

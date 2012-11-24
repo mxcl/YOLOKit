@@ -15,7 +15,6 @@
                                                   cancelButtonTitle:@"That Sucks!"
                                                   otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
     }
 }
 @end
