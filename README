@@ -1,17 +1,7 @@
 Suggested usage:
 
-*   git submodule init
+    git submodule init
     git submodule add https://github.com/mxcl/MBCategories
-
-* Add the single file MBCategories.m to your project.
-* #import "MBCategories.h" in your precompiled header.
-
-This way you don't have to add or remove files to your project when keeping
-MBCategories up-to-date.
-
-If anyone knows a good way to drop an XcodeProj file as a sub-project into an
-Xcode 4 iOS project so that it builds all the sources and all just works,
-please let me know.
 
 ______________________________________________________________________________
 I, Max Howell the copyright holder of this work, hereby release it into the
