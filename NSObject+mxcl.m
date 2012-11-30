@@ -12,12 +12,14 @@
     free(methods);
 }
 
-+ (id)objectWithJSONData:(NSData *)json {
-    return [NSJSONSerialization JSONObjectWithData:json options:kNilOptions error:nil];
++ (id)objectWithJSONData:(NSData *)data {
+    if (!data) return nil;
+    id o = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    return [o isKindOfClass:self] ? o : nil;
 }
 
-+ (id)objectWithJSONString:(NSString *)json {
-    return [NSObject objectWithJSONData:[json dataUsingEncoding:NSUTF8StringEncoding]];
++ (id)objectWithJSONString:(NSString *)jsonString {
+    return [self objectWithJSONData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end
