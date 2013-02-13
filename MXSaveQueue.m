@@ -18,7 +18,8 @@
 - (void)addOperationWithBlock:(NSData *(^)(void))dataFeederBlock {
     [self cancelAllOperations];
 
-    NSBlockOperation *op = [NSBlockOperation new];
+    NSBlockOperation *op_ = [NSBlockOperation new];
+    __weak NSBlockOperation *op = op_;
     [op addExecutionBlock:^{
         NSData *data = dataFeederBlock();
         if (!op.isCancelled)
