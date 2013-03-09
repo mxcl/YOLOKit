@@ -7,6 +7,8 @@
 - (id)find:(BOOL (^)(id o))block;
 - (NSArray *)flatten;
 
+- (id)min:(NSInteger (^)(id o))block;
+
 - (id)inject:(id (^)(id memo, id obj))block;
 - (id)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
 

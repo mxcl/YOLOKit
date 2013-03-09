@@ -58,6 +58,19 @@
     return aa;
 }
 
+- (id)min:(NSInteger (^)(id o))block {
+    NSInteger value = NSIntegerMax;
+    id keeper = nil;
+    for (id o in self) {
+        NSInteger ov = block(o);
+        if (ov < value) {
+            value = ov;
+            keeper = o;
+        }
+    }
+    return keeper;
+}
+
 @end
 
 
