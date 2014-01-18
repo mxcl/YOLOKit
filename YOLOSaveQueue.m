@@ -1,10 +1,9 @@
-#import "MXSaveQueue.h"
-#import "NSFileManager+DirectoryLocations.h"
+#import "YOLO.h"
 
 
-@implementation MXSaveQueue
+@implementation YOLOSaveQueue
 
-- (id)initWithSaveFilename:(NSString *)path {
+- (instancetype)initWithSaveFilename:(NSString *)path {
     self = [super init];
     self.maxConcurrentOperationCount = 1;
     if (self) {

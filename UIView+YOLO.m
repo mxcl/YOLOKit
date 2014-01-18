@@ -1,4 +1,4 @@
-#import "UIView+mxcl.h"
+#import "YOLO.h"
 
 @interface UIView (DumpTree)
 - (NSString *)dumpTreeDescription;
@@ -16,7 +16,7 @@
 
 
 // http://stackoverflow.com/questions/751876
-static void MBDumpViews(UIView* view, NSString *text, NSString *indent)
+static void YOLODumpViews(UIView* view, NSString *text, NSString *indent)
 {
     Class class = [view class];
     NSMutableString *heirarchy = [NSMutableString stringWithString:[class description]];
@@ -31,18 +31,20 @@ static void MBDumpViews(UIView* view, NSString *text, NSString *indent)
     for (UIView *subView in view.subviews) {
         NSString *newIndent = [NSString stringWithFormat:@"  %@", indent];
         NSString *msg = [NSString stringWithFormat:@"%@%d:", newIndent, ii++];
-        MBDumpViews(subView, msg, newIndent);
+        YOLODumpViews(subView, msg, newIndent);
     }
 }
 
-@implementation UIView (mxcl)
+@implementation UIView (YOLO)
 - (NSArray *)allSubviews {
     NSMutableArray *views = [NSMutableArray arrayWithArray:self.subviews];
     for (UIView *view in self.subviews)
         [views addObjectsFromArray:[view allSubviews]];
     return views;
 }
-- (void)dumpViewTree {
-    MBDumpViews(self, @"", @"");
-}
 @end
+
+
+void UIViewDumpSubviewTree(UIView *view) {
+    YOLODumpViews(view, @"", @"");
+}

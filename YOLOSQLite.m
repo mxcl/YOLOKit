@@ -1,10 +1,9 @@
-#import "AppDelegate.h"
-#import "MBSQLite.h"
+#import "YOLO.h"
+
+#ifdef YOLO_SQLITE
 #import <sqlite3.h>
 
-
-
-int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) {
+static int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) {
     id aa = (__bridge NSMutableArray *)userdata;
     while (argc--)
         [aa insertObject:@(argv[argc]) atIndex:0];
@@ -13,14 +12,14 @@ int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) 
 
 
 
-@implementation MBSQLite
-@synthesize throwErrors;
+@implementation YOLOSQLite {
+    sqlite3 *db;
+}
 
 - (id)init {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    return [self initWithPath:[[self class] performSelector:(@selector(path))]];
-#pragma clang diagnostic pop
+    id path = [[self class] performSelector:@selector(path)]
+           ?: [[NSFileManager defaultManager].applicationSupportDirectory stringByAppendingPathComponent:@"sqlite.db"];
+    return [self initWithPath:path];
 }
 
 - (id)initWithPath:(id)path {
@@ -40,7 +39,7 @@ int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) 
     if (sqlite3_exec(db, [sql UTF8String], sqlite3_exec_callback, (__bridge void *)results, &err) != SQLITE_OK) {
         id nserr = @(err);
         sqlite3_free(err);
-        if (!throwErrors)
+        if (!_throwErrors)
             NSLog(@"SQLite3 Error: %@", nserr);
         else
             @throw nserr;
@@ -63,10 +62,11 @@ int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) 
 
 
 
-@implementation NSString (MBSQLite)
+@implementation NSString (YOLOSQLite)
 
-- (id)sqlite3_escape {
+- (instancetype)sqlite3_escape {
     return [self stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
 }
 
 @end
+#endif

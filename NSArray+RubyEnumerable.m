@@ -1,4 +1,4 @@
-#import "NSArray+mxcl.h"
+#import "YOLO.h"
 
 
 @implementation NSArray (RubyEnumerable)
@@ -69,60 +69,6 @@
         }
     }
     return keeper;
-}
-
-@end
-
-
-@implementation NSArray (mxcl)
-- (id)firstObject {
-    return self.count > 0
-            ? self[0]
-            : nil;
-}
-- (id)shuffledArray {
-    switch (self.count) {
-        case 0:
-        case 1:
-            return self;
-        case 2:
-            return @[self[1], self[0]];
-        default: {
-            NSMutableArray *ll = [NSMutableArray arrayWithArray:self];
-            do {
-                for (NSUInteger i = ll.count - 1; i; --i) // Knuth-Fisher-Yates
-                    [ll exchangeObjectAtIndex:rand() % (i + 1) withObjectAtIndex:i];
-            } while ([ll isEqualToArray:self]); // dangerous!
-            return ll;
-        }
-    }
-}
-
-- (id)JSONData {
-    return [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:nil];
-}
-
-- (id)JSONString {
-    return [[NSString alloc] initWithData:[self JSONData] encoding:NSUTF8StringEncoding];
-}
-
-- (id)uniq {
-    return [[NSOrderedSet orderedSetWithArray:self] array];
-}
-
-@end
-
-
-@implementation NSMutableArray (mxcl)
-
-- (id)pop {
-    if (self.count) {
-        id o = self[0];
-        [self removeObjectAtIndex:0];
-        return o;
-    } else {
-        return nil;
-    }
 }
 
 @end

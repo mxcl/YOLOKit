@@ -1,6 +1,7 @@
-#import "NSDictionary+mxcl.h"
+#import "YOLO.h"
 
-@implementation NSDictionary (mxcl)
+
+@implementation NSDictionary (YOLO)
 
 - (id)massagedStringForKey:(id)key {
 	NSString *s = self[key];

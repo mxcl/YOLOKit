@@ -1,6 +1,6 @@
-#import "UIImage+mxcl.h"
+#import "YOLO.h"
 
-@implementation UIImage (mxcl)
+@implementation UIImage (YOLO)
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0, 0, 11, 11);
     UIGraphicsBeginImageContext(rect.size);

@@ -1,7 +1,12 @@
-#import <IOKit/pwr_mgt/IOPMLib.h>
-#import "MBInsomnia.h"
+#ifndef TARGET_OS_IPHONE 
 
-@implementation MBInsomnia
+#import <IOKit/pwr_mgt/IOPMLib.h>
+#import "YOLO.h"
+
+
+@implementation YOLOInsomnia {
+    IOPMAssertionID assertionID;
+}
 
 - (void)dealloc {
     [self off];
@@ -21,3 +26,5 @@
 }
 
 @end
+
+#endif

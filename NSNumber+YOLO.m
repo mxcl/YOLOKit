@@ -1,6 +1,6 @@
-#import "NSNumber+mxcl.h"
+#import "YOLO.h"
 
-@implementation NSNumber (mxcl)
+@implementation NSNumber (YOLO)
 - (NSString *)localizedString {
     NSNumberFormatter *nf = [NSNumberFormatter new];
     [nf setNumberStyle: NSNumberFormatterDecimalStyle];

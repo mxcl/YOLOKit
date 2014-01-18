@@ -1,6 +1,6 @@
-#import "NSString+mxcl.h"
+#import "YOLO.h"
 
-@implementation NSString (mxcl)
+@implementation NSString (YOLO)
 - (BOOL)matches:(NSString *)pattern {
     return [self rangeOfString:pattern options:NSRegularExpressionSearch].location != NSNotFound;
 }
