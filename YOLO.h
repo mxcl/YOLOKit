@@ -126,6 +126,7 @@
 
 
 @interface UIColor (YOLO)
+- (BOOL)dark;  // is this image dark when viewed by the human eye?
 + (instancetype)randomColor;
 @end
 
@@ -138,6 +139,8 @@
 
 
 @interface UIImage (YOLO)
+- (UIColor *)color;  // the pixel-averaged color of this image
+- (UIStatusBarStyle)preferredStatusBarStyle;
 + (UIImage *)imageWithColor:(UIColor *)color;
 @end
 
