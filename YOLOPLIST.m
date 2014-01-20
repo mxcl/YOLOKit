@@ -2,22 +2,6 @@
 #import <objc/runtime.h>
 
 
-@implementation NSObject (YOLO)
-
-+ (id)objectWithJSONData:(NSData *)data {
-    if (!data) return nil;
-    id o = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    return [o isKindOfClass:self] ? o : nil;
-}
-
-+ (id)objectWithJSONString:(NSString *)jsonString {
-    return [self objectWithJSONData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-}
-
-@end
-
-
-
 @implementation NSDictionary (PListCompliant)
 
 - (NSDictionary *)plistCompliantObject {

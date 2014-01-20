@@ -1,57 +1,6 @@
 @import UIKit;
 
 
-@interface YOLOActionSheet : UIActionSheet <UIActionSheetDelegate>
-+ (instancetype)actionSheet;
-@property (nonatomic, copy) void (^completionBlock)(NSUInteger index);
-@end
-
-
-#ifndef TARGET_OS_IPHONE
-@interface YOLOInsomnia : NSObject
-- (void)on;
-- (void)off;
-@end
-#endif
-
-
-#ifdef YOLO_SQLITE
-@interface YOLOSQLite : NSObject
-- (instancetype)initWithPath:(id)path;
-- (NSArray *)exec:(id)sql;
-- (id)lastInsertRowID;
-
-@property (nonatomic) BOOL throwErrors;
-@end
-#endif
-
-
-@interface NSString (YOLOSQLite)
-- (instancetype)sqlite3_escape;
-@end
-
-
-/** Save your data in the background on a serial queue.
-  * When you add your job, any existing jobs in the queue are canceled. This is
-    the main point of this class, that is: to avoid resource starvation because
-    of situations where your save function is called way more than you expected.
-  * NOTE that obviously the block is called in the background, so: be thread-safe.
-  * NOTE you probably want to waitUntilAllOperationsAreFinished in your class’s
-         dealloc selector.
-  */
-
-@interface YOLOSaveQueue : NSOperationQueue
-
-// relative paths will be made absolute relative to ApplicationSupport
-- (instancetype)initWithSaveFilename:(NSString *)path;
-
-// return an NSData object in your block
-- (void)addOperationWithBlock:(NSData *(^)(void))returnTheDataToSave;
-
-@property (nonatomic, readonly) NSString *path;
-@end
-
-
 @interface NSArray (RubyEnumerable)
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;
@@ -94,27 +43,26 @@
 
 
 @interface NSNumber (YOLO)
-- (NSString *)localizedString;
-@end
-
-
-@interface NSObject (YOLO)
-+ (id)objectWithJSONData:(NSData *)json;
-+ (id)objectWithJSONString:(NSString *)json;
+- (NSString *)localizedString;  // eg. 10,123 (with commas/whatever per locale)
 @end
 
 
 @interface NSObject (PListCompliant)
-- (id)plistCompliantObject; // PLISTs cannot contains NULL, so we remove those
+- (id)plistCompliantObject; // When you are trying to write dictionaries or
+							// arrays to PLISTs using writeToFile type methods
+							// NULLs throw exceptions, and if you have JSON data
+							// then you will have nulls, so this sanitizes the
+							// objects so you won't get a crash
 @end
 
 
 @interface NSString (YOLO)
-- (NSNumber *)wordCount;
-- (NSRange)range;
-- (NSString *)strippedString;
-- (NSString *)chuzzle;        // returns nil if trimmed string is empty
-								// FYI calling chuzzle on nil returns nil too!
+- (NSRange)range;      // convenience
+- (NSString *)strip;   // convenience
+- (NSString *)chuzzle; // returns stripped string unless stripped string has
+					   // zero length, if so it returns nil. Stop putting empty
+					   // strings in the user's face! Short-circuit off your
+					   // chuzzled strings with the ?: compact ternary operator!
 @end
 
 
@@ -141,7 +89,7 @@
 @interface UIImage (YOLO)
 - (UIColor *)color;  // the pixel-averaged color of this image
 - (UIStatusBarStyle)preferredStatusBarStyle;
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)imageWithColor:(UIColor *)color; // A 1x1 image of that color
 @end
 
 
@@ -152,3 +100,55 @@
 
 void UIViewDumpSubviewTree(UIView *view);
 void NSObjectDumpSelectors(NSObject *o);
+
+
+/** Let’s use blocks more */
+@interface YOLOActionSheet : UIActionSheet <UIActionSheetDelegate>
++ (instancetype)actionSheet;
+@property (nonatomic, copy) void (^completionBlock)(NSUInteger index);
+@end
+
+
+#ifndef TARGET_OS_IPHONE
+// turn on and your Mac app will prevent sleep (but not screen sleep)
+@interface YOLOInsomnia : NSObject
+- (void)on;
+- (void)off;
+@end
+#endif
+
+
+#ifdef YOLO_SQLITE
+@interface YOLOSQLite : NSObject
+- (instancetype)initWithPath:(id)path;
+- (NSArray *)exec:(id)sql;
+- (id)lastInsertRowID;
+
+@property (nonatomic) BOOL throwErrors;
+@end
+
+@interface NSString (YOLOSQLite)
+- (instancetype)sqlite3_escape;
+@end
+#endif
+
+
+/** Save your data in the background on a serial queue.
+  * When you add your job, any existing jobs in the queue are canceled. This is
+    the main point of this class, that is: to avoid resource starvation because
+    of situations where your save function is called way more than you expected.
+  * NOTE that obviously the block is called in the background, so: be thread-safe.
+  * NOTE you probably want to waitUntilAllOperationsAreFinished in your class’s
+         dealloc selector.
+  */
+
+@interface YOLOSaveQueue : NSOperationQueue
+
+// relative paths will be made absolute relative to ApplicationSupport
+- (instancetype)initWithSaveFilename:(NSString *)path;
+
+// return an NSData object in your block
+- (void)addOperationWithBlock:(NSData *(^)(void))returnTheDataToSave;
+
+@property (nonatomic, readonly) NSString *path;
+@end
