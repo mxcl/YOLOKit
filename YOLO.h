@@ -91,6 +91,7 @@
 - (UIStatusBarStyle)preferredStatusBarStyle;
 + (UIImage *)imageWithColor:(UIColor *)color; // A 1x1 image of that color
 - (UIImage *)croppedImage:(CGRect)cropRect;
+- (UIImage *)imageTintedWithColor:(UIColor *)color;
 @end
 
 
