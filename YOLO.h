@@ -90,6 +90,7 @@
 - (UIColor *)color;  // the pixel-averaged color of this image
 - (UIStatusBarStyle)preferredStatusBarStyle;
 + (UIImage *)imageWithColor:(UIColor *)color; // A 1x1 image of that color
+- (UIImage *)croppedImage:(CGRect)cropRect;
 @end
 
 

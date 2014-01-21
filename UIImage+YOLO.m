@@ -30,4 +30,16 @@
     return img;
 }
 
+- (UIImage *)croppedImage:(CGRect)cropRect {
+    cropRect.origin.x *= self.scale;
+    cropRect.origin.y *= self.scale;
+    cropRect.size.height *= self.scale;
+    cropRect.size.width *= self.scale;
+
+    CGImageRef imageRef = CGImageCreateWithImageInRect(self.CGImage, cropRect);
+    UIImage *img = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+    CGImageRelease(imageRef);
+    return img;
+}
+
 @end
