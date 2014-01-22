@@ -1,6 +1,4 @@
 #import "YOLO.h"
-
-#ifdef YOLO_SQLITE
 #import <sqlite3.h>
 
 static int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **column) {
@@ -12,7 +10,7 @@ static int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **c
 
 
 
-@implementation YOLOSQLite {
+@implementation YOSQLO {
     sqlite3 *db;
 }
 
@@ -62,11 +60,10 @@ static int sqlite3_exec_callback(void *userdata, int argc, char **argv, char **c
 
 
 
-@implementation NSString (YOLOSQLite)
+@implementation NSString (YOSQLO)
 
 - (instancetype)sqlite3_escape {
     return [self stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
 }
 
 @end
-#endif

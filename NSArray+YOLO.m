@@ -34,3 +34,20 @@
 }
 
 @end
+
+
+
+@implementation NSArray (PListCompliant)
+
+- (id)plistCompliantObject {
+    NSMutableArray *array = @[].mutableCopy;
+    for (id obj in self) {
+        if ([obj respondsToSelector:@selector(plistCompliantObject)])
+            [array addObject:[obj plistCompliantObject]];
+        else if (obj != [NSNull null])
+            [array addObject:obj];
+    }
+    return [NSArray arrayWithArray:array];
+}
+
+@end

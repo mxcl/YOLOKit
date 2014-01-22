@@ -20,3 +20,20 @@
 }
 
 @end
+
+
+@implementation NSDictionary (PListCompliant)
+
+- (NSDictionary *)plistCompliantObject {
+    NSMutableDictionary *dict = @{}.mutableCopy;
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([obj respondsToSelector:@selector(plistCompliantObject)]) {
+            dict[key] = [obj plistCompliantObject];
+        } else if (obj != [NSNull null]) {
+            dict[key] = obj;
+        }
+    }];
+    return dict;
+}
+
+@end

@@ -43,13 +43,13 @@
 }
 
 - (UIImage *)imageTintedWithColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGRect rect = (CGRect){.size = self.size};
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
-    CGContextRef c = UIGraphicsGetCurrentContext();
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     [self drawInRect:rect];
-    CGContextSetFillColorWithColor(c, [color CGColor]);
-    CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
-    CGContextFillRect(c, rect);
+    CGContextSetFillColorWithColor(ctx, [color CGColor]);
+    CGContextSetBlendMode(ctx, kCGBlendModeSourceAtop);
+    CGContextFillRect(ctx, rect);
     return UIGraphicsGetImageFromCurrentImageContext();
 }
 

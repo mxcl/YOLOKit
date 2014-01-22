@@ -1,4 +1,4 @@
-@import UIKit;
+@import Foundation;
 
 
 @interface NSArray (RubyEnumerable)
@@ -56,6 +56,9 @@
 @end
 
 
+void NSObjectDumpSelectors(NSObject *o);
+
+
 @interface NSString (YOLO)
 - (NSRange)range;      // convenience
 - (NSString *)strip;   // convenience
@@ -65,6 +68,9 @@
 					   // chuzzled strings with the ?: compact ternary operator!
 @end
 
+
+#if TARGET_OS_IPHONE
+@import UIKit;
 
 @interface UIAlertView (YOLO)
 // because 50% of the time I forget to call show and then you have a likely untested branch where you don't show the user an error message
@@ -101,7 +107,6 @@
 
 
 void UIViewDumpSubviewTree(UIView *view);
-void NSObjectDumpSelectors(NSObject *o);
 
 
 /** Let’s use blocks more */
@@ -109,6 +114,7 @@ void NSObjectDumpSelectors(NSObject *o);
 + (instancetype)actionSheet;
 @property (nonatomic, copy) void (^completionBlock)(NSUInteger index);
 @end
+#endif
 
 
 #ifndef TARGET_OS_IPHONE
@@ -120,8 +126,9 @@ void NSObjectDumpSelectors(NSObject *o);
 #endif
 
 
-#ifdef YOLO_SQLITE
-@interface YOLOSQLite : NSObject
+#ifdef __YOSQLO__
+// You Only SQLive Once
+@interface YOSQLO : NSObject
 - (instancetype)initWithPath:(id)path;
 - (NSArray *)exec:(id)sql;
 - (id)lastInsertRowID;
@@ -129,7 +136,7 @@ void NSObjectDumpSelectors(NSObject *o);
 @property (nonatomic) BOOL throwErrors;
 @end
 
-@interface NSString (YOLOSQLite)
+@interface NSString (YOSQLO)
 - (instancetype)sqlite3_escape;
 @end
 #endif
