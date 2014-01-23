@@ -33,6 +33,10 @@
     return [[NSOrderedSet orderedSetWithArray:self] array];
 }
 
+- (NSSet *)set {
+    return [NSSet setWithArray:self];
+}
+
 @end
 
 

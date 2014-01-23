@@ -3,6 +3,39 @@
 
 @implementation NSArray (RubyEnumerable)
 
+- (NSArray *(^)(BOOL (^)(id)))select {
+    return ^(BOOL(^block)(id)) {
+        return [self select:^BOOL(id o) {
+            return block(o);
+        }];
+    };
+}
+
+- (NSArray *(^)(BOOL (^)(id)))reject {
+    return ^(BOOL(^block)(id)) {
+        return [self reject:^BOOL(id o) {
+            return block(o);
+        }];
+    };
+}
+
+- (NSArray *(^)(NSString *))pick {
+    return ^(NSString *key) {
+        return [self valueForKeyPath:key];
+    };
+}
+
+- (NSArray *(^)(void (^)(id)))each {
+    return ^(void (^block)(id)) {
+        [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            block(obj);
+        }];
+        return self;
+    };
+}
+
+
+
 - (id)inject:(id (^)(id memo, id obj))block {
     return [self inject:nil block:block];
 }

@@ -2,6 +2,12 @@
 
 
 @interface NSArray (RubyEnumerable)
+
+- (NSArray *(^)(BOOL (^)(id o)))select;
+- (NSArray *(^)(BOOL (^)(id o)))reject;
+- (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
+- (NSArray *(^)(void (^)(id o)))each;
+
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;
 - (NSArray *)reject:(BOOL (^)(id o))block;
@@ -19,11 +25,18 @@
 - (NSData *)JSONData;
 - (NSString *)JSONString;
 - (NSArray *)uniq;          // like Ruby, preserves sort order
+
+- (NSSet *)set;
 @end
 
 
 @interface NSMutableArray (YOLO)
 - (id)pop;
+@end
+
+
+@interface NSSet (YOLO)
+- (NSSet *)without:(NSSet *)set;
 @end
 
 
