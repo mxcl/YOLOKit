@@ -54,6 +54,12 @@
     };
 }
 
+- (NSArray *(^)(BOOL (^)(id)))find {
+    return ^(BOOL (^block)(id o)) {
+        return [self find:block];
+    };
+}
+
 
 
 - (id)inject:(id (^)(id memo, id obj))block {

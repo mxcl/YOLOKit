@@ -10,8 +10,9 @@
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(id (^)(id memo, id obj)))inject;
 - (NSArray *)flatten;
-- (NSArray *(^)(NSInteger (^)(id o)))min;
-- (NSArray *(^)(NSInteger (^)(id o)))max;
+- (NSArray *(^)(NSInteger (^)(id)))min;
+- (NSArray *(^)(NSInteger (^)(id)))max;
+- (NSArray *(^)(BOOL (^)(id o)))find;
 
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;
