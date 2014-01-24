@@ -8,13 +8,17 @@
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
 - (NSArray *(^)(void (^)(id o)))each;
+- (NSArray *(^)(id (^)(id memo, id obj)))inject;
+- (NSArray *)flatten;
+- (NSArray *(^)(NSInteger (^)(id o)))min;
+- (NSArray *(^)(NSInteger (^)(id o)))max;
 
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;
 - (NSArray *)reject:(BOOL (^)(id o))block;
 - (id)find:(BOOL (^)(id o))block;
-- (NSArray *)flatten;
 - (id)min:(NSInteger (^)(id o))block;
+- (id)max:(NSInteger (^)(id o))block;
 - (id)inject:(id (^)(id memo, id obj))block;
 - (id)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
 @end

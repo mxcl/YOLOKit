@@ -36,6 +36,24 @@
     };
 }
 
+- (NSArray *(^)(id (^)(id memo, id obj)))inject {
+    return ^(id (^block)(id memo, id obj)) {
+        return [self inject:nil block:block];
+    };
+}
+
+- (NSArray *(^)(NSInteger (^)(id)))min {
+    return ^(NSInteger (^block)(id o)) {
+        return [self min:block];
+    };
+}
+
+- (NSArray *(^)(NSInteger (^)(id)))max {
+    return ^(NSInteger (^block)(id o)) {
+        return [self max:block];
+    };
+}
+
 
 
 - (id)inject:(id (^)(id memo, id obj))block {
@@ -99,6 +117,19 @@
     for (id o in self) {
         NSInteger ov = block(o);
         if (ov < value) {
+            value = ov;
+            keeper = o;
+        }
+    }
+    return keeper;
+}
+
+- (id)max:(NSInteger (^)(id o))block {
+    NSInteger value = NSIntegerMin;
+    id keeper = nil;
+    for (id o in self) {
+        NSInteger ov = block(o);
+        if (ov > value) {
             value = ov;
             keeper = o;
         }
