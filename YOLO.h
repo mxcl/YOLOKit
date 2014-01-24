@@ -3,6 +3,7 @@
 
 @interface NSArray (RubyEnumerable)
 
+- (NSArray *(^)(id (^)(id o)))map;
 - (NSArray *(^)(BOOL (^)(id o)))select;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];

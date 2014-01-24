@@ -34,6 +34,12 @@
     };
 }
 
+- (NSArray *(^)(id (^)(id)))map {
+    return ^(id (^block)(id)) {
+        return self.map(block);
+    };
+}
+
 
 
 - (id)inject:(id (^)(id memo, id obj))block {
