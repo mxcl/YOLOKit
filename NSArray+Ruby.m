@@ -138,3 +138,21 @@
 }
 
 @end
+
+
+
+@implementation NSArray (Ruby)
+
+- (NSArray *(^)(int, int))slice {
+    return ^id(int start, int length) {
+        if (start < 0) start += self.count;
+        if (length < 0) length = ((int)self.count) + length - start;
+        return [self subarrayWithRange:NSMakeRange(start, length)];
+    };
+}
+
+- (id)uniq {
+    return [[NSOrderedSet orderedSetWithArray:self] array];
+}
+
+@end

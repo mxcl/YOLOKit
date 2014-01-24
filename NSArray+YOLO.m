@@ -29,10 +29,6 @@
     return [[NSString alloc] initWithData:[self JSONData] encoding:NSUTF8StringEncoding];
 }
 
-- (id)uniq {
-    return [[NSOrderedSet orderedSetWithArray:self] array];
-}
-
 - (NSSet *)set {
     return [NSSet setWithArray:self];
 }

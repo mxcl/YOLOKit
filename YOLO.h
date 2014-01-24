@@ -21,6 +21,16 @@
 - (id)max:(NSInteger (^)(id o))block;
 - (id)inject:(id (^)(id memo, id obj))block;
 - (id)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
+
+@end
+
+
+@interface NSArray (Ruby)
+// Ruby allows ranges to be passed to slice, but since we have no equivalent
+// I have made it so length (as well as start) can be negative, in that case
+// length is no longer length, but end-position.
+- (NSArray *(^)(int start, int length))slice;
+- (NSArray *)uniq;  // like Ruby, preserves sort order
 @end
 
 
@@ -32,9 +42,9 @@
 							// values are equal or if most values are equal
 - (NSData *)JSONData;
 - (NSString *)JSONString;
-- (NSArray *)uniq;          // like Ruby, preserves sort order
 
 - (NSSet *)set;
+
 @end
 
 
