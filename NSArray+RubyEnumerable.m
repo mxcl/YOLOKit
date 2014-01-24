@@ -5,17 +5,13 @@
 
 - (NSArray *(^)(BOOL (^)(id)))select {
     return ^(BOOL(^block)(id)) {
-        return [self select:^BOOL(id o) {
-            return block(o);
-        }];
+        return [self select:block];
     };
 }
 
 - (NSArray *(^)(BOOL (^)(id)))reject {
     return ^(BOOL(^block)(id)) {
-        return [self reject:^BOOL(id o) {
-            return block(o);
-        }];
+        return [self reject:block];
     };
 }
 
@@ -36,7 +32,7 @@
 
 - (NSArray *(^)(id (^)(id)))map {
     return ^(id (^block)(id)) {
-        return self.map(block);
+        return [self map:block];
     };
 }
 
