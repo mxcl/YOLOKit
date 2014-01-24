@@ -59,6 +59,14 @@
 @end
 
 
+@interface NSDictionary (Underscore)
+
+/** two forms supported, single argument which is a dictionary
+  * or *two* arguments, a key and value */
+- (NSDictionary *(^)(id o, ...))extend;
+@end
+
+
 @interface NSDictionary (YOLO)
 - (NSString *)massagedStringForKey:(id)key; // returns nil if not a string or
 											// if string length is zero after
