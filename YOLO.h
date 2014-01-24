@@ -20,6 +20,9 @@
 
 
 @interface NSArray (YOLO)
+
+- (NSArray *(^)(void (^)(id arrayOrSet)))without;
+
 - (NSArray *)shuffledArray; // Do not use this if there a chance that all
 							// values are equal or if most values are equal
 - (NSData *)JSONData;
