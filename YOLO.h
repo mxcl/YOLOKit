@@ -59,6 +59,11 @@
 @end
 
 
+@interface NSSet (RubyEnumerable)
+- (NSSet *(^)(void (^)(id o)))each;
+@end
+
+
 @interface NSDictionary (Underscore)
 
 /** two forms supported, single argument which is a dictionary
