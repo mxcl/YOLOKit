@@ -47,6 +47,9 @@ Nesting square-brackets is very objective-C, but it's also so very 1983 and
 it’s (let’s be honest) not very readable. You only live once, so let’s be
 modern, let's make iterating over data easy, delightful, productive and awesome.
 
+Caveats: calling nil in block form crashes and doesn't just not happen as is
+typical of the square bracket syntax. So… that sucks.
+
 Using via CocoaPods
 ===================
 In your Podfile:
