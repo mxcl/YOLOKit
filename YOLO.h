@@ -1,6 +1,13 @@
 @import Foundation;
 
 
+/** Duck type methods that return single objects, thus
+  * you can just chain eg. `.floatValue` off of YOLO-chains */
+@protocol YOQuackO <NSObject>
+- (float)floatValue;
+@end
+
+
 @interface NSArray (RubyEnumerable)
 
 - (NSArray *(^)(id (^)(id o)))map;
@@ -10,9 +17,10 @@
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(id (^)(id memo, id obj)))inject;
 - (NSArray *)flatten;
-- (NSArray *(^)(NSInteger (^)(id)))min;
-- (NSArray *(^)(NSInteger (^)(id)))max;
+- (id<YOQuackO>(^)(NSInteger (^)(id)))min;
+- (id<YOQuackO>(^)(NSInteger (^)(id)))max;
 - (NSArray *(^)(BOOL (^)(id o)))find;
+
 
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;

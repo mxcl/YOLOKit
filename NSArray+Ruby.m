@@ -42,13 +42,13 @@
     };
 }
 
-- (NSArray *(^)(NSInteger (^)(id)))min {
+- (id<YOQuackO>(^)(NSInteger (^)(id)))min {
     return ^(NSInteger (^block)(id o)) {
         return [self min:block];
     };
 }
 
-- (NSArray *(^)(NSInteger (^)(id)))max {
+- (id<YOQuackO>(^)(NSInteger (^)(id)))max {
     return ^(NSInteger (^block)(id o)) {
         return [self max:block];
     };
