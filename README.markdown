@@ -48,7 +48,16 @@ it’s (let’s be honest) not very readable. You only live once, so let’s be
 modern, let's make iterating over data easy, delightful, productive and awesome.
 
 Caveats: calling nil in block form crashes and doesn't just not happen as is
-typical of the square bracket syntax. So… that sucks.
+typical of the square bracket syntax. So… that sucks. So if it's possible your
+*initial* object is nil you should do something like this:
+
+```objc
+(campaigns ?: @[]).reject(^(PPCampaign *campaign){
+    return campaign.locked;
+}).pick(@"venues").flatten.each(^(PPVenue *venue){
+    [geofencer startMonitoringForRegion:venue.region];
+});
+```
 
 Using via CocoaPods
 ===================
