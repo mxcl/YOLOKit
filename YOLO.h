@@ -15,6 +15,7 @@
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
 - (NSArray *(^)(void (^)(id o)))each;
+- (NSArray *(^)(void (^)(id o, uint index)))each_with_index;
 - (NSArray *(^)(id (^)(id memo, id obj)))inject;
 - (NSArray *)flatten;
 - (id<YOQuackO>(^)(NSInteger (^)(id)))min;

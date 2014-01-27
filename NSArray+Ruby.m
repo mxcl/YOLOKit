@@ -30,6 +30,15 @@
     };
 }
 
+- (NSArray *(^)(void (^)(id, uint)))each_with_index {
+    return ^(void (^block)(id, uint)) {
+        [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            block(obj, idx);
+        }];
+        return self;
+    };
+}
+
 - (NSArray *(^)(id (^)(id)))map {
     return ^(id (^block)(id)) {
         return [self map:block];
