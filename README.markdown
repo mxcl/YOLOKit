@@ -59,6 +59,18 @@ typical of the square bracket syntax. So… that sucks. So if it's possible your
 });
 ```
 
+But we only live once, so why not:
+
+```objc
+if (campaigns) campaigns.reject(^(PPCampaign *campaign){
+    return campaign.locked;
+}).pick(@"venues").flatten.each(^(PPVenue *venue){
+    [geofencer startMonitoringForRegion:venue.region];
+});
+```
+
+OMG we didn’t push ENTER! Kittens might die!!1!
+
 Using via CocoaPods
 ===================
 In your Podfile:
