@@ -49,7 +49,7 @@
 @implementation NSArray (PListCompliant)
 
 - (id)plistCompliantObject {
-    NSMutableArray *array = @[].mutableCopy;
+    NSMutableArray *array = [NSMutableArray new];
     for (id obj in self) {
         if ([obj respondsToSelector:@selector(plistCompliantObject)])
             [array addObject:[obj plistCompliantObject]];

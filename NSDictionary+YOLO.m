@@ -25,7 +25,7 @@
 @implementation NSDictionary (PListCompliant)
 
 - (NSDictionary *)plistCompliantObject {
-    NSMutableDictionary *dict = @{}.mutableCopy;
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if ([obj respondsToSelector:@selector(plistCompliantObject)]) {
             dict[key] = [obj plistCompliantObject];
