@@ -16,6 +16,7 @@
 - (id(^)(BOOL (^)(id o)))find;
 
 - (NSArray *)map:(id (^)(id o))block;
+- (NSArray *)each:(void (^)(id o))block;
 - (NSArray *)select:(BOOL (^)(id o))block;
 - (NSArray *)reject:(BOOL (^)(id o))block;
 - (id)find:(BOOL (^)(id o))block;

@@ -152,6 +152,13 @@
     return keeper;
 }
 
+- (NSArray *)each:(void (^)(id o))block {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        block(obj);
+    }];
+    return self;
+}
+
 @end
 
 
