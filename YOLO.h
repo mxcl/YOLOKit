@@ -116,6 +116,11 @@ void NSObjectDumpSelectors(NSObject *o);
 @end
 
 
+@interface NSAttributedString (YOLO)
+- (NSRange)range;
+@end
+
+
 #if TARGET_OS_IPHONE
 @import UIKit;
 
