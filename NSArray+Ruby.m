@@ -51,19 +51,19 @@
     };
 }
 
-- (id<YOQuackO>(^)(NSInteger (^)(id)))min {
+- (id(^)(NSInteger (^)(id)))min {
     return ^(NSInteger (^block)(id o)) {
         return [self min:block];
     };
 }
 
-- (id<YOQuackO>(^)(NSInteger (^)(id)))max {
+- (id(^)(NSInteger (^)(id)))max {
     return ^(NSInteger (^block)(id o)) {
         return [self max:block];
     };
 }
 
-- (NSArray *(^)(BOOL (^)(id)))find {
+- (id(^)(BOOL (^)(id)))find {
     return ^(BOOL (^block)(id o)) {
         return [self find:block];
     };
