@@ -21,8 +21,8 @@
 - (id)find:(BOOL (^)(id o))block;
 - (id)min:(NSInteger (^)(id o))block;
 - (id)max:(NSInteger (^)(id o))block;
-- (id)inject:(id (^)(id memo, id obj))block;
-- (id)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
+- (NSArray *)inject:(id (^)(id memo, id obj))block;
+- (NSArray *)inject:(id)initialMemo block:(id (^)(id memo, id obj))block;
 
 @end
 
@@ -38,7 +38,7 @@
 
 @interface NSArray (YOLO)
 
-- (NSArray *(^)(void (^)(id arrayOrSet)))without;
+- (NSArray *(^)(void (^)(id arrayOrSetOrClass)))without;
 
 - (NSArray *)shuffledArray; // Do not use this if there a chance that all
 							// values are equal or if most values are equal
