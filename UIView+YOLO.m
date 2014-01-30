@@ -48,3 +48,9 @@ static void YOLODumpViews(UIView* view, NSString *text, NSString *indent)
 void UIViewDumpSubviewTree(UIView *view) {
     YOLODumpViews(view, @"", @"");
 }
+
+void UIFontDumpAll() {
+    [UIFont familyNames].each(^(id o){
+        NSLog(@"%@", [UIFont fontNamesForFamilyName:o]);
+    });
+}

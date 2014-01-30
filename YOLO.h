@@ -159,6 +159,7 @@ void NSObjectDumpSelectors(NSObject *o);
 
 
 void UIViewDumpSubviewTree(UIView *view);
+void UIFontDumpAll();
 
 
 /** Let’s use blocks more */
