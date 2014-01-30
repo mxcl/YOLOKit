@@ -39,7 +39,7 @@
 
 @interface NSArray (YOLO)
 
-- (NSArray *(^)(void (^)(id arrayOrSetOrClass)))without;
+- (NSArray *(^)(id arrayOrSetOrClass))without;
 
 - (NSArray *)shuffledArray; // Do not use this if there a chance that all
 							// values are equal or if most values are equal

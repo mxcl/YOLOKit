@@ -33,9 +33,13 @@
     return [NSSet setWithArray:self];
 }
 
-- (NSArray *(^)(void (^)(id)))without {
+- (NSArray *(^)(id))without {
     return ^(id arrayOrSet) {
-        id objs = [arrayOrSet isKindOfClass:[NSSet class]] ? [arrayOrSet allObjects] : arrayOrSet;
+        id objs = [arrayOrSet isKindOfClass:[NSSet class]]
+                ? [arrayOrSet allObjects]
+                : [arrayOrSet isKindOfClass:[NSArray class]]
+                ? arrayOrSet
+                : @[arrayOrSet];
         id rv = self.mutableCopy;
         [rv removeObjectsInArray:objs];
         return rv;
