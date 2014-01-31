@@ -53,6 +53,7 @@
 
 @interface NSMutableArray (YOLO)
 - (id)pop;
+- (NSMutableArray *(^)(id obj))add;
 @end
 
 

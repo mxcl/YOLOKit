@@ -13,4 +13,11 @@
     }
 }
 
+- (NSMutableArray *(^)(id))add {
+    return ^(id o){
+        [self addObject:o];
+        return self;
+    };
+}
+
 @end
