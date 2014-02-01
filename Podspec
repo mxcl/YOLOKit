@@ -3,12 +3,5 @@ Pod::Spec.new do |s|
   s.version      = "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1"
   s.source       = { :git => "https://github.com/mxcl/YOLOKit.git" }
   s.requires_arc = true
-
-  s.ios.source_files = 'UI*.m'
-  s.source_files = 'NS*.m', 'YOLOSQLite.m', 'YOLO.h'
-
-  s.subspec 'sqlite' do |ss|
-    ss.source_files = 'YOLOSQLite.m'
-    ss.xcconfig = { 'OTHER_CFLAGS' => '-D__YOSQLO__' }
-  end
+  s.source_files = '*.m', 'YOLO.h'
 end
