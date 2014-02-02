@@ -69,6 +69,12 @@
     };
 }
 
+- (NSUInteger (^)(id obj))index_of {
+    return ^NSUInteger(id obj) {
+        return [self indexOfObject:obj];
+    };
+}
+
 
 
 - (id)inject:(id (^)(id memo, id obj))block {

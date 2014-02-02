@@ -27,6 +27,7 @@
 - (id(^)(NSInteger (^)(id)))min;
 - (id(^)(NSInteger (^)(id)))max;
 - (id(^)(BOOL (^)(id o)))find;
+- (NSUInteger (^)(id obj))index_of;
 
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)each:(void (^)(id o))block;
