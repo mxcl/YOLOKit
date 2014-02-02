@@ -71,6 +71,7 @@
 
 - (id)pop;
 - (NSMutableArray *(^)(id obj))add;
+- (NSArray *(^)(NSUInteger))take;
 
 @end
 
