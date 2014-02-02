@@ -1,0 +1,85 @@
+#!/bin/bash
+
+D=/Applications/Xcode.app/Contents/Developer/Library/Frameworks
+OBJC=`awk '/^__OBJC__/ {print NR + 1; exit 0; }' $0`
+tail -n+$OBJC $0 > /tmp/YOLOtests.m
+
+clang -ObjC -F$D -I. -fmodules -fobjc-arc \
+    -framework SenTestingKit \
+    /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
+
+install_name_tool -change \
+    @rpath/SenTestingKit.framework/Versions/A/SenTestingKit \
+    $D/SenTestingKit.framework/SenTestingKit \
+    /tmp/YOLOtests
+
+exec /tmp/YOLOtests
+
+
+__OBJC__
+
+#import <SenTestingKit/SenTestingKit.h>
+#import "YOLO.h"
+
+
+int main() {
+    unlink("/tmp/YOLOtests.m");  //before or… doesn't happen! FFS
+    unlink("/tmp/YOLOtests");
+
+    @autoreleasepool {
+        SenSelfTestMain();
+    }
+}
+
+
+@interface GeneralTests : SenTestCase
+@end
+
+
+@implementation GeneralTests
+
+- (void)testIndexOfSuccess {
+    NSUInteger u = @[@1, @2, @3].index_of(@2);
+    STAssertEquals(u, 1ul, @"");
+}
+
+- (void)testIndexOfFailure {
+    NSUInteger u = @[@1, @2, @3].index_of(@4);
+    STAssertEquals(u, NSNotFound, @"");
+}
+
+- (void)testPop {
+    NSMutableArray *aa = @[@1, @2, @3].mutableCopy;
+    [aa pop];
+    STAssertEquals(aa.count, 2ul, @"");
+}
+
+- (void)testUniq {
+    NSArray *aa = @[@1, @2, @3, @3, @2, @2, @1].uniq;
+    STAssertEquals(aa.count, 3ul, @"");
+    id aaa = @[@1, @2, @3];
+    STAssertEqualObjects(aaa, aa, @"");
+}
+
+- (void)testTake {
+    NSMutableArray *aa = @[@1, @2, @3, @4].mutableCopy;
+    id bb = aa.take(2);
+    id cc = @[@1, @2];
+    STAssertEqualObjects(cc, bb, @"");
+    id dd = @[@3, @4];
+    STAssertEqualObjects(aa, dd, @"");
+}
+
+- (void)testExtendForm1 {
+    NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
+    id other = dict.extend(@{@3: @5});
+    STAssertEqualObjects(other[@3], @5, @"");
+}
+
+- (void)testExtendForm2 {
+    NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
+    id other = dict.extend(@3, @9);
+    STAssertEqualObjects(other[@3], @9, @"");
+}
+
+@end
