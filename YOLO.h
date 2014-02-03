@@ -19,7 +19,6 @@
 
 - (NSArray *(^)(BOOL (^)(id o)))select;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
-- (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(void (^)(id o, uint index)))each_with_index;
 - (NSArray *(^)(id (^)(id memo, id obj)))inject;
@@ -28,6 +27,9 @@
 - (id(^)(NSInteger (^)(id)))max;
 - (id(^)(BOOL (^)(id o)))find;
 - (NSUInteger (^)(id obj))index_of;
+
+// underscore.js really
+- (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
 
 - (NSArray *)map:(id (^)(id o))block;
 - (NSArray *)each:(void (^)(id o))block;
