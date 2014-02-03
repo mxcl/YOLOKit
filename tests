@@ -80,12 +80,6 @@ int main() {
     STAssertEqualObjects(objs, objs2, @"");
 }
 
-- (void)testDrop {
-    id aa = @[@1,@2,@3,@4,@5].drop(2);
-    id bb = @[@3, @4, @5];
-    STAssertEqualObjects(aa, bb, @"");
-}
-
 - (void)testLast {
     id aa = @[@1,@2,@3,@4,@5].last(3);
     id bb = @[@3, @4, @5];
@@ -153,5 +147,18 @@ int main() {
     });
     STAssertEquals(sum.intValue, 10, @"");
 }
+
+- (void)testSlice1 {
+    id aa = @[@1, @2, @3, @4, @5].slice(1, -2);
+    id bb = @[@2, @3, @4];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testSlice2 {
+    id aa = @[@1, @2, @3].slice(1, 2);
+    id bb = @[@2, @3];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 
 @end

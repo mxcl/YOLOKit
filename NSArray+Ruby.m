@@ -65,7 +65,7 @@
 - (id(^)(id (^)(id, id)))reduce {
     return ^(id (^block)(id, id)) {
         id memo = self.firstObject;
-        for (id obj in self.drop(1))
+        for (id obj in self.slice(1, -1))
             memo = block(memo, obj);
         return memo;
     };
@@ -156,7 +156,7 @@
 - (NSArray *(^)(int, int))slice {
     return ^id(int start, int length) {
         if (start < 0) start += self.count;
-        if (length < 0) length = ((int)self.count) + length - start;
+        if (length < 0) length = ((int)self.count) + length - start + 1;
         return [self subarrayWithRange:NSMakeRange(start, length)];
     };
 }
@@ -174,12 +174,6 @@
 - (NSArray *(^)(NSUInteger))first {
     return ^(NSUInteger num) {
         return [self subarrayWithRange:NSMakeRange(0, num)];
-    };
-}
-
-- (NSArray *(^)(NSUInteger))drop {
-    return ^(NSUInteger num) {
-        return [self subarrayWithRange:NSMakeRange(num, self.count - num)];
     };
 }
 

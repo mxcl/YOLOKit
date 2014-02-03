@@ -70,7 +70,6 @@
 - (NSArray *(^)(int start, int length))slice;
 
 - (NSArray *(^)(NSUInteger))first;
-- (NSArray *(^)(NSUInteger))drop;
 - (NSArray *(^)(NSUInteger))last;
 
 /**
