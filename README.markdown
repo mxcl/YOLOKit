@@ -28,9 +28,6 @@ Versus:
 }];
 ```
 
-*I prefer the former, but if you don’t then you’ll be pleased to hear that
-YOLOKit offers **both** styles.*
-
 Or, in 2002 (fast enumeration is recent!) style:
 
 ```objc
