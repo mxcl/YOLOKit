@@ -130,6 +130,20 @@
     };
 }
 
+- (NSDictionary *(^)(id (^)(id o)))group_by {
+    return ^id(id (^block)(id)) {
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        for (id o in self) {
+            id key = block(o);
+            if (!dict[key])
+                dict[key] = [NSMutableArray arrayWithObject:o];
+            else
+                [dict[key] addObject:o];
+        }
+        return dict;
+    };
+}
+
 @end
 
 

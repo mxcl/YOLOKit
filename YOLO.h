@@ -28,6 +28,7 @@
 - (id(^)(BOOL (^)(id o)))find;
 - (NSUInteger (^)(id obj))index_of;
 - (NSArray *(^)(NSArray *(^)(id o)))flat_map;
+- (NSDictionary *(^)(id (^)(id o)))group_by;
 
 // underscore.js really
 - (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
