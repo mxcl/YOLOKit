@@ -189,4 +189,22 @@
     };
 }
 
+- (NSArray *(^)(NSUInteger))first {
+    return ^(NSUInteger num) {
+        return [self subarrayWithRange:NSMakeRange(0, num)];
+    };
+}
+
+- (NSArray *(^)(NSUInteger))drop {
+    return ^(NSUInteger num) {
+        return [self subarrayWithRange:NSMakeRange(num, self.count - num)];
+    };
+}
+
+- (NSArray *(^)(NSUInteger))last {
+    return ^(NSUInteger num) {
+        return [self subarrayWithRange:NSMakeRange(self.count - num, num)];
+    };
+}
+
 @end

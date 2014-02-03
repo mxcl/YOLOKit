@@ -61,15 +61,6 @@ int main() {
     STAssertEqualObjects(aaa, aa, @"");
 }
 
-- (void)testTake {
-    NSMutableArray *aa = @[@1, @2, @3, @4].mutableCopy;
-    id bb = aa.take(2);
-    id cc = @[@1, @2];
-    STAssertEqualObjects(cc, bb, @"");
-    id dd = @[@3, @4];
-    STAssertEqualObjects(aa, dd, @"");
-}
-
 - (void)testExtendForm1 {
     NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
     id other = dict.extend(@{@3: @5});
@@ -87,6 +78,24 @@ int main() {
     objs = objs.concat(objs);
     id objs2 = @[@1, @2, @3, @1, @2, @3];
     STAssertEqualObjects(objs, objs2, @"");
+}
+
+- (void)testDrop {
+    id aa = @[@1,@2,@3,@4,@5].drop(2);
+    id bb = @[@3, @4, @5];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testLast {
+    id aa = @[@1,@2,@3,@4,@5].last(3);
+    id bb = @[@3, @4, @5];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testFirst {
+    id aa = @[@1,@2,@3,@4,@5].first(3);
+    id bb = @[@1, @2, @3];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 @end

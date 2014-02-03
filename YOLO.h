@@ -50,11 +50,20 @@
 - (NSArray *(^)(NSArray *other_array))concat;
 
 /**
-  Ruby allows ranges to be passed to slice, but since we have no equivalent
-  I have made it so length (as well as start) can be negative, in that case
-  length is no longer length, but end-position.
+ Ruby allows ranges to be passed to slice, but since we have no equivalent I
+ have made it so length (as well as start) can be negative, in that case length
+ is no longer length, but end-position.
  **/
 - (NSArray *(^)(int start, int length))slice;
+
+- (NSArray *(^)(NSUInteger))first;
+- (NSArray *(^)(NSUInteger))drop;
+- (NSArray *(^)(NSUInteger))last;
+
+/**
+ NOTE we didn't implement take as its name is confusing and it behaves the exact
+ same as first().
+**/
 
 @end
 
@@ -73,7 +82,6 @@
 
 - (id)pop;
 - (NSMutableArray *(^)(id obj))add;
-- (NSArray *(^)(NSUInteger))take;
 
 @end
 

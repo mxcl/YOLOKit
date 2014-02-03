@@ -20,13 +20,4 @@
     };
 }
 
-- (NSArray *(^)(NSUInteger))take {
-    return ^(NSUInteger number) {
-        NSRange rng = NSMakeRange(0, number);
-        id rv = [self subarrayWithRange:rng];
-        [self removeObjectsInRange:rng];
-        return rv;
-    };
-}
-
 @end
