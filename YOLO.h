@@ -43,9 +43,15 @@
 - (NSArray *(^)(NSArray *(^)(id o)))flat_map;
 - (NSDictionary *(^)(id (^)(id o)))group_by;
 
-// underscore.js really
-- (NSArray *(^)(NSString *key))pick;  // uses [foo valueForKeyPath];
+@end
 
+
+@interface NSArray (Underscore)
+/**
+ Map for the specified keypath, uses valueForKeyPath so you can specify
+ multiple levels of key. Check Apple’s docs if you are unfamiliar.
+**/
+- (NSArray *(^)(NSString *keypath))pluck;
 @end
 
 

@@ -23,12 +23,6 @@
     };
 }
 
-- (NSArray *(^)(NSString *))pick {
-    return ^(NSString *key) {
-        return [self valueForKeyPath:key];
-    };
-}
-
 - (NSArray *(^)(void (^)(id)))each {
     return ^(void (^block)(id)) {
         for (id obj in self)

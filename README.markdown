@@ -13,7 +13,7 @@ codebase:
 ```objc
 campaigns.reject(^(PPCampaign *campaign){
     return campaign.locked;
-}).pick(@"venues").flatten.each(^(PPVenue *venue){
+}).pluck(@"venues").flatten.each(^(PPVenue *venue){
     [geofencer startMonitoringForRegion:venue.region];
 });
 ```
@@ -23,7 +23,7 @@ Versus:
 ```objc
 [[[[campaigns reject:^(PPCampaign *campaign) {
     return campaign.locked;
-}] pick:@"venues"] flatten] each:^(PPVenue *venue) {
+}] pluck:@"venues"] flatten] each:^(PPVenue *venue) {
     [geofencer startMonitoringForRegion:venue.region];
 }];
 ```
@@ -51,7 +51,7 @@ typical of the square bracket syntax. So… that sucks. So if it's possible your
 ```objc
 (campaigns ?: @[]).reject(^(PPCampaign *campaign){
     return campaign.locked;
-}).pick(@"venues").flatten.each(^(PPVenue *venue){
+}).pluck(@"venues").flatten.each(^(PPVenue *venue){
     [geofencer startMonitoringForRegion:venue.region];
 });
 ```
@@ -61,7 +61,7 @@ But we only live once, so why not:
 ```objc
 if (campaigns) campaigns.reject(^(PPCampaign *campaign){
     return campaign.locked;
-}).pick(@"venues").flatten.each(^(PPVenue *venue){
+}).pluck(@"venues").flatten.each(^(PPVenue *venue){
     [geofencer startMonitoringForRegion:venue.region];
 });
 ```
