@@ -47,6 +47,8 @@
 
 - (NSArray *)uniq;  // like Ruby, preserves sort order
 
+- (NSArray *(^)(NSArray *other_array))concat;
+
 /**
   Ruby allows ranges to be passed to slice, but since we have no equivalent
   I have made it so length (as well as start) can be negative, in that case

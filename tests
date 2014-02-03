@@ -82,4 +82,11 @@ int main() {
     STAssertEqualObjects(other[@3], @9, @"");
 }
 
+- (void)testConcat {
+    NSArray *objs = @[@1, @2, @3];
+    objs = objs.concat(objs);
+    id objs2 = @[@1, @2, @3, @1, @2, @3];
+    STAssertEqualObjects(objs, objs2, @"");
+}
+
 @end
