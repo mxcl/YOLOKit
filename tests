@@ -147,4 +147,11 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testReduce {
+    NSNumber *sum = @[@1, @2, @3, @4].reduce(^(NSNumber *memo, NSNumber *num){
+        return @(num.intValue + memo.intValue);
+    });
+    STAssertEquals(sum.intValue, 10, @"");
+}
+
 @end

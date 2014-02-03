@@ -21,7 +21,20 @@
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(void (^)(id o, uint index)))each_with_index;
-- (NSArray *(^)(id initial_memo, id (^)(id memo, id obj)))inject;
+
+/**
+ Combines all elements into a single value. Memo starts as the first element in
+ the array and each iteration is the value returned from your block
+**/
+- (id(^)(id (^)(id memo, id obj)))reduce;
+
+/**
+ Same as reduce, but you specify the initial memo, usually used to populate eg.
+ an NSDictionary by providing an initial memo of @{} though with experience
+ there are often better ways to do such things, like eg. group_by
+**/
+- (id(^)(id initial_memo, id (^)(id memo, id obj)))inject;
+
 - (NSArray *)flatten;
 - (id(^)(NSInteger (^)(id)))min;
 - (id(^)(NSInteger (^)(id)))max;

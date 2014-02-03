@@ -59,10 +59,19 @@
     };
 }
 
-- (NSArray *(^)(id, id (^)(id, id)))inject {
+- (id(^)(id, id (^)(id, id)))inject {
     return ^(id initial_memo, id (^block)(id, id)) {
         id memo = initial_memo;
         for (id obj in self)
+            memo = block(memo, obj);
+        return memo;
+    };
+}
+
+- (id(^)(id (^)(id, id)))reduce {
+    return ^(id (^block)(id, id)) {
+        id memo = self.firstObject;
+        for (id obj in self.drop(1))
             memo = block(memo, obj);
         return memo;
     };
