@@ -127,4 +127,16 @@ int main() {
     STAssertEquals([a intValue], 29, @"");
 }
 
+- (void)testFlatten {
+    id a = @[@1, @[@1, @2], @[@1, @[@1, @2, @[@1, @[@2, @3]]], @2]];
+    STAssertEquals([a flatten].count, 10ul, @"");
+}
+
+- (void)testFlatMap {
+    id a = @[@1, @2, @3].flat_map(^(id o){
+        return @[o, o];
+    });
+    STAssertEquals([a count], 6ul, @"");
+}
+
 @end

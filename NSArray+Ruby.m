@@ -124,6 +124,12 @@
     return aa;
 }
 
+- (NSArray *(^)(NSArray *(^)(id o)))flat_map {
+    return ^(NSArray *(^block)(id o)){
+        return self.map(block).flatten;
+    };
+}
+
 @end
 
 
