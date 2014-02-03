@@ -98,4 +98,33 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testEach {
+    __block int x = 0;
+    @[@1, @2, @3].each(^(id o){
+        STAssertEqualObjects(o, @(++x), @"");
+    });
+}
+
+- (void)testSelect {
+    id aa = @[@1, @2, @3, @4].select(^BOOL(id o) {
+        return [o intValue] % 2 == 0;
+    });
+    id bb = @[@2, @4];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testMin {
+    id a = @[@19, @29, @4, @5, @6].min(^NSInteger(id o) {
+        return [o integerValue];
+    });
+    STAssertEquals([a intValue], 4, @"");
+}
+
+- (void)testMax {
+    id a = @[@19, @29, @4, @5, @6].max(^NSInteger(id o) {
+        return [o integerValue];
+    });
+    STAssertEquals([a intValue], 29, @"");
+}
+
 @end
