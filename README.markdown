@@ -44,7 +44,31 @@ Nesting square-brackets is very objective-C, but it's also so very 1983 and
 it’s (let’s be honest) not very readable. You only live once, so let’s be
 modern, let's make iterating over data easy, delightful, productive and awesome.
 
-Caveats: calling nil in block form crashes and doesn't just not happen as is
+Some Other Nice Examples
+========================
+From:
+
+```objc
+[campaigns subArrayWithRange:NSMakeRange(0, 2)] arrayByAppendingArray:[campaigns subArrayWithRange:NSMakeRange(4, campaigns.count-4)]];
+```
+
+To:
+
+```objc
+campaigns.first(2).concat(campaigns.slice(4,-1))
+```
+
+Forgiving
+=========
+YOLOKit assumes you'd rather not have crashes. Whenever possible it will behave
+defensively. Eg. if you ask for `slice(0, 3)` and the array only has 2 items, it
+will return as though you called `slice(0, 2)`.
+
+We are writing iPhone apps. Not space shuttle control modules.
+
+Caveats
+=======
+Calling nil in block form crashes and doesn't just not happen as is
 typical of the square bracket syntax. So… that sucks. So if it's possible your
 *initial* object is nil you should do something like this:
 

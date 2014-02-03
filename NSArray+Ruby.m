@@ -155,8 +155,16 @@
 
 - (NSArray *(^)(int, int))slice {
     return ^id(int start, int length) {
+        if (self.count == 0)
+            return self;
+
         if (start < 0) start += self.count;
         if (length < 0) length = ((int)self.count) + length - start + 1;
+
+        // YOLOKit is forgiving
+        if (start > self.count - 1) start = self.count - 1;
+        if (start + length > self.count) length = self.count - start;
+
         return [self subarrayWithRange:NSMakeRange(start, length)];
     };
 }
@@ -173,13 +181,13 @@
 
 - (NSArray *(^)(NSUInteger))first {
     return ^(NSUInteger num) {
-        return [self subarrayWithRange:NSMakeRange(0, num)];
+        return self.slice(0, num);
     };
 }
 
 - (NSArray *(^)(NSUInteger))last {
     return ^(NSUInteger num) {
-        return [self subarrayWithRange:NSMakeRange(self.count - num, num)];
+        return self.slice(-num, num);
     };
 }
 

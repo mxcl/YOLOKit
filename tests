@@ -160,5 +160,25 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testOverslice {
+    NSArray *aa = @[@1, @2, @3, @4];
+    id bb = aa.slice(0, 10);
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testEmptySlice {
+    NSArray *bb = @[].slice(3, 10);
+    STAssertEquals(bb.count, 0ul, @"");
+}
+
+- (void)testEmptyFirst {
+    NSArray *bb = @[].first(3);
+    STAssertEquals(bb.count, 0ul, @"");
+}
+
+- (void)testEmptyLast {
+    NSArray *bb = @[].last(3);
+    STAssertEquals(bb.count, 0ul, @"");
+}
 
 @end
