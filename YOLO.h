@@ -122,3 +122,14 @@
 - (NSDictionary *(^)(id o, ...))extend;
 
 @end
+
+
+
+@interface NSDictionary (YOLO)
+
+/**
+ because [] syntax is often ugly when chaining
+**/
+- (id (^)(id))get;
+
+@end

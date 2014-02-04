@@ -181,4 +181,8 @@ int main() {
     STAssertEquals(bb.count, 0ul, @"");
 }
 
+- (void)testGet {
+    STAssertEquals([@{@1:@2}.get(@1) intValue], 2, @"");
+}
+
 @end
