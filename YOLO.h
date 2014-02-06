@@ -50,8 +50,9 @@
 /**
  Map for the specified keypath, uses valueForKeyPath so you can specify
  multiple levels of key. Check Apple’s docs if you are unfamiliar.
+ You can also pass Classes eg: array.pluck(NSNumber.class)
 **/
-- (NSArray *(^)(NSString *keypath))pluck;
+- (NSArray *(^)(id keypathOrClass))pluck;
 @end
 
 

@@ -204,4 +204,9 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testPluckClass {
+    id bb = @[@1, @"a", @[]].pluck(NSNumber.class);
+    STAssertEqualObjects(bb, @[@1], @"");
+}
+
 @end
