@@ -6,9 +6,7 @@ Let’s use categories, let’s make new classes, let’s use modern design patt
 
 Chainable, Dot-notated, Ruby-style Enumeration
 ==============================================
-YOLOKit offers a novel way to do Ruby-style enumeration in Objective-C. Here’s a
-real-world example taken from the [Popular Pays](http://popularpays.com)
-codebase:
+YOLOKit offers dot-notated Ruby-style enumeration:
 
 ```objc
 campaigns.reject(^(PPCampaign *campaign){
@@ -19,16 +17,6 @@ campaigns.reject(^(PPCampaign *campaign){
 ```
 
 Versus:
-
-```objc
-[[[[campaigns reject:^(PPCampaign *campaign) {
-    return campaign.locked;
-}] pluck:@"venues"] flatten] each:^(PPVenue *venue) {
-    [geofencer startMonitoringForRegion:venue.region];
-}];
-```
-
-Or, in 2002 (fast enumeration is recent!) style:
 
 ```objc
 for (PPCampaign *campaign in campaigns) {
@@ -56,6 +44,25 @@ To:
 
 ```objc
 campaigns.first(2).concat(campaigns.slice(4,-1))
+```
+
+I don’t think I would have been happy with this code without YOLOKit:
+
+```objc
+id chicago = [[CLLocation alloc] initWithLatitude:41.905088 longitude:-87.670083];
+id austin = [[CLLocation alloc] initWithLatitude:30.2500 longitude:-97.7500];
+
+[PPAPI GET:@"/campaigns" success:^(NSArray *got) {
+    id closest_city = @[chicago, austin].min(^(id city) {
+        return [locationManager.location distanceFromLocation:city];
+    });
+
+    self.campaigns = got.group_by(^(PPCampaign *campaign) {
+        return @[chicago, austin].min(^(id city) {
+            return [campaign.location distanceFromLocation:city];
+        });
+    }).get(closest_city);
+}];
 ```
 
 Forgiving
