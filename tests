@@ -198,4 +198,10 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testUpto {
+    id aa = @(4).upto(6);
+    id bb = @[@4, @5, @6];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end

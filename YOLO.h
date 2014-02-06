@@ -141,3 +141,11 @@
 - (id (^)(id))get;
 
 @end
+
+
+
+@interface NSNumber (Ruby)
+
+- (NSArray *(^)(int))upto;
+
+@end
