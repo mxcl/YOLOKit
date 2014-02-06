@@ -86,6 +86,14 @@
 - (NSArray *(^)(id arrayOrSetOrClass))without;
 - (NSSet *)set;
 
+/**
+ Parallel map. Obviously: be thread safe in your block. Doesn't return
+ until everything is done. Typically not worth using unless you have
+ large lists since the overhead of thread-syncronization may be greater
+ than the parallel savings otherwise.
+**/
+- (NSArray *(^)(id (^)(id o)))pmap;
+
 @end
 
 

@@ -185,4 +185,17 @@ int main() {
     STAssertEquals([@{@1:@2}.get(@1) intValue], 2, @"");
 }
 
+- (void)testPMap {
+    NSUInteger const count = 2000;
+    NSArray *nums = @(1).upto(count);
+    id aa = nums.pmap(^(NSNumber *num){
+        return @(num.intValue * num.intValue);
+    });
+    id bb = nums.map(^(NSNumber *num){
+        return @(num.intValue * num.intValue);
+    });
+    STAssertEquals(count, nums.count, @"");
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
