@@ -4,7 +4,7 @@ D=/Applications/Xcode.app/Contents/Developer/Library/Frameworks
 OBJC=`awk '/^__OBJC__/ {print NR + 1; exit 0; }' $0`
 tail -n+$OBJC $0 > /tmp/YOLOtests.m
 
-clang -ObjC -F$D -I. -fmodules -fobjc-arc \
+clang -g -O0 -ObjC -F$D -I. -fmodules -fobjc-arc \
     -framework SenTestingKit \
     /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
 
