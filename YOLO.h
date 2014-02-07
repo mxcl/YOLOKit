@@ -43,6 +43,14 @@
 - (NSArray *(^)(NSArray *(^)(id o)))flat_map;
 - (NSDictionary *(^)(id (^)(id o)))group_by;
 
+/**
+ Accepts a block or a string being a keypath, though
+ we feed the keypath to a NSSortDescriptor, so you
+ can't use dots in there.
+**/
+- (NSArray *(^)(id (^)(id o)))sort_by;
+- (NSArray *)sort;
+
 @end
 
 

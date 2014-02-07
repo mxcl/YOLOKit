@@ -147,6 +147,26 @@
     };
 }
 
+- (NSArray *)sort {
+    return [self sortedArrayUsingSelector:@selector(compare:)];
+}
+
+// FIXME inefficient
+- (NSArray *(^)(id (^)(id o)))sort_by {
+    return ^(id (^block)(id)) {
+        if ([block isKindOfClass:[NSString class]]) {
+            id d = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+            return [self sortedArrayUsingDescriptors:@[d]];
+        }
+
+        NSArray *keys = self.map(block);
+        return keys.sort.map(^(id key){
+            int ii = [keys indexOfObject:key];
+            return self[ii];
+        });
+    };
+}
+
 @end
 
 

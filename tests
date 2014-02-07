@@ -209,6 +209,17 @@ int main() {
     STAssertEqualObjects(bb, @[@1], @"");
 }
 
+- (void)testSortBy {
+    id c = @{@3: @"c"};
+    id a = @{@1: @"a"};
+    id b = @{@2: @"b"};
+    id aa = @[c, a, b].sort_by(^(NSDictionary *o){
+        return o.allKeys.firstObject;
+    });
+    id bb = @[a, b, c];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 - (void)testReverse {
     id aa = @[@5, @4, @3, @2, @1];
     id bb = @[@1, @2, @3, @4, @5].reverse;
