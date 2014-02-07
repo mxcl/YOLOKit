@@ -87,10 +87,9 @@
 **/
 
 - (NSArray *)reverse;
-
 - (NSString *)join;
-
 - (NSArray *)transpose;
+- (NSArray *)shuffle;
 
 @end
 
