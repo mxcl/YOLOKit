@@ -52,6 +52,8 @@ int main() {
     NSMutableArray *aa = @[@1, @2, @3].mutableCopy;
     [aa pop];
     STAssertEquals(aa.count, 2ul, @"");
+    id bb = @[@1, @2];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 - (void)testUniq {
