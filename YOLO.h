@@ -134,7 +134,9 @@
 
 - (id)pop;
 - (NSMutableArray *(^)(id obj))push;
+
 - (id)shift;
+- (NSMutableArray *(^)(id obj))unshift;
 
 @end
 

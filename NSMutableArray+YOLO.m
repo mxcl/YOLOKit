@@ -29,4 +29,11 @@
     return o;
 }
 
+- (NSMutableArray *(^)(id o))unshift {
+    return ^(id o){
+        [self insertObject:o atIndex:0];
+        return self;
+    };
+}
+
 @end

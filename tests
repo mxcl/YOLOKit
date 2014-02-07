@@ -295,4 +295,11 @@ int main() {
     STAssertEqualObjects(aa.sort, bb.sort, @"");
 }
 
+- (void)testUnshift {
+    NSMutableArray *aa = @[@4, @5, @6].mutableCopy;
+    aa.unshift(@3).unshift(@2).unshift(@1);
+    id bb = @[@1, @2, @3, @4, @5, @6];
+    STAssertEqualObjects(bb, aa, @"");
+}
+
 @end
