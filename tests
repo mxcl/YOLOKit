@@ -270,4 +270,10 @@ int main() {
     STAssertFalse(@[@1].empty, @"");
 }
 
+- (void)testString {
+    id aa = @"1,2,3,4".split(@",");
+    id bb = @[@"1", @"2", @"3", @"4"];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end

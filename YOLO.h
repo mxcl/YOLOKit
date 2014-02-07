@@ -182,3 +182,11 @@
 - (NSArray *(^)(int))upto;
 
 @end
+
+
+
+@interface NSString (YOLO)
+
+- (NSArray *(^)(NSString *))split;
+
+@end

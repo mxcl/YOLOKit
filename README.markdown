@@ -1,8 +1,10 @@
 YOLOKit
 =======
-Friends don’t let friends use APIs designed thirty years ago.
+YOLOKit is a delightful library for enumerating Foundation.
 
-Let’s use categories, let’s make new classes, let’s use modern design patterns.
+Friends don’t let friends use APIs designed thirty years ago. Let’s use
+categories, let’s make new classes, let’s use modern design patterns.
+
 
 Chainable, Dot-notated, Ruby-style Enumeration
 ==============================================
