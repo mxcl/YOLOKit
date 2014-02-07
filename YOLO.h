@@ -91,6 +91,11 @@
 - (NSArray *)transpose;
 - (NSArray *)shuffle;
 
+/**
+ Returns a random object from the array.
+**/
+- (id)sample;
+
 @end
 
 

@@ -244,4 +244,9 @@ int main() {
     STAssertEquals(aa.count, 2ul, @"");
 }
 
+- (void)testSample {
+    id aa = @[@1, @2, @3].sample;
+    STAssertNotNil(aa, @"");
+}
+
 @end

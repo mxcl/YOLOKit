@@ -255,4 +255,8 @@
     }
 }
 
+- (id)sample {
+    return self[arc4random() % self.count];
+}
+
 @end
