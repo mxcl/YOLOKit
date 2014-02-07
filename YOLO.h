@@ -127,7 +127,7 @@
 @interface NSMutableArray (YOLO)
 
 - (id)pop;
-- (NSMutableArray *(^)(id obj))add;
+- (NSMutableArray *(^)(id obj))push;
 - (id)shift;
 
 @end

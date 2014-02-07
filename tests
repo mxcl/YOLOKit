@@ -259,4 +259,10 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testPush {
+    id aa = [NSMutableArray new].push(@1).push(@2).copy;
+    id bb = @[@1, @2];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
