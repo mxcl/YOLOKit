@@ -226,4 +226,10 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testJoin {
+    id aa = @[@"a", @1, @"b"].join;
+    id bb = @"a1b";
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end

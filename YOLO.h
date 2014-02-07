@@ -88,6 +88,8 @@
 
 - (NSArray *)reverse;
 
+- (NSString *)join;
+
 @end
 
 

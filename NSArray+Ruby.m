@@ -223,4 +223,8 @@
     return aa;
 }
 
+- (NSString *)join {
+    return [self.pluck(@"description") componentsJoinedByString:@""];
+}
+
 @end
