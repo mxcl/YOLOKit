@@ -90,6 +90,8 @@
 
 - (NSString *)join;
 
+- (NSArray *)transpose;
+
 @end
 
 

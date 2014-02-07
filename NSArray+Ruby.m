@@ -227,4 +227,16 @@
     return [self.pluck(@"description") componentsJoinedByString:@""];
 }
 
+- (NSArray *)transpose {
+    __block NSMutableArray *objs = [NSMutableArray new];
+    for (int x = 0; x < [self[0] count]; ++x)
+        [objs addObject:[NSMutableArray new]];
+    self.each(^(NSArray *obj){
+        obj.each_with_index(^(id o, uint ii) {
+            [objs[ii] addObject:o];
+        });
+    });
+    return objs;
+}
+
 @end
