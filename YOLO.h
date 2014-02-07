@@ -116,6 +116,7 @@
 
 - (id)pop;
 - (NSMutableArray *(^)(id obj))add;
+- (id)shift;
 
 @end
 

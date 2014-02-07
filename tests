@@ -238,4 +238,10 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testShift {
+    NSMutableArray *aa = [NSMutableArray arrayWithObjects:@1, @2, @3, nil];
+    STAssertEqualObjects(aa.shift, @1, @"");
+    STAssertEquals(aa.count, 2ul, @"");
+}
+
 @end
