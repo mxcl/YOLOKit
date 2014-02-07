@@ -96,6 +96,13 @@
 **/
 - (id)sample;
 
+/**
+ Returns a new array by rotating self so that the element at count is the first
+ element of the new array. If count is negative then it rotates in the opposite
+ direction, starting from the end of self where -1 is the last element.
+**/
+- (NSArray *(^)(int))rotate;
+
 @end
 
 

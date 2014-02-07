@@ -259,4 +259,12 @@
     return self[arc4random() % self.count];
 }
 
+- (NSArray *(^)(int))rotate {
+    return ^(int pivot) {
+        if (pivot < 0)
+            pivot = self.count + pivot;
+        return self.slice(pivot, -1).concat(self.slice(0, pivot));
+    };
+}
+
 @end

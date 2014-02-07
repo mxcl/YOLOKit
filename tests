@@ -249,4 +249,14 @@ int main() {
     STAssertNotNil(aa, @"");
 }
 
+- (void)testRotate {
+    id aa = @[@1, @2, @3, @4].rotate(2);
+    id bb = @[@3, @4, @1, @2];
+    STAssertEqualObjects(aa, bb, @"");
+
+    id cc = @[@1, @2, @3, @4].rotate(-2);
+    id dd = @[@3, @4, @1, @2];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
