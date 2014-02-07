@@ -78,6 +78,8 @@
  same as first().
 **/
 
+- (NSArray *)reverse;
+
 @end
 
 

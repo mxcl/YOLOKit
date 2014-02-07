@@ -209,4 +209,10 @@ int main() {
     STAssertEqualObjects(bb, @[@1], @"");
 }
 
+- (void)testReverse {
+    id aa = @[@5, @4, @3, @2, @1];
+    id bb = @[@1, @2, @3, @4, @5].reverse;
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
