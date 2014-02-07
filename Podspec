@@ -1,7 +1,0 @@
-Pod::Spec.new do |s|
-  s.name         = "YOLOKit"
-  s.version      = "2"
-  s.source       = { :git => "https://github.com/mxcl/YOLOKit.git" }
-  s.requires_arc = true
-  s.source_files = '*.m', 'YOLO.h'
-end

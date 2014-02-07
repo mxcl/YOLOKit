@@ -105,7 +105,7 @@ Using via CocoaPods
 ===================
 In your Podfile:
 
-    pod 'YOLOKit', :podspec => 'https://raw.github.com/mxcl/YOLOKit/master/Podspec'
+    pod 'YOLOKit'
 
 Git Submodule Usage
 ===================
