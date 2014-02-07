@@ -276,4 +276,21 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (NSArray *)array:(NSUInteger)count {
+    id objs[count];
+    for (NSUInteger x = 0; x < count; ++x)
+        objs[x] = @(arc4random());
+    return [NSArray arrayWithObjects:objs count:count];
+}
+
+- (void)testShuffle {
+    // obviously there is no good test for shuffle, but we can check that the
+    // resulting array has certain characteristics
+
+    NSArray *aa = [self array:50];
+    NSArray *bb = aa.shuffle;
+    STAssertEquals(aa.count, bb.count, @"");
+    STAssertEqualObjects(aa.sort, bb.sort, @"");
+}
+
 @end
