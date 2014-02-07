@@ -120,6 +120,12 @@
 **/
 - (NSArray *(^)(id (^)(id o)))pmap;
 
+/**
+ Chosen over isempty because almost always we use this in an if statement and in
+ that context: `if (array.empty) {}` the code is clear.
+**/
+- (BOOL)empty;
+
 @end
 
 

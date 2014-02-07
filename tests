@@ -265,4 +265,9 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testEmpty {
+    STAssertTrue(@[].empty, @"");
+    STAssertFalse(@[@1].empty, @"");
+}
+
 @end

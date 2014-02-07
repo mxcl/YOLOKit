@@ -43,4 +43,8 @@
     };
 }
 
+- (BOOL)empty {
+    return self.count == 0;
+}
+
 @end
