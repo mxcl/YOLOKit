@@ -368,6 +368,15 @@ if (campaigns) campaigns.reject(^(PPCampaign *campaign){
 
 OMG we didn’t push ENTER! Kittens might die!!1!
 
+Contribution
+------------
+I have implemented most of Ruby’s Enumerable and Ruby’s Array and some bits from
+Underscore, and some new stuff. Feel free to fill in the gaps. I am not too keen
+on importing all the aliases and have tried to pick the one Ruby should have
+chosen in the first place (IMO).
+
+Contributions welcome and highly desired.
+
 Using YOLOKit
 -------------
 CocoaPods is the coolest:
