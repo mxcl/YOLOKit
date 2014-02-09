@@ -140,10 +140,14 @@ uint rv = @[@1, @2, @3, @4].index_of(@2)
 ###NSArray.flat_map()
 ```objc
 id rv = @[@1, @2, @3, @4].flat_map(^(id n){
-    return @[n, n];
+    return @[n, @[n]];
 });
-// rv => @[@1, @1, @2, @2, @3, @3, @4, @4]
+// rv => @[@1, @[@1], @2, @[@2], @3, @[@3], @4, @[@4]]
 ```
+
+Useful over vanilla `map` followed by a `flatten` because `flatten` is
+recursive, and you may want to preserve array relationships beyond the first
+level.
 
 ###NSArray.group_by()
 ```objc
