@@ -28,6 +28,9 @@ syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
 dot-notation. You’re welcome.
 
+We have also tried to add iOS/Objective-C niceties, and additional function to make
+up for various shortcomings.
+
 ###NSArray.map()
 ```objc
 id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
@@ -35,6 +38,9 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
 });
 // rv => @[@1, @4, @9, @16]
 ```
+
+Notably, if you return nil, we don’t insert `NSNull` (we can’t insert nil),
+we just return an array with one less element.
 
 ###NSArray.select()
 ```objc
@@ -98,12 +104,12 @@ id rv = @[@[@1, @2], @3, @[@4]].flatten
 
 ###NSArray.min()
 ```objc
-id rv = @[@1, @2, @3, @4].min(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].min(^int(NSNumber *n){
     return n.intValue;
 });
 // rv => @1
 
-id rv = @[@1, @2, @3, @4].min(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].min(^int(NSNumber *n){
     return (n.intValue - 3) ^ 2;
 });
 // rv => @3
@@ -111,12 +117,12 @@ id rv = @[@1, @2, @3, @4].min(^int(NSNumber *n){
 
 ###NSArray.max()
 ```objc
-id rv = @[@1, @2, @3, @4].max(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].max(^int(NSNumber *n){
     return n.intValue;
 });
 // rv => @4
 
-id rv = @[@1, @2, @3, @4].max(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].max(^int(NSNumber *n){
     return (n.intValue - 3) ^ 2;
 });
 // rv => @1
@@ -125,9 +131,9 @@ id rv = @[@1, @2, @3, @4].max(^int(NSNumber *n){
 ###NSArray.find()
 ```objc
 id rv = @[@1, @2, @3, @4].find(^(id n){
-    return [n isEqual:@1];
+    return [n isEqual:@3];
 });
-// rv => @1
+// rv => @3
 ```
 
 ###NSArray.index_of()
@@ -163,6 +169,12 @@ id rv = @[@[@2], @[@1]].sort_by(^(id a){
     return a[0];
 });
 // rv => @[@[@1], @[@2]]
+
+MKShape *shape1 = [MKShape new]; shape1.title = @"foo";
+MKShape *shape2 = [MKShape new]; shape2.title = @"bar";
+id rv = @[shape1, shape2].sort_by(@"title")
+
+rv => @[shape2, shape1]
 ```
 
 ###NSArray.sort
@@ -174,12 +186,18 @@ id rv = @[@2, @1, @3, @5, @4].sort
 
 ###NSArray.pluck()
 ```objc
-MKShape *shape1 = [MKShape new]; sh1.title = @"shape 1";
-MKShape *shape2 = [MKShape new]; sh2.title = @"shape 2";
+MKShape *shape1 = [MKShape new]; shape1.title = @"shape 1";
+MKShape *shape2 = [MKShape new]; shape2.title = @"shape 2";
 
 id rv = @[shape1, shape2].pluck(@"title")
-
 // rv => @[@"shape 1", @"shape 2"]
+
+id rv = @[shape1, shape2].pluck(@"title.uppcaseString")
+// rv => @[@"SHAPE 1", @"SHAPE 2"]
+
+id rv = @[@1, @"1", shape1].pluck(NSNumber.class)
+// rv => @[@1]
+
 ```
 
 ###NSArray.uniq
@@ -385,9 +403,8 @@ chosen in the first place (IMO).
 
 Contributions welcome and highly desired.
 
-Using YOLOKit
--------------
-CocoaPods is the coolest:
+Importing YOLOKit
+-----------------
 
     pod 'YOLOKit'
 
