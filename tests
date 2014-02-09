@@ -21,6 +21,12 @@ __OBJC__
 #import <SenTestingKit/SenTestingKit.h>
 #import "YOLO.h"
 
+@interface Thingy : NSObject
+@property (nonatomic) NSString *title;
+@end
+@implementation Thingy
+@end
+
 
 int main() {
     unlink("/tmp/YOLOtests.m");  //before or… doesn't happen! FFS
@@ -205,6 +211,15 @@ int main() {
     id aa = @(4).upto(6);
     id bb = @[@4, @5, @6];
     STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testPluck {
+    Thingy *shape1 = [Thingy new]; shape1.title = @"shape 1";
+    Thingy *shape2 = [Thingy new]; shape2.title = @"shape 2";
+
+    id aa = @[shape1, shape2].pluck(@"title.uppercaseString");
+    id bb = @[@"SHAPE 1", @"SHAPE 2"];
+    STAssertEqualObjects(bb, aa, @"");
 }
 
 - (void)testPluckClass {
