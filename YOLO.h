@@ -109,7 +109,7 @@
 
 @interface NSArray (YOLO)
 
-- (NSArray *(^)(id arrayOrSetOrClass))without;
+- (NSArray *(^)(id arrayOrSetOrObject))without;
 - (NSSet *)set;
 
 /**
