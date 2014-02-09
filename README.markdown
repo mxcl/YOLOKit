@@ -155,7 +155,7 @@ id rv = @[@1, @2, @3, @4].group_by(^(NSNumber *n) {
 
 ###NSArray.sort_by()
 ```objc
-id rv = @[@[@2], @[@1]].sort_by_(^(id a){
+id rv = @[@[@2], @[@1]].sort_by(^(id a){
     return a[0];
 });
 // rv => @[@[@1], @[@2]]
@@ -291,6 +291,10 @@ BOOL rv = @[].empty;
 
 // rv => YES
 ```
+
+We picked `empty` rather than `is_empty` because of context. We almost always
+use empty in an if statement, and there the form: `if (array.empty) {}` is
+clear and reads more easily than `is_empty`. Small wins add up.
 
 ###NSDictionary.extend()
 ```objc
