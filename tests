@@ -129,10 +129,11 @@ int main() {
 }
 
 - (void)testFlatMap {
-    id a = @[@1, @2, @3].flat_map(^(id o){
-        return @[o, o];
+    id aa = @[@1, @2, @3].flat_map(^(id o){
+        return @[o, @[o]];
     });
-    STAssertEquals([a count], 6ul, @"");
+    id bb = @[@1, @[@1], @2, @[@2], @3, @[@3]];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 - (void)testGroupBy {

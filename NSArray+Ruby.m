@@ -129,7 +129,13 @@
 
 - (NSArray *(^)(NSArray *(^)(id o)))flat_map {
     return ^(NSArray *(^block)(id o)){
-        return self.map(block).flatten;
+        NSMutableArray *rv = [NSMutableArray new];
+        for (id o in self) {
+            id m = block(o);
+            if (m)
+                [rv addObjectsFromArray:m];
+        }
+        return rv;
     };
 }
 
