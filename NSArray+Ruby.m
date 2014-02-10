@@ -34,7 +34,7 @@
 - (NSArray *(^)(void (^)(id, uint)))each_with_index {
     return ^(void (^block)(id, uint)) {
         [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            block(obj, idx);
+            block(obj, (uint)idx);
         }];
         return self;
     };
@@ -167,7 +167,7 @@
 
         NSArray *keys = self.map(block);
         return keys.sort.map(^(id key){
-            int ii = [keys indexOfObject:key];
+            NSUInteger ii = [keys indexOfObject:key];
             return self[ii];
         });
     };
@@ -181,15 +181,17 @@
 
 - (NSArray *(^)(int, int))slice {
     return ^id(int start, int length) {
-        if (self.count == 0)
+        int const N = (int)self.count;
+
+        if (N == 0)
             return self;
 
-        if (start < 0) start += self.count;
-        if (length < 0) length = ((int)self.count) + length - start + 1;
+        if (start < 0) start += N;
+        if (length < 0) length = N + length - start + 1;
 
         // YOLOKit is forgiving
-        if (start > self.count - 1) start = self.count - 1;
-        if (start + length > self.count) length = self.count - start;
+        if (start > N - 1) start = N - 1;
+        if (start + length > N) length = N - start;
 
         return [self subarrayWithRange:NSMakeRange(start, length)];
     };
@@ -205,14 +207,14 @@
     };
 }
 
-- (NSArray *(^)(NSUInteger))first {
-    return ^(NSUInteger num) {
+- (NSArray *(^)(uint))first {
+    return ^(uint num) {
         return self.slice(0, num);
     };
 }
 
-- (NSArray *(^)(NSUInteger))last {
-    return ^(NSUInteger num) {
+- (NSArray *(^)(uint))last {
+    return ^(uint num) {
         return self.slice(-num, num);
     };
 }
@@ -268,7 +270,7 @@
 - (NSArray *(^)(int))rotate {
     return ^(int pivot) {
         if (pivot < 0)
-            pivot = self.count + pivot;
+            pivot = (int)self.count + pivot;
         return self.slice(pivot, -1).concat(self.slice(0, pivot));
     };
 }

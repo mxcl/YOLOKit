@@ -79,8 +79,8 @@
  **/
 - (NSArray *(^)(int start, int length))slice;
 
-- (NSArray *(^)(NSUInteger))first;
-- (NSArray *(^)(NSUInteger))last;
+- (NSArray *(^)(uint))first;
+- (NSArray *(^)(uint))last;
 
 /**
  NOTE we didn't implement take as its name is confusing and it behaves the exact
