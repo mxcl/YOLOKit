@@ -1,4 +1,4 @@
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 
 
@@ -52,6 +52,7 @@
 - (NSArray *)sort;
 
 @end
+
 
 
 @interface NSArray (Underscore)

@@ -1,9 +1,8 @@
 YOLOKit
 =======
-YOLOKit is a delightful library for enumerating Foundation.
+YOLOKit is a delightful library for enumerating Foundation objects.
 
-Friends don’t let friends use APIs designed thirty years ago. Let’s use
-categories, let’s make new classes, let’s use modern design patterns.
+You only live once: let’s write better code.
 
 
 Chainable, Dot-notated, Ruby-like Enumeration
@@ -13,8 +12,6 @@ For example:
 ```objc
 #import "YOLO.h"
 
-//…
-
 campaigns.reject(^(PPCampaign *campaign){
     return campaign.locked;
 }).pluck(@"venues").flatten.each(^(PPVenue *venue){
@@ -23,13 +20,22 @@ campaigns.reject(^(PPCampaign *campaign){
 ```
 
 Many people have done Ruby-like enumeration for Objective-C. It’s not a new
-thing. Just search CocoaPods. But everyone else did it with square bracket
+thing: just search CocoaPods. But everyone else did it with square bracket
 syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
-dot-notation. You’re welcome.
+dot-notation. And it feels *great* to use.
 
-We have also tried to add iOS/Objective-C niceties, and additional function to make
-up for various shortcomings.
+We have also tried to add iOS/Objective-C niceties, and additional function to
+make up for various shortcomings.
+
+Importing YOLOKit
+-----------------
+
+    pod 'YOLOKit'
+
+
+Example Index
+=============
 
 ###NSArray.map()
 ```objc
@@ -75,8 +81,6 @@ __block NSMutableDictionary *rv = @{}.mutableCopy;
 });
 // rv => @{@1: @16, @2: @9, @3: @4, @4: @1}
 ```
-
-Note, the above example would be better produced with *inject*.
 
 ###NSArray.reduce()
 ```objc
@@ -325,6 +329,15 @@ id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
 // rv => @{@1: @9, @2: @4, @10: @100}
 ```
 
+###NSDictionary.get()
+```objc
+id rv = @{@1: @1, @2: @4}.get(@2);
+
+// rv => @4
+```
+
+Same as: `[NSDictionary objectForKey:]`.
+
 ###NSNumber.upto()
 ```objc
 id rv = @1.upto(6);
@@ -339,8 +352,36 @@ id rv = @"1,2,3,4,5,6".split(@",")
 // rv => @[@1, @2, @3, @4, @5, @6]
 ```
 
-Real World Example
-------------------
+###NSMutableArray.push()
+```objc
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.push(@1).push(@2).push(@3)
+// rv => @[@1, @2, @3]
+```
+
+###NSMutableArray.pop()
+```objc
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.push(@1).push(@2).push(@3).pop()
+// rv => @3
+```
+
+###NSMutableArray.unshift()
+```objc
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.unshift(@1).unshift(@2).unshift(@3);
+// rv => @[@3, @2, @1]
+```
+
+###NSMutableArray.shift()
+```objc
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
+// rv => @3
+```
+
+Real World Examples
+-------------------
 I don’t think I would have been happy with this code without YOLOKit:
 
 ```objc
@@ -359,6 +400,8 @@ id austin = [[CLLocation alloc] initWithLatitude:30.2500 longitude:-97.7500];
     }).get(closest_city);
 }];
 ```
+
+Do you have a great example of real-world YOLOKit use? Please submit it here!
 
 YOLOKit Forgives You
 --------------------
@@ -392,21 +435,16 @@ if (campaigns) campaigns.reject(^(PPCampaign *campaign){
 });
 ```
 
-OMG we didn’t push ENTER! Kittens might die!!1!
+Code is art. Make it look good, make it readable. You don’t have to rigidly
+adhere to rules about how to write an if statement if the resulting code is
+*nice*.
 
 Contribution
 ------------
-I have implemented most of Ruby’s Enumerable and Ruby’s Array and some bits from
-Underscore, and some new stuff. Feel free to fill in the gaps. I am not too keen
-on importing all the aliases and have tried to pick the one Ruby should have
-chosen in the first place (IMO).
+Please open issues for suggestions and pull requests for contributions.
 
-Contributions welcome and highly desired.
-
-Importing YOLOKit
------------------
-
-    pod 'YOLOKit'
+Please don't submit the many aliases for the above methods, as we think it’s
+about time someone made decisions about which one to use. So we did.
 
 License
 -------
