@@ -25,8 +25,11 @@ syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
 dot-notation: and using it feels *great*.
 
-We have also tried to add iOS/Objective-C niceties, and additional functions to
-make up for various shortcomings.
+We have also have tried to add a few iOS/Objective-C specific niceties and
+methods that make up for various shortcomings in our platform.
+
+However, we believe in a **lean-library** approach and will resist bloat. Hence our string functions are as minimal as possible and concerned with enumeration
+only.
 
 YOLOKit is thorough, well-tested and inside apps on the store.
 
