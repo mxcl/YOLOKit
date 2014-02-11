@@ -23,7 +23,7 @@ Many people have done Ruby-like enumeration for Objective-C. It’s not a new
 thing: just search CocoaPods. But everyone else did it with square bracket
 syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
-dot-notation: and using it feels *great*.
+dot-notation: and using it *feels great*.
 
 We have also have tried to add a few iOS/Objective-C specific niceties and
 methods that make up for various shortcomings in our platform.
@@ -36,7 +36,7 @@ YOLOKit is thorough, well-tested and inside apps on the store.
 
 YOLOKit is Forgiving
 --------------------
-YOLOKit assumes you'd rather not have crashes. Whenever possible it will behave
+YOLOKit assumes you’d rather not have crashes. Whenever possible it will behave
 defensively, eg. if you ask for `slice(0, 3)` and the array only has 2 items, it
 will return `slice(0, 2)`.
 
@@ -231,6 +231,8 @@ id rv = @[@1, @1, @2].uniq;
 // rv => @[@1, @2]
 ```
 
+Order is preserved.
+
 ###NSArray.concat()
 ```objc
 id rv = @[@1, @2].concat(@[@3, @4]);
@@ -246,6 +248,8 @@ id yolo = nums.first(2).concat(nums.slice(4,-1));
 // yolo => @[@1, @2, @5, @6]
 // lolo => [nums subArrayWithRange:NSMakeRange(0, 2)] arrayByAppendingArray:[nums subArrayWithRange:NSMakeRange(4, campaigns.count-4)]];
 ```
+
+Negative indexes count from the array end. `-1` is the last item.
 
 ###NSArray.first()
 ```objc
@@ -299,18 +303,20 @@ id rv = @[@1, @2, @3, @4, @5, @6].sample;
 ###NSArray.rotate()
 ```objc
 id rv = @[@1, @2, @3, @4, @5, @6].rotate(2);
-
 // rv => @[@3, @4, @5, @6, @1, @2]
+
+id rv = @[@1, @2, @3, @4, @5, @6].rotate(-2);
+// rv => @[@5, @6, @1, @2, @3, @4]
 ```
+
+Returns a new array rotated about the provided index.
 
 ###NSArray.without()
 ```objc
 id rv = @[@1, @2, @3, @4, @5, @6].without(@2);
-
 // rv => @[@1, @3, @4, @5, @6]
 
 id rv = @[@1, @2, @3, @4, @5, @6].without(@[@2, @3]);
-
 // rv => @[@1, @4, @5, @6]
 ```
 
@@ -322,7 +328,7 @@ id rv = @[@1, @1, @1, @1, @2, @1].set;
 ```
 
 ###NSArray.pmap
-Map, but run in parallel. Obviously: be thread safe in your block. Doesn't
+Map, but run in parallel. Obviously: be thread safe in your block. Doesn’t
 return until everything is done. Typically not worth using unless you have large
 arrays since the overhead of thread-syncronization may be greater than the
 parallel savings otherwise.
@@ -330,11 +336,9 @@ parallel savings otherwise.
 ###NSArray.empty
 ```objc
 BOOL rv = @[@1, @2].empty;
-
 // rv => NO
 
 BOOL rv = @[].empty;
-
 // rv => YES
 ```
 
@@ -425,9 +429,9 @@ Do you have a great example of real-world YOLOKit use? Please submit it here!
 
 Caveats
 -------
-Calling nil in block form crashes and doesn't just not happen as is
-typical of the square bracket syntax. So… that sucks. So if it's possible your
-*initial* object is nil you should do something like this:
+You can’t call a variable that represents a block if that variable is nil. This
+is markedly different to sending a message to nil: you get nil back: no crash.
+If it’s possible your *initial* object is nil you need to:
 
 ```objc
 (campaigns ?: @[]).reject(^(PPCampaign *campaign){
@@ -437,7 +441,7 @@ typical of the square bracket syntax. So… that sucks. So if it's possible your
 });
 ```
 
-But we only live once, so why not:
+Or, more controversially:
 
 ```objc
 if (campaigns) campaigns.reject(^(PPCampaign *campaign){
@@ -455,7 +459,7 @@ Contribution
 ------------
 Please open issues for suggestions and pull requests for contributions.
 
-Please don't submit the many aliases for the above methods, as we think it’s
+Please don’t submit the many aliases for the above methods, as we think it’s
 about time someone made decisions about which one to use. So we did.
 
 License
