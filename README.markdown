@@ -158,6 +158,12 @@ id rv = @[@1, @2, @3, @4].find(^(id n){
     return [n isEqual:@3];
 });
 // rv => @3
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *selectedCell = tableView.visibleCells.find(^(id cell){
+        return [[tableView indexPathForCell:cell] isEqual:indexPath];
+    });
+}
 ```
 
 ###NSArray.index_of()
