@@ -2,7 +2,7 @@ YOLOKit
 =======
 YOLOKit is a delightful library for enumerating Foundation objects.
 
-You only live once: let’s write better code.
+You only live once: let’s code expressively.
 
 
 Chainable, Dot-notated, Ruby-like Enumeration
@@ -23,10 +23,22 @@ Many people have done Ruby-like enumeration for Objective-C. It’s not a new
 thing: just search CocoaPods. But everyone else did it with square bracket
 syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
-dot-notation. And it feels *great* to use.
+dot-notation: and using it feels *great*.
 
-We have also tried to add iOS/Objective-C niceties, and additional function to
+We have also tried to add iOS/Objective-C niceties, and additional functions to
 make up for various shortcomings.
+
+YOLOKit is thorough, well-tested and inside apps on the store.
+
+
+YOLOKit is Forgiving
+--------------------
+YOLOKit assumes you'd rather not have crashes. Whenever possible it will behave
+defensively, eg. if you ask for `slice(0, 3)` and the array only has 2 items, it
+will return `slice(0, 2)`.
+
+We are writing iPhone apps. Not space shuttle control modules.
+
 
 Importing YOLOKit
 -----------------
@@ -34,8 +46,8 @@ Importing YOLOKit
     pod 'YOLOKit'
 
 
-Example Index
-=============
+Complete Method Index
+=====================
 
 ###NSArray.map()
 ```objc
@@ -45,8 +57,13 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
 // rv => @[@1, @4, @9, @16]
 ```
 
-Notably, if you return nil, we don’t insert `NSNull` (we can’t insert nil),
-we just return an array with one less element.
+Notably, if you return nil, we skip that element in the returned array.
+Justification:
+
+1. We can’t add nil to NSArray
+2. We could add NSNull instead, but then we’d be crashy and *YOLOKit is forgiving*
+3. In Objective-C calling a method on nil returns nil. When enumerating an array
+   this is equivalent to just skipping that element. Hence: we skip the element.
 
 ###NSArray.select()
 ```objc
@@ -402,14 +419,6 @@ id austin = [[CLLocation alloc] initWithLatitude:30.2500 longitude:-97.7500];
 ```
 
 Do you have a great example of real-world YOLOKit use? Please submit it here!
-
-YOLOKit Forgives You
---------------------
-YOLOKit assumes you'd rather not have crashes. Whenever possible it will behave
-defensively. Eg. if you ask for `slice(0, 3)` and the array only has 2 items, it
-will return as though you called `slice(0, 2)`.
-
-We are writing iPhone apps. Not space shuttle control modules.
 
 Caveats
 -------
