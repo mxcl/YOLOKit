@@ -500,6 +500,12 @@ Please open issues for suggestions and pull requests for contributions.
 Please don’t submit the many aliases for the above methods, as we think it’s
 about time someone made decisions about which one to use. So we did.
 
+The Alternatives People Talk About
+----------------------------------
+* http://underscorem.org
+* https://github.com/robb/Asterism
+* https://github.com/ReactiveCocoa/ReactiveCocoa
+
 License
 -------
 I, Max Howell the copyright holder of this work, hereby release it into the
