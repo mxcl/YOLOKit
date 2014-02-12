@@ -25,6 +25,7 @@
 
 @interface NSArray (Underscore)
 - (NSArray *(^)(id keypathOrClass))pluck;
+- (NSArray *(^)(id arrayOrSetOrObject))without;
 @end
 
 @interface NSArray (Ruby)
@@ -45,7 +46,6 @@
 - (BOOL)empty;
 - (NSArray *(^)(id (^)(id o)))pmap;
 - (NSSet *)set;
-- (NSArray *(^)(id arrayOrSetOrObject))without;
 @end
 
 @interface NSMutableArray (YOLO)
@@ -53,10 +53,6 @@
 - (NSMutableArray *(^)(id obj))push;
 - (id)shift;
 - (NSMutableArray *(^)(id obj))unshift;
-@end
-
-@interface NSSet (YOLO)
-- (NSSet *)without:(NSSet *)set;
 @end
 
 @interface NSSet (RubyEnumerable)
