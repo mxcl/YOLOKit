@@ -278,10 +278,12 @@ id rv = @[@1, @2, @3, @4].reverse;
 // rv => @[@4, @3, @2, @1]
 ```
 
-###NSArray.join
+###NSArray.join()
 ```objc
-id rv = @[@1, @2, @3, @4].join;
+id rv = @[@1, @2, @3, @4].join(@",");
+// rv => @"1,2,3,4"
 
+id rv = @[@1, @2, @3, @4].join(nil);  // join(0) is valid, though unclear
 // rv => @"1234"
 ```
 

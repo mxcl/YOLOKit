@@ -231,8 +231,10 @@
     return aa;
 }
 
-- (NSString *)join {
-    return [self.pluck(@"description") componentsJoinedByString:@""];
+- (NSString *(^)(NSString *))join {
+    return ^(NSString *separator) {
+        return [self.pluck(@"description") componentsJoinedByString:separator];
+    };
 }
 
 - (NSArray *)transpose {

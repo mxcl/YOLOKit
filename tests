@@ -245,9 +245,10 @@ int main() {
 }
 
 - (void)testJoin {
-    id aa = @[@"a", @1, @"b"].join;
+    NSArray *aa = @[@"a", @1, @"b"];
     id bb = @"a1b";
-    STAssertEqualObjects(aa, bb, @"");
+    STAssertEqualObjects(aa.join(@""), bb, @"");
+    STAssertEqualObjects(aa.join(nil), bb, @"");
 }
 
 - (void)testTranspose {

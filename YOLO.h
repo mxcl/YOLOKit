@@ -30,8 +30,8 @@
 @interface NSArray (Ruby)
 - (NSArray *(^)(NSArray *other_array))concat;
 - (NSArray *(^)(uint))first;  // @see last, slice
-- (NSString *)join;
 - (NSArray *(^)(uint))last;   // @see first, slice
+- (NSString *(^)(NSString *))join;
 - (NSArray *)reverse;
 - (NSArray *(^)(int))rotate;
 - (id)sample;
