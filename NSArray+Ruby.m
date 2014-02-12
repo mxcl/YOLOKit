@@ -65,7 +65,7 @@
 - (id(^)(id (^)(id, id)))reduce {
     return ^(id (^block)(id, id)) {
         id memo = self.firstObject;
-        for (id obj in self.slice(1, -1))
+        for (id obj in self.last(self.count - 1))
             memo = block(memo, obj);
         return memo;
     };
@@ -179,17 +179,14 @@
 
 @implementation NSArray (Ruby)
 
-- (NSArray *(^)(int, int))slice {
-    return ^id(int start, int length) {
-        int const N = (int)self.count;
+- (NSArray *(^)(NSUInteger, NSUInteger))slice {
+    return ^id(NSUInteger start, NSUInteger length) {
+        NSUInteger const N = self.count;
 
         if (N == 0)
             return self;
 
-        if (start < 0) start += N;
-        if (length < 0) length = N + length - start + 1;
-
-        // YOLOKit is forgiving
+        // forgive
         if (start > N - 1) start = N - 1;
         if (start + length > N) length = N - start;
 
@@ -215,7 +212,7 @@
 
 - (NSArray *(^)(uint))last {
     return ^(uint num) {
-        return self.slice(-num, num);
+        return self.slice(self.count - num, num);
     };
 }
 
@@ -273,7 +270,7 @@
     return ^(int pivot) {
         if (pivot < 0)
             pivot = (int)self.count + pivot;
-        return self.slice(pivot, -1).concat(self.slice(0, pivot));
+        return self.skip(pivot).concat(self.snip(pivot));
     };
 }
 

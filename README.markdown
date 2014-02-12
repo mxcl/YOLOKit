@@ -248,14 +248,10 @@ id rv = @[@1, @2].concat(@[@3, @4]);
 
 ###NSArray.slice()
 ```objc
-NSArray *nums = @[@1, @2, @3, @4, @5, @6];
-id yolo = nums.first(2).concat(nums.slice(4,-1));
+id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
 
-// yolo => @[@1, @2, @5, @6]
-// lolo => [nums subArrayWithRange:NSMakeRange(0, 2)] arrayByAppendingArray:[nums subArrayWithRange:NSMakeRange(4, campaigns.count-4)]];
+// rv => @[@3, @4]
 ```
-
-Negative indexes count from the array end. `-1` is the last item.
 
 ###NSArray.first()
 ```objc
@@ -270,6 +266,24 @@ id rv = @[@1, @2, @3, @4, @5, @6].last(2);
 
 // rv => @[@5, @6]
 ```
+
+###NSArray.skip()
+```objc
+id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
+
+// rv => @[@3, @4, @5, @6]
+```
+
+Skips *num* entries and returns the rest of the array.
+
+###NSArray.snip()
+```objc
+id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
+
+// rv => @[@1, @2, @3, @4]
+```
+
+Snips the end off the array.
 
 ###NSArray.reverse
 ```objc
@@ -410,6 +424,16 @@ id rv = aa.unshift(@1).unshift(@2).unshift(@3);
 NSMutableArray *aa = [NSMutableArray new];
 id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
 // rv => @3
+```
+
+first, last, slice, skip, snip
+------------------------------
+```objc
+@[@1, @2, @3, @4, @5].first(2)		// [1,2]
+@[@1, @2, @3, @4, @5].last(2)		// [4,5]
+@[@1, @2, @3, @4, @5].slice(2, 2)	// [3,4]
+@[@1, @2, @3, @4, @5].skip(2)		// [3,4,5]
+@[@1, @2, @3, @4, @5].snip(2)		// [1,2,3]
 ```
 
 Real World Examples

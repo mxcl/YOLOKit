@@ -30,14 +30,14 @@
 
 @interface NSArray (Ruby)
 - (NSArray *(^)(NSArray *other_array))concat;
-- (NSArray *(^)(uint))first;  // @see last, slice
-- (NSArray *(^)(uint))last;   // @see first, slice
+- (NSArray *(^)(uint))first;  // @see last, slice, snip, skip
 - (NSString *(^)(NSString *))join;
+- (NSArray *(^)(uint))last;   // @see first, slice, snip, skip
 - (NSArray *)reverse;
 - (NSArray *(^)(int))rotate;
 - (id)sample;
 - (NSArray *)shuffle;
-- (NSArray *(^)(int start, int length))slice;  // @see first, last
+- (NSArray *(^)(NSUInteger start, NSUInteger length))slice;  // @see first, last, snip, skip
 - (NSArray *)transpose;
 - (NSArray *)uniq;
 @end
@@ -46,6 +46,8 @@
 - (BOOL)empty;
 - (NSArray *(^)(id (^)(id o)))pmap;
 - (NSSet *)set;
+- (NSArray *(^)(NSUInteger numberToTrim))snip;
+- (NSArray *(^)(NSUInteger numberToSkip))skip;
 @end
 
 @interface NSMutableArray (YOLO)

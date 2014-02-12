@@ -31,4 +31,16 @@
     return self.count == 0;
 }
 
+- (NSArray *(^)(NSUInteger numberToTrim))snip {
+    return ^(NSUInteger num){
+        return self.slice(0, self.count - num);
+    };
+}
+
+- (NSArray *(^)(NSUInteger numberToTrim))skip {
+    return ^(NSUInteger num){
+        return self.last(self.count - num);
+    };
+}
+
 @end

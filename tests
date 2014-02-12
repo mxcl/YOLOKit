@@ -86,6 +86,15 @@ int main() {
     objs = objs.concat(objs);
     id objs2 = @[@1, @2, @3, @1, @2, @3];
     STAssertEqualObjects(objs, objs2, @"");
+
+    NSArray *aa = @[@1, @2, @3].concat(@[@3, @4, @5]);
+    id bb = @[@1, @2, @3, @3, @4, @5];
+    STAssertEqualObjects(aa, bb, @"");
+
+    aa = @[@1, @2, @3, @4, @5];
+    aa = aa.skip(2).concat(aa.snip(2));
+    bb = @[@3, @4, @5, @1, @2, @3];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 - (void)testLast {
@@ -157,14 +166,8 @@ int main() {
     STAssertEquals(sum.intValue, 10, @"");
 }
 
-- (void)testSlice1 {
-    id aa = @[@1, @2, @3, @4, @5].slice(1, -2);
-    id bb = @[@2, @3, @4];
-    STAssertEqualObjects(aa, bb, @"");
-}
-
-- (void)testSlice2 {
-    id aa = @[@1, @2, @3].slice(1, 2);
+- (void)testSlice {
+    id aa = @[@1, @2, @3, @4, @5].slice(1, 2);
     id bb = @[@2, @3];
     STAssertEqualObjects(aa, bb, @"");
 }
@@ -268,16 +271,6 @@ int main() {
     STAssertNotNil(aa, @"");
 }
 
-- (void)testRotate {
-    id aa = @[@1, @2, @3, @4].rotate(2);
-    id bb = @[@3, @4, @1, @2];
-    STAssertEqualObjects(aa, bb, @"");
-
-    id cc = @[@1, @2, @3, @4].rotate(-2);
-    id dd = @[@3, @4, @1, @2];
-    STAssertEqualObjects(aa, bb, @"");
-}
-
 - (void)testPush {
     id aa = [NSMutableArray new].push(@1).push(@2).copy;
     id bb = @[@1, @2];
@@ -317,6 +310,28 @@ int main() {
     aa.unshift(@3).unshift(@2).unshift(@1);
     id bb = @[@1, @2, @3, @4, @5, @6];
     STAssertEqualObjects(bb, aa, @"");
+}
+
+- (void)testSnip {
+    id aa = @[@1, @2, @3, @4, @5].snip(2);
+    id bb = @[@1, @2, @3];
+    STAssertEqualObjects(bb, aa, @"");
+}
+
+- (void)testSkip {
+    id aa = @[@1, @2, @3, @4, @5].skip(2);
+    id bb = @[@3, @4, @5];
+    STAssertEqualObjects(bb, aa, @"");
+}
+
+- (void)testRotate {
+    id aa = @[@1, @2, @3, @4].rotate(2);
+    id bb = @[@3, @4, @1, @2];
+    STAssertEqualObjects(aa, bb, @"");
+
+    id cc = @[@1, @2, @3, @4].rotate(-2);
+    id dd = @[@3, @4, @1, @2];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 @end
