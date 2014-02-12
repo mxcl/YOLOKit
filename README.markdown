@@ -246,13 +246,6 @@ id rv = @[@1, @2].concat(@[@3, @4]);
 // rv => @[@1, @2, @3, @4]
 ```
 
-###NSArray.slice()
-```objc
-id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
-
-// rv => @[@3, @4]
-```
-
 ###NSArray.first()
 ```objc
 id rv = @[@1, @2, @3, @4, @5, @6].first(2);
@@ -284,6 +277,17 @@ id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
 ```
 
 Snips the end off the array.
+
+###NSArray.slice()
+```objc
+id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
+
+// rv => @[@3, @4]
+```
+
+Use slice instead of first, last, skip and snip… when you have to. If you find
+yourself writing `array.slice(0, 4)` then consider `array.first(4)` instead:
+it’s more expressive, more explicit and shorter to boot.
 
 ###NSArray.reverse
 ```objc
@@ -426,14 +430,16 @@ id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
 // rv => @3
 ```
 
-first, last, slice, skip, snip
-------------------------------
+first, last, skip, snip & slice
+-------------------------------
+These methods are related and worth memorizing:
+
 ```objc
 @[@1, @2, @3, @4, @5].first(2)		// [1,2]
 @[@1, @2, @3, @4, @5].last(2)		// [4,5]
-@[@1, @2, @3, @4, @5].slice(2, 2)	// [3,4]
 @[@1, @2, @3, @4, @5].skip(2)		// [3,4,5]
 @[@1, @2, @3, @4, @5].snip(2)		// [1,2,3]
+@[@1, @2, @3, @4, @5].slice(2, 2)	// [3,4]
 ```
 
 Real World Examples
