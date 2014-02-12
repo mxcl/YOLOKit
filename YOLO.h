@@ -5,22 +5,22 @@
 **/
 
 @interface NSArray (RubyEnumerable)
-- (NSArray *(^)(id (^)(id o)))map;
-- (NSArray *(^)(BOOL (^)(id o)))select;
-- (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(void (^)(id o, uint index)))eachWithIndex;
-- (id(^)(id (^)(id memo, id obj)))reduce;
-- (id(^)(id initial_memo, id (^)(id memo, id obj)))inject;
-- (NSArray *)flatten;
-- (id(^)(NSInteger (^)(id)))min;
-- (id(^)(NSInteger (^)(id)))max;
 - (id(^)(BOOL (^)(id o)))find;
-- (NSUInteger (^)(id obj))indexOf;
+- (NSArray *)flatten;
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap;
 - (NSDictionary *(^)(id (^)(id o)))groupBy;
-- (NSArray *(^)(id (^)(id o)))sortBy;
+- (NSUInteger (^)(id obj))indexOf;
+- (id(^)(id initial_memo, id (^)(id memo, id obj)))inject;
+- (NSArray *(^)(id (^)(id o)))map;
+- (id(^)(NSInteger (^)(id)))max;
+- (id(^)(NSInteger (^)(id)))min;
+- (NSArray *(^)(BOOL (^)(id o)))select;
 - (NSArray *)sort;
+- (NSArray *(^)(id (^)(id o)))sortBy;
+- (id(^)(id (^)(id memo, id obj)))reduce;
+- (NSArray *(^)(BOOL (^)(id o)))reject;
 @end
 
 @interface NSArray (Underscore)
@@ -28,24 +28,24 @@
 @end
 
 @interface NSArray (Ruby)
-- (NSArray *)uniq;
 - (NSArray *(^)(NSArray *other_array))concat;
-- (NSArray *(^)(int start, int length))slice;
-- (NSArray *(^)(uint))first;
-- (NSArray *(^)(uint))last;
-- (NSArray *)reverse;
+- (NSArray *(^)(uint))first;  // @see last, slice
 - (NSString *)join;
-- (NSArray *)transpose;
-- (NSArray *)shuffle;
-- (id)sample;
+- (NSArray *(^)(uint))last;   // @see first, slice
+- (NSArray *)reverse;
 - (NSArray *(^)(int))rotate;
+- (id)sample;
+- (NSArray *)shuffle;
+- (NSArray *(^)(int start, int length))slice;  // @see first, last
+- (NSArray *)transpose;
+- (NSArray *)uniq;
 @end
 
 @interface NSArray (YOLO)
-- (NSArray *(^)(id arrayOrSetOrObject))without;
-- (NSSet *)set;
-- (NSArray *(^)(id (^)(id o)))pmap;
 - (BOOL)empty;
+- (NSArray *(^)(id (^)(id o)))pmap;
+- (NSSet *)set;
+- (NSArray *(^)(id arrayOrSetOrObject))without;
 @end
 
 @interface NSMutableArray (YOLO)
