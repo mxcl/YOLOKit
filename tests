@@ -45,12 +45,12 @@ int main() {
 @implementation GeneralTests
 
 - (void)testIndexOfSuccess {
-    NSUInteger u = @[@1, @2, @3].index_of(@2);
+    NSUInteger u = @[@1, @2, @3].indexOf(@2);
     STAssertEquals(u, 1ul, @"");
 }
 
 - (void)testIndexOfFailure {
-    NSUInteger u = @[@1, @2, @3].index_of(@4);
+    NSUInteger u = @[@1, @2, @3].indexOf(@4);
     STAssertEquals(u, NSNotFound, @"");
 }
 
@@ -135,7 +135,7 @@ int main() {
 }
 
 - (void)testFlatMap {
-    id aa = @[@1, @2, @3].flat_map(^(id o){
+    id aa = @[@1, @2, @3].flatMap(^(id o){
         return @[o, @[o]];
     });
     id bb = @[@1, @[@1], @2, @[@2], @3, @[@3]];
@@ -143,7 +143,7 @@ int main() {
 }
 
 - (void)testGroupBy {
-    id aa = @[@1, @2, @3, @4].group_by(^(NSNumber *n) {
+    id aa = @[@1, @2, @3, @4].groupBy(^(NSNumber *n) {
         return @(n.intValue % 2);
     });
     id bb = @{@0: @[@2, @4], @1: @[@1, @3]};
@@ -231,7 +231,7 @@ int main() {
     id c = @{@3: @"c"};
     id a = @{@1: @"a"};
     id b = @{@2: @"b"};
-    id aa = @[c, a, b].sort_by(^(NSDictionary *o){
+    id aa = @[c, a, b].sortBy(^(NSDictionary *o){
         return o.allKeys.firstObject;
     });
     id bb = @[a, b, c];

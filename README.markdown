@@ -93,10 +93,10 @@ __block NSMutableArray *rv = @[].mutableCopy;
 // rv => @[@4, @3, @2, @1]
 ```
 
-###NSArray.each_with_index()
+###NSArray.eachWithIndex()
 ```objc
 __block NSMutableDictionary *rv = @{}.mutableCopy;
-@[@4, @3, @2, @1].each_with_index(^(id n, uint ii){
+@[@4, @3, @2, @1].eachWithIndex(^(id n, uint ii){
     rv[n] = @(ii^2);
 });
 // rv => @{@1: @16, @2: @9, @3: @4, @4: @1}
@@ -166,16 +166,16 @@ id rv = @[@1, @2, @3, @4].find(^(id n){
 }
 ```
 
-###NSArray.index_of()
+###NSArray.indexOf()
 ```objc
-uint rv = @[@1, @2, @3, @4].index_of(@2)
+uint rv = @[@1, @2, @3, @4].indexOf(@2)
 
 // rv => 2
 ```
 
-###NSArray.flat_map()
+###NSArray.flatMap()
 ```objc
-id rv = @[@1, @2, @3, @4].flat_map(^(id n){
+id rv = @[@1, @2, @3, @4].flatMap(^(id n){
     return @[n, @[n]];
 });
 // rv => @[@1, @[@1], @2, @[@2], @3, @[@3], @4, @[@4]]
@@ -185,24 +185,24 @@ Useful over vanilla `map` followed by a `flatten` because `flatten` is
 recursive, and you may want to preserve array relationships beyond the first
 level.
 
-###NSArray.group_by()
+###NSArray.groupBy()
 ```objc
-id rv = @[@1, @2, @3, @4].group_by(^(NSNumber *n) {
+id rv = @[@1, @2, @3, @4].groupBy(^(NSNumber *n) {
     return @(n.intValue % 2);
 });
 // rv => @{@0: @[@1, @3], @1: @[@2, @4]}
 ```
 
-###NSArray.sort_by()
+###NSArray.sortBy()
 ```objc
-id rv = @[@[@2], @[@1]].sort_by(^(id a){
+id rv = @[@[@2], @[@1]].sortBy(^(id a){
     return a[0];
 });
 // rv => @[@[@1], @[@2]]
 
 MKShape *shape1 = [MKShape new]; shape1.title = @"foo";
 MKShape *shape2 = [MKShape new]; shape2.title = @"bar";
-id rv = @[shape1, shape2].sort_by(@"title")
+id rv = @[shape1, shape2].sortBy(@"title")
 
 rv => @[shape2, shape1]
 ```
@@ -348,9 +348,9 @@ BOOL rv = @[].empty;
 // rv => YES
 ```
 
-We picked `empty` rather than `is_empty` because of context. We almost always
+We picked `empty` rather than `isEmpty` because of context. We almost always
 use empty in an if statement, and there the form: `if (array.empty) {}` is
-clear and reads more easily than `is_empty`. Small wins add up.
+clear and reads more easily than `isEmpty`. Small wins add up.
 
 ###NSDictionary.extend()
 ```objc
@@ -419,15 +419,15 @@ id chicago = [[CLLocation alloc] initWithLatitude:41.905088 longitude:-87.670083
 id austin = [[CLLocation alloc] initWithLatitude:30.2500 longitude:-97.7500];
 
 [PPAPI GET:@"/campaigns" success:^(NSArray *got) {
-    id closest_city = @[chicago, austin].min(^(id city) {
+    id closestCity = @[chicago, austin].min(^(id city) {
         return [locationManager.location distanceFromLocation:city];
     });
 
-    self.campaigns = got.group_by(^(PPCampaign *campaign) {
+    self.campaigns = got.groupBy(^(PPCampaign *campaign) {
         return @[chicago, austin].min(^(id city) {
             return [campaign.location distanceFromLocation:city];
         });
-    }).get(closest_city);
+    }).get(closestCity);
 }];
 ```
 

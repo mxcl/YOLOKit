@@ -31,7 +31,7 @@
     };
 }
 
-- (NSArray *(^)(void (^)(id, uint)))each_with_index {
+- (NSArray *(^)(void (^)(id, uint)))eachWithIndex {
     return ^(void (^block)(id, uint)) {
         [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             block(obj, (uint)idx);
@@ -110,7 +110,7 @@
     };
 }
 
-- (NSUInteger (^)(id obj))index_of {
+- (NSUInteger (^)(id obj))indexOf {
     return ^NSUInteger(id obj) {
         return [self indexOfObject:obj];
     };
@@ -127,7 +127,7 @@
     return aa;
 }
 
-- (NSArray *(^)(NSArray *(^)(id o)))flat_map {
+- (NSArray *(^)(NSArray *(^)(id o)))flatMap {
     return ^(NSArray *(^block)(id o)){
         NSMutableArray *rv = [NSMutableArray new];
         for (id o in self) {
@@ -139,7 +139,7 @@
     };
 }
 
-- (NSDictionary *(^)(id (^)(id o)))group_by {
+- (NSDictionary *(^)(id (^)(id o)))groupBy {
     return ^id(id (^block)(id)) {
         NSMutableDictionary *dict = [NSMutableDictionary new];
         for (id o in self) {
@@ -158,7 +158,7 @@
 }
 
 // FIXME inefficient
-- (NSArray *(^)(id (^)(id o)))sort_by {
+- (NSArray *(^)(id (^)(id o)))sortBy {
     return ^(id (^block)(id)) {
         if ([block isKindOfClass:[NSString class]]) {
             id d = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -240,7 +240,7 @@
     for (int x = 0; x < [self[0] count]; ++x)
         [objs addObject:[NSMutableArray new]];
     self.each(^(NSArray *obj){
-        obj.each_with_index(^(id o, uint ii) {
+        obj.eachWithIndex(^(id o, uint ii) {
             [objs[ii] addObject:o];
         });
     });

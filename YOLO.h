@@ -20,7 +20,7 @@
 - (NSArray *(^)(BOOL (^)(id o)))select;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 - (NSArray *(^)(void (^)(id o)))each;
-- (NSArray *(^)(void (^)(id o, uint index)))each_with_index;
+- (NSArray *(^)(void (^)(id o, uint index)))eachWithIndex;
 
 /**
  Combines all elements into a single value. Memo starts as the first element in
@@ -39,16 +39,16 @@
 - (id(^)(NSInteger (^)(id)))min;
 - (id(^)(NSInteger (^)(id)))max;
 - (id(^)(BOOL (^)(id o)))find;
-- (NSUInteger (^)(id obj))index_of;
-- (NSArray *(^)(NSArray *(^)(id o)))flat_map;
-- (NSDictionary *(^)(id (^)(id o)))group_by;
+- (NSUInteger (^)(id obj))indexOf;
+- (NSArray *(^)(NSArray *(^)(id o)))flatMap;
+- (NSDictionary *(^)(id (^)(id o)))groupBy;
 
 /**
  Accepts a block or a string being a keypath, though
  we feed the keypath to a NSSortDescriptor, so you
  can't use dots in there.
 **/
-- (NSArray *(^)(id (^)(id o)))sort_by;
+- (NSArray *(^)(id (^)(id o)))sortBy;
 - (NSArray *)sort;
 
 @end
