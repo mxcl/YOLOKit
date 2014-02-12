@@ -168,9 +168,9 @@ id rv = @[@1, @2, @3, @4].find(^(id n){
 
 ###NSArray.indexOf()
 ```objc
-uint rv = @[@1, @2, @3, @4].indexOf(@2)
+uint rv = @[@1, @2, @3, @4].indexOf(@2);
 
-// rv => 2
+// rv => 1
 ```
 
 ###NSArray.flatMap()
