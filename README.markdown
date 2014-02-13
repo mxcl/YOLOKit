@@ -23,7 +23,7 @@ Many people have done Ruby-like enumeration for Objective-C. It’s not a new
 thing: just search CocoaPods. But everyone else did it with square bracket
 syntax. Square bracket syntax is not conducive to chaining. Ruby-like
 enumeration (practically) demands chaining. So we figured out how to do it with
-dot-notation: and using it *feels great*.
+dot-notation: and using it feels *great*.
 
 We have also have tried to add a few iOS/Objective-C specific niceties and
 methods that make up for various shortcomings in our platform.
@@ -65,8 +65,7 @@ Justification:
 
 1. We can’t add nil to NSArray
 2. We could add NSNull instead, but then we’d be crashy and *YOLOKit is forgiving*
-3. In Objective-C calling a method on nil returns nil. When enumerating an array
-   this is equivalent to just skipping that element. Hence: we skip the element.
+3. In Objective-C calling a method on nil returns nil. When enumerating an array this is equivalent to just skipping that element. Hence: we skip the element.
 
 ###NSArray.select()
 ```objc
@@ -86,11 +85,9 @@ id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
 
 ###NSArray.each()
 ```objc
-__block NSMutableArray *rv = @[].mutableCopy;
-@[@1, @2, @3, @4].each(^(NSNumber *n){
-    rv.unshift(n);
+@[@1, @2, @3, @4].each(^(id n){
+	NSLog(@"%@", n);
 });
-// rv => @[@4, @3, @2, @1]
 ```
 
 ###NSArray.eachWithIndex()
@@ -222,12 +219,11 @@ MKShape *shape2 = [MKShape new]; shape2.title = @"shape 2";
 id rv = @[shape1, shape2].pluck(@"title")
 // rv => @[@"shape 1", @"shape 2"]
 
-id rv = @[shape1, shape2].pluck(@"title.uppcaseString")
+id rv = @[shape1, shape2].pluck(@"title.uppercaseString")
 // rv => @[@"SHAPE 1", @"SHAPE 2"]
 
 id rv = @[@1, @"1", shape1].pluck(NSNumber.class)
 // rv => @[@1]
-
 ```
 
 ###NSArray.uniq
@@ -307,7 +303,7 @@ id rv = @[@1, @2, @3, @4].join(nil);  // join(0) is valid, though unclear
 
 ###NSArray.transpose
 ```objc
-id rv = @[@[@1, @2, @3], @[@4, @5, @6]].tranpose;
+id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 
 // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 ```
@@ -356,7 +352,7 @@ id rv = @[@1, @1, @1, @1, @2, @1].set;
 ###NSArray.pmap
 Map, but run in parallel. Obviously: be thread safe in your block. Doesn’t
 return until everything is done. Typically not worth using unless you have large
-arrays since the overhead of thread-syncronization may be greater than the
+arrays since the overhead of thread-synchronization may be greater than the
 parallel savings otherwise.
 
 ###NSArray.empty
