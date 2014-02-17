@@ -389,9 +389,9 @@ id rv = @{@1: @1, @2: @4}.get(@2);
 
 Same as: `[NSDictionary objectForKey:]`.
 
-###NSNumber.upto()
+###NSNumber.upTo()
 ```objc
-id rv = @1.upto(6);
+id rv = @1.upTo(6);
 
 // rv => @[@1, @2, @3, @4, @5, @6]
 ```

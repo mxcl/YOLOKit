@@ -199,7 +199,7 @@ int main() {
 
 - (void)testPMap {
     NSUInteger const count = 2000;
-    NSArray *nums = @(1).upto(count);
+    NSArray *nums = @(1).upTo(count);
     id aa = nums.pmap(^(NSNumber *num){
         return @(num.intValue * num.intValue);
     });
@@ -211,7 +211,7 @@ int main() {
 }
 
 - (void)testUpto {
-    id aa = @(4).upto(6);
+    id aa = @(4).upTo(6);
     id bb = @[@4, @5, @6];
     STAssertEqualObjects(aa, bb, @"");
 }
