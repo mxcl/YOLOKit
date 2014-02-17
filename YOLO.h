@@ -51,10 +51,10 @@
 @end
 
 @interface NSMutableArray (YOLO)
-- (id)pop;
-- (NSMutableArray *(^)(id obj))push;
-- (id)shift;
-- (NSMutableArray *(^)(id obj))unshift;
+- (id)popFromEnd;
+- (NSMutableArray *(^)(id obj))append;
+- (id)popFromStart;
+- (NSMutableArray *(^)(id obj))prepend;
 @end
 
 @interface NSSet (RubyEnumerable)

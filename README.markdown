@@ -88,7 +88,7 @@ id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
 ```objc
 __block NSMutableArray *rv = @[].mutableCopy;
 @[@1, @2, @3, @4].each(^(NSNumber *n){
-    rv.unshift(n);
+    rv.prepend(n);
 });
 // rv => @[@4, @3, @2, @1]
 ```
@@ -402,31 +402,31 @@ id rv = @"1,2,3,4,5,6".split(@",")
 // rv => @[@1, @2, @3, @4, @5, @6]
 ```
 
-###NSMutableArray.push()
+###NSMutableArray.append()
 ```objc
 NSMutableArray *aa = [NSMutableArray new];
-id rv = aa.push(@1).push(@2).push(@3)
+id rv = aa.append(@1).append(@2).append(@3)
 // rv => @[@1, @2, @3]
 ```
 
-###NSMutableArray.pop()
+###NSMutableArray.popFromEnd()
 ```objc
 NSMutableArray *aa = [NSMutableArray new];
-id rv = aa.push(@1).push(@2).push(@3).pop()
+id rv = aa.append(@1).append(@2).append(@3).popFromEnd()
 // rv => @3
 ```
 
-###NSMutableArray.unshift()
+###NSMutableArray.prepend()
 ```objc
 NSMutableArray *aa = [NSMutableArray new];
-id rv = aa.unshift(@1).unshift(@2).unshift(@3);
+id rv = aa.prepend(@1).prepend(@2).prepend(@3);
 // rv => @[@3, @2, @1]
 ```
 
-###NSMutableArray.shift()
+###NSMutableArray.popFromStart
 ```objc
 NSMutableArray *aa = [NSMutableArray new];
-id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
+id rv = aa.prepend(@1).prepend(@2).prepend(@3).popFromStart;
 // rv => @3
 ```
 
