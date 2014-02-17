@@ -65,10 +65,6 @@
 - (NSDictionary *(^)(id o, ...))extend;
 @end
 
-@interface NSDictionary (YOLO)
-- (id (^)(id))get;
-@end
-
 @interface NSNumber (Ruby)
 - (NSArray *(^)(int))upto;
 @end
