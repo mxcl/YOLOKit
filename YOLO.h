@@ -66,7 +66,7 @@
 @end
 
 @interface NSNumber (Ruby)
-- (NSArray *(^)(int))upto;
+- (NSArray *(^)(int))upTo;
 @end
 
 @interface NSString (YOLO)
