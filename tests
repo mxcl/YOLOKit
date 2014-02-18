@@ -334,4 +334,14 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testPushNil {
+    NSMutableArray *ma = @[].mutableCopy;
+    STAssertEquals(0ul, ma.push(nil).count, @"");
+}
+
+- (void)testUnshiftNil {
+    NSMutableArray *ma = @[@1].mutableCopy;
+    STAssertEquals(1ul, ma.unshift(nil).count, @"");
+}
+
 @end

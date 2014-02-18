@@ -16,7 +16,7 @@
 
 - (NSMutableArray *(^)(id))push {
     return ^(id o){
-        [self addObject:o];
+        if (o) [self addObject:o];
         return self;
     };
 }
@@ -31,7 +31,7 @@
 
 - (NSMutableArray *(^)(id o))unshift {
     return ^(id o){
-        [self insertObject:o atIndex:0];
+        if (o) [self insertObject:o atIndex:0];
         return self;
     };
 }
