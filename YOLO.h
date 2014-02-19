@@ -18,7 +18,7 @@
 - (id(^)(NSInteger (^)(id)))min;
 - (NSArray *(^)(BOOL (^)(id o)))select;
 - (NSArray *)sort;
-- (NSArray *(^)(id (^)(id o)))sortBy;
+- (NSArray *(^)(id blockOrKey))sortBy;
 - (id(^)(id (^)(id memo, id obj)))reduce;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 

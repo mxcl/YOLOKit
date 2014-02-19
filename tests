@@ -237,7 +237,7 @@ int main() {
     id aa = @[c, a, b].sortBy(^(NSDictionary *o){
         return o.allKeys.firstObject;
     });
-    id bb = @[a, b, c];
+    id bb = @[[a copy], [b copy], [c copy]];
     STAssertEqualObjects(aa, bb, @"");
 }
 
@@ -344,6 +344,30 @@ int main() {
     STAssertEquals(1ul, ma.unshift(nil).count, @"");
 }
 
+- (void)testMultiSort {
+    id frank12 = @{@"name": @"frank", @"age": @12};
+    id zane = @{@"name": @"zane", @"age": @1};
+    id bob = @{@"name": @"bob", @"age": @54};
+    id frank31 = @{@"name": @"frank", @"age": @31};
+    id frank32 = @{@"name": @"frank", @"age": @32};
+
+    NSArray *aa = @[frank32, frank31, bob, zane, frank12];
+
+    id bb = aa.sortBy(^(id o){
+        return @[o[@"name"], o[@"age"]];
+    });
+
+    id cc = @[
+        [bob copy],
+        [frank12 copy],
+        [frank31 copy],
+        [frank32 copy],
+        [zane copy]
+    ];
+
+    STAssertEqualObjects(bb, cc, @"");
+}
+
 - (void)testTransposeWithNonEqualCounts {
     id aa = @[@[@1, @2, @3], @[@1, @2]].transpose;
     id bb = @[@[@1, @1], @[@2, @2], @[@3]];
@@ -368,6 +392,12 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testMixedSort {
+    NSArray *aa = @[@"20", @4, @"3", @5].sort;
+    NSArray *bb = @[@"3", @4, @5, @"20"];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 - (void)testAll {
     BOOL b = @[@1, @2, @3].all(^BOOL(id o){
         return [o intValue] > 0;
@@ -389,6 +419,12 @@ int main() {
 
     d = @[@"1", @2, @"3"].all(NSString.class);
     STAssertFalse(d, @"");
+}
+
+- (void)testStringSort {
+    id aa = @[@"103", @"11", @"10", @"12"].sort;
+    id bb = @[@"10", @"11", @"12", @"103"];
+    STAssertEqualObjects(aa, bb, @"");
 }
 
 @end

@@ -208,13 +208,36 @@ id rv = @[rhombas, ellipse, hexagon].sortBy(^(id shape){
 
 id rv = @[rhombas, ellipse, hexagon].sortBy(@"title")
 // rv => @[ellipse, hexagon, rhombas]
+
+id rv = @[
+    @{@"name": @"frank", @"age": @32},
+    @{@"name": @"frank", @"age": @31},
+    @{@"name": @"bob", @"age": @54},
+    @{@"name": @"zane", @"age": @1},
+    @{@"name": @"frank", @"age": @12}
+].sortBy(^(id o){
+    return @[o[@"name"], o[@"age"]];
+});
+// rv => @[
+    @{@"name": @"bob", @"age": @54},
+    @{@"name": @"frank", @"age": @12},
+    @{@"name": @"frank", @"age": @31},
+    @{@"name": @"frank", @"age": @32},
+    @{@"name": @"zane", @"age": @1}
+];
 ```
+
+You will need you to implement a `compare:` method for any custom objects
+returned.
 
 ###NSArray.sort
 ```objc
-id rv = @[@2, @1, @3, @5, @4].sort
-
+id rv = @[@2, @1, @3, @5, @4].sort;
 // rv => @[@1, @2, @3, @4, @5]
+
+id rv = @[@"20", @"1", @3, @5, @"4"].sort;
+// rv => @[@"1", @3, @"4", @5, @"20"]   // handles mixed object types
+
 ```
 
 ###NSArray.pluck()

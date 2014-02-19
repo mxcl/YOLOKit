@@ -155,23 +155,49 @@
 }
 
 - (NSArray *)sort {
-    return [self sortedArrayUsingSelector:@selector(compare:)];
+    @try {
+        if (self.all(^(id o){ return [o isKindOfClass:[NSString class]]; }))
+            return [self sortedArrayUsingComparator:^(id obj1, id obj2){
+                return [obj1 compare:obj2 options:NSCaseInsensitiveSearch|NSNumericSearch];
+            }];
+        else
+            return [self sortedArrayUsingSelector:@selector(compare:)];
+    } @catch (id e)
+    {}
+
+    return self.sortBy(@"description");
 }
 
-// FIXME inefficient
-- (NSArray *(^)(id (^)(id o)))sortBy {
-    return ^(id (^block)(id)) {
-        if ([block isKindOfClass:[NSString class]]) {
-            id d = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-            return [self sortedArrayUsingDescriptors:@[d]];
-        }
+- (NSArray *(^)(id))sortBy {
+    // TODO pass an array to sort by multiple selectors (use multiple sort descriptors)
 
-        NSArray *keys = self.map(block);
+    return ^(id blockOrKey) {
+        if ([blockOrKey isKindOfClass:[NSString class]])
+            blockOrKey = ^(id o){
+                return [o valueForKey:blockOrKey];
+            };
+
+        // FIXME inefficient
+        NSArray *keys = self.map(blockOrKey);
         return keys.sort.map(^(id key){
             NSUInteger ii = [keys indexOfObject:key];
             return self[ii];
         });
     };
+}
+
+- (NSComparisonResult)compare:(NSArray *)array {
+    if (![array isKindOfClass:[NSArray class]])
+        array = @[array];
+
+    for (NSArray *o in @[self, array].transpose) {
+        if (o.count == 2) {
+            NSComparisonResult result = [o[0] compare:o[1]];
+            if (result != NSOrderedSame)
+                return result;
+        }
+    }
+    return NSOrderedSame;
 }
 
 - (BOOL(^)(id o))all {
