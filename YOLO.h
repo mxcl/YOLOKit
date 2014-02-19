@@ -17,17 +17,16 @@
 - (NSArray *(^)(id (^)(id o)))map;
 - (id(^)(NSInteger (^)(id)))max;
 - (id(^)(NSInteger (^)(id)))min;
-- (NSArray *(^)(BOOL (^)(id o)))select;
 - (BOOL(^)(id blockOrClass))none;
+- (NSArray *(^)(id blockOrClass))select;
 - (NSArray *)sort;
 - (NSArray *(^)(id blockOrKey))sortBy;
 - (id(^)(id (^)(id memo, id obj)))reduce;
-- (NSArray *(^)(BOOL (^)(id o)))reject;
-
+- (NSArray *(^)(id blockOrClass))reject;
 @end
 
 @interface NSArray (Underscore)
-- (NSArray *(^)(id keypathOrClass))pluck;
+- (NSArray *(^)(NSString *keypath))pluck;
 - (NSArray *(^)(id arrayOrSetOrObject))without;
 @end
 

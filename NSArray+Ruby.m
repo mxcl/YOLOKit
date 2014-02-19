@@ -2,25 +2,34 @@
 #import <objc/runtime.h>
 
 
+#define YOLOSelectReject(logic) \
+    if (class_isMetaClass(object_getClass(block))) { \
+        id key = block; \
+        block = ^(id o){ \
+            return [o isKindOfClass:key]; \
+        }; \
+    } \
+    \
+    id selected[self.count]; \
+    int ii = 0; \
+    for (id o in self) \
+        if (logic block(o)) \
+            selected[ii++] = o; \
+    return [NSArray arrayWithObjects:selected count:ii]
+
+
+
 @implementation NSArray (RubyEnumerable)
 
-- (NSArray *(^)(BOOL (^)(id)))select {
+- (NSArray *(^)(id))select {
     return ^(BOOL(^block)(id)) {
-        id objs[self.count];
-        int ii = 0;
-        for (id item in self) {
-            if (block(item))
-                objs[ii++] = item;
-        }
-        return [NSArray arrayWithObjects:objs count:ii];
+        YOLOSelectReject(!!);
     };
 }
 
-- (NSArray *(^)(BOOL (^)(id)))reject {
+- (NSArray *(^)(id))reject {
     return ^(BOOL(^block)(id)) {
-        return self.select(^BOOL(id o) {
-            return !block(o);
-        });
+        YOLOSelectReject(!);
     };
 }
 

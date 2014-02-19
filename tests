@@ -225,9 +225,15 @@ int main() {
     STAssertEqualObjects(bb, aa, @"");
 }
 
-- (void)testPluckClass {
-    id bb = @[@1, @"a", @[]].pluck(NSNumber.class);
+- (void)testSelectClass {
+    id bb = @[@1, @"a", @[]].select(NSNumber.class);
     STAssertEqualObjects(bb, @[@1], @"");
+}
+
+- (void)testRejectClass {
+    id bb = @[@1, @"a", @[]].reject(NSNumber.class);
+    id aa =  @[@"a", @[]];
+    STAssertEqualObjects(bb, aa, @"");
 }
 
 - (void)testSortBy {
@@ -436,6 +442,16 @@ int main() {
 
     b = @[@"1", @"2", @"3"].none(NSString.class);
     STAssertFalse(b, @"");
+}
+
+- (void)testPluckNil {
+    NSArray *aa = @[@1];
+    STAssertEqualObjects(aa.pluck(nil), aa, @"");
+}
+
+- (void)testPluckEmpty {
+    NSArray *aa = @[@1];
+    STAssertEqualObjects(aa.pluck(@""), aa, @"");
 }
 
 @end

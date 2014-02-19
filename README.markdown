@@ -73,6 +73,10 @@ id rv = @[@1, @2, @3, @4].select(^BOOL(NSNumber *n){
     return n.intValue % 2 == 0;
 });
 // rv => @[@2, @4]
+
+**id rv = @[@1, @"1", @{}].select(NSNumber.class)
+// rv => @[@1]
+**
 ```
 
 ###NSArray.reject()
@@ -81,6 +85,9 @@ id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
     return n.intValue % 2 == 0;
 });
 // rv => @[@1, @3]
+
+**id rv = @[@1, @"1", @{}].reject(NSNumber.class)
+// rv => @[@"1", @{}]
 ```
 
 ###NSArray.each()
@@ -251,9 +258,6 @@ id rv = @[rhombas, ellipse, hexagon].pluck(@"title")
 
 id rv = @[rhombas, ellipse, hexagon].pluck(@"title.uppercaseString")
 // rv => @[@"RHOMBAS", @"ELLIPSE", @"HEXAGON"]
-
-id rv = @[@1, @"1", rhombas].pluck(NSNumber.class)
-// rv => @[@1]
 ```
 
 ###NSArray.uniq
