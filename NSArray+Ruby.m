@@ -304,7 +304,7 @@
 
 - (NSString *(^)(NSString *))join {
     return ^(NSString *separator) {
-        return [self.pluck(@"description") componentsJoinedByString:separator];
+        return [self.pluck(@"description") componentsJoinedByString:separator ?: @""];
     };
 }
 
