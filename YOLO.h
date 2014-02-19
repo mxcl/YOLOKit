@@ -23,6 +23,7 @@
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 
 - (BOOL(^)(id blockOrClass))all;
+- (BOOL(^)(id blockOrClass))none;
 @end
 
 @interface NSArray (Underscore)

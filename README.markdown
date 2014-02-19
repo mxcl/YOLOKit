@@ -416,6 +416,17 @@ BOOL rv = @[@1, @2, @3].all(NSNumber.class);
 // rv => YES
 ```
 
+###NSArray.none()
+```objc
+BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+	return [o intValue] > 4;
+});
+// rv => YES
+
+BOOL rv = @[@1, @2, @3].all(NSString.class);
+// rv => YES
+```
+
 ###NSDictionary.extend()
 ```objc
 id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});

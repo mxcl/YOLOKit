@@ -427,4 +427,15 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testNone {
+    BOOL b = @[@"1", @"2", @"3"].none(NSNumber.class);
+    STAssertTrue(b, @"");
+
+    b = @[@1, @"2", @"3"].none(NSNumber.class);
+    STAssertFalse(b, @"");
+
+    b = @[@"1", @"2", @"3"].none(NSString.class);
+    STAssertFalse(b, @"");
+}
+
 @end

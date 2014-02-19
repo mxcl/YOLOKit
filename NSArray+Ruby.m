@@ -204,9 +204,7 @@
     return ^(id arg){
         BOOL (^block)(id o) = nil;
 
-        // this bizarre comparison to NSString.class because I got segfaults
-        // otherwise
-        if (arg == NSString.class || class_isMetaClass(object_getClass(arg))) {
+        if (arg == NSString.class /*or segfaults!*/ || class_isMetaClass(object_getClass(arg))) {
             Class cls = arg;
             block = ^(id o){
                 return [o isKindOfClass:cls];
@@ -216,6 +214,25 @@
 
         for (id o in self)
             if (!block(o))
+                return NO;
+        return YES;
+    };
+}
+
+- (BOOL(^)(id o))none {
+    return ^(id arg){
+        BOOL (^block)(id o) = nil;
+
+        if (arg == NSString.class /*or segfaults!*/ || class_isMetaClass(object_getClass(arg))) {
+            Class cls = arg;
+            block = ^(id o){
+                return [o isKindOfClass:cls];
+            };
+        } else
+            block = arg;
+
+        for (id o in self)
+            if (block(o))
                 return NO;
         return YES;
     };
