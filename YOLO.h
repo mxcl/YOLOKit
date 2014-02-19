@@ -5,6 +5,7 @@
 **/
 
 @interface NSArray (RubyEnumerable)
+- (BOOL(^)(id blockOrClass))all;
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(void (^)(id o, uint index)))eachWithIndex;
 - (id(^)(BOOL (^)(id o)))find;
@@ -17,13 +18,12 @@
 - (id(^)(NSInteger (^)(id)))max;
 - (id(^)(NSInteger (^)(id)))min;
 - (NSArray *(^)(BOOL (^)(id o)))select;
+- (BOOL(^)(id blockOrClass))none;
 - (NSArray *)sort;
 - (NSArray *(^)(id blockOrKey))sortBy;
 - (id(^)(id (^)(id memo, id obj)))reduce;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
 
-- (BOOL(^)(id blockOrClass))all;
-- (BOOL(^)(id blockOrClass))none;
 @end
 
 @interface NSArray (Underscore)
