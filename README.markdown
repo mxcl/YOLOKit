@@ -197,16 +197,17 @@ id rv = @[@1, @2, @3, @4].groupBy(^(NSNumber *n) {
 
 ###NSArray.sortBy()
 ```objc
-id rv = @[@[@2], @[@1]].sortBy(^(id a){
-    return a[0];
+MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
+MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
+MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
+
+id rv = @[rhombas, ellipse, hexagon].sortBy(^(id shape){
+    return [shape title];
 });
-// rv => @[@[@1], @[@2]]
+// rv => @[ellipse, hexagon, rhombas]
 
-MKShape *shape1 = [MKShape new]; shape1.title = @"foo";
-MKShape *shape2 = [MKShape new]; shape2.title = @"bar";
-id rv = @[shape1, shape2].sortBy(@"title")
-
-rv => @[shape2, shape1]
+id rv = @[rhombas, ellipse, hexagon].sortBy(@"title")
+// rv => @[ellipse, hexagon, rhombas]
 ```
 
 ###NSArray.sort
@@ -218,16 +219,17 @@ id rv = @[@2, @1, @3, @5, @4].sort
 
 ###NSArray.pluck()
 ```objc
-MKShape *shape1 = [MKShape new]; shape1.title = @"shape 1";
-MKShape *shape2 = [MKShape new]; shape2.title = @"shape 2";
+MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
+MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
+MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
 
-id rv = @[shape1, shape2].pluck(@"title")
-// rv => @[@"shape 1", @"shape 2"]
+id rv = @[rhombas, ellipse, hexagon].pluck(@"title")
+// rv => @[@"rhombas", @"ellipse", @"hexagon"]
 
-id rv = @[shape1, shape2].pluck(@"title.uppercaseString")
-// rv => @[@"SHAPE 1", @"SHAPE 2"]
+id rv = @[rhombas, ellipse, hexagon].pluck(@"title.uppercaseString")
+// rv => @[@"RHOMBAS", @"ELLIPSE", @"HEXAGON"]
 
-id rv = @[@1, @"1", shape1].pluck(NSNumber.class)
+id rv = @[@1, @"1", rhombas].pluck(NSNumber.class)
 // rv => @[@1]
 ```
 
@@ -302,7 +304,7 @@ id rv = @[@1, @2, @3, @4].reverse;
 id rv = @[@1, @2, @3, @4].join(@",");
 // rv => @"1,2,3,4"
 
-id rv = @[@1, @2, @3, @4].join(nil);  // join(0) is valid, though unclear
+id rv = @[@1, @2, @3, @4].join(@"");
 // rv => @"1234"
 ```
 
@@ -313,11 +315,13 @@ id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 ```
 
+`tranpose` is surprisingly useful, if you think laterally about your problem.
+
 ###NSArray.shuffle
 ```objc
 id rv = @[@1, @2, @3, @4, @5, @6].shuffle;
 
-// rv => @[@2, @4, @5, @1, @3, @6]
+// rv => @[@2, @4, @5, @1, @3, @6]  // order is *random*
 ```
 
 ###NSArray.sample
