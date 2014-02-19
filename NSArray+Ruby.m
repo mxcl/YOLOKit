@@ -235,15 +235,26 @@
 }
 
 - (NSArray *)transpose {
-    __block NSMutableArray *objs = [NSMutableArray new];
-    for (int x = 0; x < [self[0] count]; ++x)
-        [objs addObject:[NSMutableArray new]];
-    self.each(^(NSArray *obj){
-        obj.eachWithIndex(^(id o, uint ii) {
-            [objs[ii] addObject:o];
+    if (self.empty)
+        return self;
+
+    NSArray *arrays = self.select(^(id o){
+        return [o isKindOfClass:[NSArray class]];
+    });
+    const int max = [arrays.max(^NSInteger(id o){
+        return [o count];
+    }) count];
+
+    NSMutableArray *rv = [NSMutableArray new];
+    for (int x = 0; x < max; ++x)
+        [rv addObject:[NSMutableArray new]];
+
+    arrays.each(^(NSArray *array){
+        array.eachWithIndex(^(id o, uint ii) {
+            [rv[ii] addObject:o];
         });
     });
-    return objs;
+    return rv;
 }
 
 - (id)shuffle {

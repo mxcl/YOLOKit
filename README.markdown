@@ -315,7 +315,7 @@ id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 ```
 
-`tranpose` is surprisingly useful, if you think laterally about your problem.
+`transpose` is surprisingly useful, if you think laterally about your problem.
 
 ###NSArray.shuffle
 ```objc

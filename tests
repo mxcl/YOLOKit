@@ -344,4 +344,28 @@ int main() {
     STAssertEquals(1ul, ma.unshift(nil).count, @"");
 }
 
+- (void)testTransposeWithNonEqualCounts {
+    id aa = @[@[@1, @2, @3], @[@1, @2]].transpose;
+    id bb = @[@[@1, @1], @[@2, @2], @[@3]];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testTransposeNothing {
+    id aa = @[].transpose;
+    id bb = @[];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testTransposeFlat {
+    id aa = @[@1].transpose;
+    id bb = @[];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testTransposeOneArray {
+    id aa = @[@[@1, @2, @3]].transpose;
+    id bb = @[@[@1], @[@2], @[@3]];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
