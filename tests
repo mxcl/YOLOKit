@@ -198,7 +198,7 @@ int main() {
 }
 
 - (void)testPMap {
-    NSUInteger const count = 2000;
+    NSUInteger const count = 50000;
     NSArray *nums = @(1).upTo(count);
     id aa = nums.pmap(^(NSNumber *num){
         return @(num.intValue * num.intValue);
