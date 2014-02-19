@@ -377,6 +377,22 @@ We picked `empty` rather than `isEmpty` because of context. We almost always
 use empty in an if statement, and there the form: `if (array.empty) {}` is
 clear and reads more easily than `isEmpty`. Small wins add up.
 
+###NSArray.all()
+```objc
+BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+	return [o intValue] > 0;
+});
+// rv => YES
+
+BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+	return [o intValue] < 3;
+});
+// rv => NO
+
+BOOL rv = @[@1, @2, @3].all(NSNumber.class);
+// rv => YES
+```
+
 ###NSDictionary.extend()
 ```objc
 id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});

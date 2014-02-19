@@ -21,6 +21,8 @@
 - (NSArray *(^)(id (^)(id o)))sortBy;
 - (id(^)(id (^)(id memo, id obj)))reduce;
 - (NSArray *(^)(BOOL (^)(id o)))reject;
+
+- (BOOL(^)(id blockOrClass))all;
 @end
 
 @interface NSArray (Underscore)

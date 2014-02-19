@@ -368,4 +368,27 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testAll {
+    BOOL b = @[@1, @2, @3].all(^BOOL(id o){
+        return [o intValue] > 0;
+    });
+    STAssertTrue(b, @"");
+
+    BOOL c = @[@1, @2, @3].all(^BOOL(id o){
+        return [o intValue] > 1;
+    });
+    STAssertFalse(c, @"");
+}
+
+- (void)testAllClass {
+    BOOL d = @[@1, @2, @3].all(NSNumber.class);
+    STAssertTrue(d, @"");
+
+    d = @[@"1", @"2", @"3"].all(NSString.class);
+    STAssertTrue(d, @"");
+
+    d = @[@"1", @2, @"3"].all(NSString.class);
+    STAssertFalse(d, @"");
+}
+
 @end
