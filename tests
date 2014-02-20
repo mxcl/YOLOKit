@@ -1,22 +1,5 @@
-#!/bin/bash
-
-D=/Applications/Xcode.app/Contents/Developer/Library/Frameworks
-OBJC=`awk '/^__OBJC__/ {print NR + 1; exit 0; }' $0`
-tail -n+$OBJC $0 > /tmp/YOLOtests.m
-
-clang -g -O0 -ObjC -F$D -I. -fmodules -fobjc-arc \
-    -framework SenTestingKit \
-    /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
-
-install_name_tool -change \
-    @rpath/SenTestingKit.framework/Versions/A/SenTestingKit \
-    $D/SenTestingKit.framework/SenTestingKit \
-    /tmp/YOLOtests
-
-exec /tmp/YOLOtests
-
-
-__OBJC__
+#!/usr/bin/ruby
+OBJC = <<-__EOBJC__
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "YOLO.h"
@@ -471,3 +454,26 @@ int main() {
 }
 
 @end
+
+__EOBJC__
+
+FRAMEWORKS = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+
+File.open('/tmp/YOLOtests.m', 'w') do |f|
+  f.puts("\n")  # make line numbers line up
+  f.puts(OBJC)
+end
+
+system <<-EOS
+  clang -g -O0 -ObjC -F#{FRAMEWORKS} -I. -fmodules -fobjc-arc \
+        -framework SenTestingKit \
+        /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
+EOS
+system <<-EOS
+    install_name_tool -change \
+        @rpath/SenTestingKit.framework/Versions/A/SenTestingKit \
+        #{FRAMEWORKS}/SenTestingKit.framework/SenTestingKit \
+        /tmp/YOLOtests
+EOS
+
+exec "/tmp/YOLOtests"
