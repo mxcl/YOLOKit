@@ -454,4 +454,10 @@ int main() {
     STAssertEqualObjects(aa.pluck(@""), aa, @"");
 }
 
+- (void)testUpToFromNegative {
+    NSArray *aa = @(-5).upTo(20);
+    STAssertEquals([aa[0] intValue], -5, @"");
+    STAssertEquals([aa[25] intValue], 20, @"");
+}
+
 @end
