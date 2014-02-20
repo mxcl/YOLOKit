@@ -278,14 +278,14 @@
     };
 }
 
-- (NSArray *(^)(uint))first {
-    return ^(uint num) {
+- (NSArray *(^)(NSUInteger))first {
+    return ^(NSUInteger num) {
         return self.slice(0, num);
     };
 }
 
-- (NSArray *(^)(uint))last {
-    return ^(uint num) {
+- (NSArray *(^)(NSUInteger))last {
+    return ^(NSUInteger num) {
         return self.slice(self.count - num, num);
     };
 }
@@ -315,7 +315,7 @@
     NSArray *arrays = self.select(^(id o){
         return [o isKindOfClass:[NSArray class]];
     });
-    const int max = [arrays.max(^NSInteger(id o){
+    NSInteger max = [arrays.max(^NSInteger(id o){
         return [o count];
     }) count];
 
@@ -351,8 +351,8 @@
     return self[arc4random() % self.count];
 }
 
-- (NSArray *(^)(int))rotate {
-    return ^(int pivot) {
+- (NSArray *(^)(NSInteger))rotate {
+    return ^(NSInteger pivot) {
         if (pivot < 0)
             pivot = (int)self.count + pivot;
         return self.skip(pivot).concat(self.snip(pivot));

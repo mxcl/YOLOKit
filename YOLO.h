@@ -32,11 +32,11 @@
 
 @interface NSArray (Ruby)
 - (NSArray *(^)(NSArray *other_array))concat;
-- (NSArray *(^)(uint))first;  // @see last, slice, snip, skip
+- (NSArray *(^)(NSUInteger))first;  // @see last, slice, snip, skip
 - (NSString *(^)(NSString *))join;
-- (NSArray *(^)(uint))last;   // @see first, slice, snip, skip
+- (NSArray *(^)(NSUInteger))last;   // @see first, slice, snip, skip
 - (NSArray *)reverse;
-- (NSArray *(^)(int))rotate;
+- (NSArray *(^)(NSInteger))rotate;
 - (id)sample;
 - (NSArray *)shuffle;
 - (NSArray *(^)(NSUInteger start, NSUInteger length))slice;  // @see first, last, snip, skip
@@ -72,7 +72,7 @@
 @end
 
 @interface NSNumber (Ruby)
-- (NSArray *(^)(int))upTo;
+- (NSArray *(^)(NSInteger))upTo;
 @end
 
 @interface NSString (YOLO)
