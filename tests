@@ -460,4 +460,14 @@ int main() {
     STAssertEquals([aa[25] intValue], 20, @"");
 }
 
+- (void)testInject {
+    id aa = @[@1, @2, @3].inject(@{}, ^(id memo, NSNumber *value){
+        memo[value] = @(value.intValue * 2);
+        return memo;
+    });
+    id bb = @{@1: @2, @2: @4, @3: @6};
+    STAssertEqualObjects(aa, bb, @"");
+    STAssertFalse([aa isKindOfClass:[NSMutableDictionary class]], @"");
+}
+
 @end

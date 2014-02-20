@@ -95,6 +95,7 @@ id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
 @[@1, @2, @3, @4].each(^(id n){
 	NSLog(@"%@", n);
 });
+// => 1\n2\n3\n4\n
 ```
 
 ###NSArray.eachWithIndex()
@@ -116,12 +117,15 @@ id rv = @[@1, @2, @3, @4].reduce(^(NSNumber *memo, NSNumber *n){
 
 ###NSArray.inject()
 ```objc
-id rv = @[@1, @2, @3, @4].inject(@{}, ^(NSDictionary *memo, NSNumber *n){
+id rv = @[@1, @2, @3, @4].inject(@{}, ^(NSMutableDictionary *memo, NSNumber *n){
     memo[n] = @(n.intValue * n.intValue);
     return memo;
 });
 // rv => @{@1: @1, @2: @4, @3: @9, @4: @16}
 ```
+
+If you feed inject a non-mutable dictionary or array YOLOKit mutates it for
+your block, and then finally returns a non-mutable `copy`.
 
 ###NSArray.flatten
 ```objc
