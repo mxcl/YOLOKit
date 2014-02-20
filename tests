@@ -455,6 +455,8 @@ int main() {
 
 @end
 
+
+
 __EOBJC__
 
 FRAMEWORKS = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
@@ -476,4 +478,42 @@ system <<-EOS
         /tmp/YOLOtests
 EOS
 
-exec "/tmp/YOLOtests"
+
+require "stringio"
+require "open3"
+
+def bold(s); s;end
+def red(s); "\e[31m#{s}\e[0m";end
+def green(s); "\e[32m#{s}\e[0m";end
+def tab(n, s); s.gsub(/^/, " " * n); end
+def log(message); $stdout.write message + "\n";end
+
+document = nil
+Open3.popen3("/tmp/YOLOtests") do |stdin, stdout, stderr, wait_thr|
+  while line = stderr.gets
+    case line
+    when /\[(\w+) (\w+)\]' started.$/
+      if document != $1
+        log bold("#{$1}")
+      end
+      document = $1
+      test_method = $2
+    when /\s(passed|failed)\s\((.*)\)/
+      result = red("FAIL")
+      result = green("PASS") if $1 == "passed"
+      result = tab(2, result)
+      time = $2.gsub(/\sseconds/, "s")
+      log "#{result} #{test_method} (#{time})"
+    when /^(Executed(.?)+)$/
+      if stderr.eof?
+        summary = $1
+        if /(\d) failures?/.match(summary)[1] == "0"
+          summary.gsub!(/(\d failures?)/, green('\1'))
+        else
+          summary.gsub!(/(\d failures?)/, red('\1'))
+        end
+        log summary
+      end
+    end
+  end
+end
