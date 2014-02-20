@@ -530,6 +530,7 @@ Do you have a great example of real-world YOLOKit use? Please submit it here!
 
 Caveats
 -------
+###`nil`
 You can’t call a variable that represents a block if that variable is nil. This
 is markedly different to sending a message to nil: you get nil back: no crash.
 If it’s possible your *initial* object is nil you need to:
@@ -555,6 +556,11 @@ if (campaigns) campaigns.reject(^(PPCampaign *campaign){
 Code is art. Make it look good, make it readable. You don’t have to rigidly
 adhere to rules about how to write an if statement if the resulting code is
 *nice*.
+
+###Completion
+Xcode (as of 5.1) does not complete YOLOKit well, apparently AppCode works
+better. If you use Xcode, you will just have to remember the arguments that
+YOLOKit blocks take. Someone should radar this.
 
 Contribution
 ------------
