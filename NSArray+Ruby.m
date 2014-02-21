@@ -1,19 +1,21 @@
 #import "YOLO.h"
 #import <objc/runtime.h>
 
-
+/**
+ The blockToUse variable is necessary or: EXC_BAD_ACCESS
+**/
 #define YOLOSelectReject(logic) \
-    if (class_isMetaClass(object_getClass(block))) { \
-        id key = block; \
-        block = ^(id o){ \
-            return [o isKindOfClass:key]; \
+    BOOL (^blockToUse)(); \
+    if (class_isMetaClass(object_getClass(input))) { \
+        blockToUse = ^(id o){ \
+            return [o isKindOfClass:input]; \
         }; \
-    } \
-    \
+    } else \
+        blockToUse = input;\
     id selected[self.count]; \
     int ii = 0; \
     for (id o in self) \
-        if (logic block(o)) \
+        if (logic blockToUse(o)) \
             selected[ii++] = o; \
     return [NSArray arrayWithObjects:selected count:ii]
 
@@ -22,13 +24,13 @@
 @implementation NSArray (RubyEnumerable)
 
 - (NSArray *(^)(id))select {
-    return ^(BOOL(^block)(id)) {
+    return ^(id input) {
         YOLOSelectReject(!!);
     };
 }
 
 - (NSArray *(^)(id))reject {
-    return ^(BOOL(^block)(id)) {
+    return ^(id input) {
         YOLOSelectReject(!);
     };
 }
