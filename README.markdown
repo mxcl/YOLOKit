@@ -426,12 +426,12 @@ BOOL rv = @[@1, @2, @3].all(NSNumber.class);
 
 ###NSArray.none()
 ```objc
-BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+BOOL rv = @[@1, @2, @3].none(^BOOL(id o){
 	return [o intValue] > 4;
 });
 // rv => YES
 
-BOOL rv = @[@1, @2, @3].all(NSString.class);
+BOOL rv = @[@1, @2, @3].none(NSString.class);
 // rv => YES
 ```
 
