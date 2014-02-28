@@ -453,6 +453,12 @@ int main() {
     STAssertFalse([aa isKindOfClass:[NSMutableDictionary class]], @"");
 }
 
+- (void)testExtendNil {
+    NSDictionary *aa = @{@1: @2};
+    id bb = aa.extend(nil);
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
 
 

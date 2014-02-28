@@ -4,7 +4,9 @@
 @implementation NSDictionary (Underscore)
 
 - (NSDictionary *(^)(id, ...))extend {
-    return ^(NSDictionary *key, ...) {
+    return ^NSDictionary *(NSDictionary *key, ...) {
+        if (!key)
+            return self;
         NSMutableDictionary *cp = self.mutableCopy;
         if ([key isKindOfClass:[NSDictionary class]]) {
             [cp addEntriesFromDictionary:key];
