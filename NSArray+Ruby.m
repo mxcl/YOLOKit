@@ -253,6 +253,15 @@
     };
 }
 
+- (BOOL(^)(BOOL(^)(id o)))any {
+    return ^(BOOL(^block)(id o)){
+        for (id o in self)
+            if (block(o))
+                return YES;
+        return NO;
+    };
+}
+
 @end
 
 

@@ -459,6 +459,12 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testAny {
+    NSArray *aa = @[@1, @2, @3, @4];
+    STAssertTrue(aa.any(^BOOL(id o){ return [o intValue] == 4; }), @"");
+    STAssertFalse(aa.any(^BOOL(id o){ return [o intValue] == 5; }), @"");
+}
+
 @end
 
 
@@ -468,7 +474,7 @@ __EOBJC__
 FRAMEWORKS = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
 
 File.open('/tmp/YOLOtests.m', 'w') do |f|
-  f.puts("\n")  # make line numbers line up
+  f.puts("\n\n")  # make line numbers line up
   f.puts(OBJC)
 end
 

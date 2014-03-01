@@ -435,6 +435,14 @@ BOOL rv = @[@1, @2, @3].none(NSString.class);
 // rv => YES
 ```
 
+###NSArray.any()
+```objc
+BOOL rv = @[@1, @2, @3].any(^BOOL(id o){
+	return [o intValue] == 3;
+});
+// rv => YES
+```
+
 ###NSDictionary.extend()
 ```objc
 id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});

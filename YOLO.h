@@ -6,6 +6,7 @@
 
 @interface NSArray (RubyEnumerable)
 - (BOOL(^)(id blockOrClass))all;
+- (BOOL(^)(BOOL (^)(id o)))any;
 - (NSArray *(^)(void (^)(id o)))each;
 - (NSArray *(^)(void (^)(id o, uint index)))eachWithIndex;
 - (id(^)(BOOL (^)(id o)))find;
