@@ -47,6 +47,7 @@
 
 @interface NSArray (YOLO)
 - (BOOL)empty;
+- (BOOL (^)(id o))has;
 - (NSArray *(^)(id (^)(id o)))pmap;
 - (NSSet *)set;
 - (NSArray *(^)(NSUInteger numberToTrim))snip;

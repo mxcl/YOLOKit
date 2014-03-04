@@ -465,6 +465,11 @@ int main() {
     STAssertFalse(aa.any(^BOOL(id o){ return [o intValue] == 5; }), @"");
 }
 
+- (void)testHas {
+    NSArray *aa = @[@1,@2,@3];
+    STAssertTrue(aa.has(@3), @"");
+}
+
 @end
 
 

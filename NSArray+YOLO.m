@@ -31,6 +31,12 @@
     return self.count == 0;
 }
 
+- (BOOL (^)(id o))has {
+    return ^BOOL(id o){
+        return [self containsObject:o];
+    };
+}
+
 - (NSArray *(^)(NSUInteger numberToTrim))snip {
     return ^(NSUInteger num){
         return self.slice(0, self.count - num);
