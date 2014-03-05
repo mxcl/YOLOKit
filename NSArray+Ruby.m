@@ -5,6 +5,7 @@
  The blockToUse variable is necessary or: EXC_BAD_ACCESS
 **/
 #define YOLOSelectReject(logic) \
+    if (!input) return @[]; \
     BOOL (^blockToUse)(); \
     if (class_isMetaClass(object_getClass(input))) { \
         blockToUse = ^(id o){ \
