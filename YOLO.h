@@ -65,6 +65,10 @@
 - (NSSet *(^)(void (^)(id o)))each;
 @end
 
+@interface NSDictionary (RubyEnumerable)
+- (NSArray *(^)(id (^)(id key, id obj)))map;
+@end
+
 @interface NSDictionary (Underscore)
 - (NSDictionary *(^)(id o, ...))extend;
 @end

@@ -461,6 +461,18 @@ code.
 
 `has` was chosen over `contains` or `includes` because it is short and clear.
 
+###NSDictionary.map()
+```objc
+id rv = @{@1: @2, @2: @4, @3: @9}.map(^(id key, id obj){
+    return @([key intValue] + [obj intValue]);
+}).sort;
+
+// rv = @[@3, @6, @12]
+```
+
+Note that internally we are fast enumerating the dictionary’s keys, which Apple
+documents as having undefined order. Thus the above example calls sort.
+
 ###NSDictionary.extend()
 ```objc
 id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});

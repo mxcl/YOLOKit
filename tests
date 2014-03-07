@@ -483,6 +483,14 @@ int main() {
     STAssertEqualObjects(a, b, @"");
 }
 
+- (void)testDictionaryMap {
+    id aa = @{@1: @2, @2: @4, @3: @9}.map(^(id key, id obj){
+        return @([key intValue] + [obj intValue]);
+    }).sort;
+    id bb = @[@3, @6, @12];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
 
 
