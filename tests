@@ -470,6 +470,19 @@ int main() {
     STAssertTrue(aa.has(@3), @"");
 }
 
+- (void)testSelectNil {
+    id aa = @[@1, @2].select(nil);
+    id bb = @[];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
+- (void)testDictionaryArray {
+    NSDictionary *d = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"};
+    id a = d.array.sort.transpose[1];
+    id b = @[@"a", @"b", @"c", @"d"];
+    STAssertEqualObjects(a, b, @"");
+}
+
 @end
 
 

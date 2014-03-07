@@ -71,6 +71,7 @@
 
 @interface NSDictionary (YOLO)
 - (id (^)(id))get;
+- (NSArray *)array;
 @end
 
 @interface NSNumber (Ruby)

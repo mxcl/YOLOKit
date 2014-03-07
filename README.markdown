@@ -478,6 +478,14 @@ id rv = @{@1: @1, @2: @4}.get(@2);
 Same as: `[NSDictionary objectForKey:]`. Provided because once you start
 a chain of dot-notations, square brackets at the end are just ugly.
 
+###NSDictionary.array()
+```objc
+id rv = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"}.array.sort.transpose[1]
+
+// rv = [@"a", @"b", @"c", @"d"]
+
+Returns a new array of key, value pairs.
+
 ###NSNumber.upTo()
 ```objc
 id rv = @1.upTo(6);
