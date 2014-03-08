@@ -27,6 +27,7 @@
 @end
 
 @interface NSArray (Underscore)
+- (NSArray *(^)(id blockReturningBool))partition;
 - (NSArray *(^)(NSString *keypath))pluck;
 - (NSArray *(^)(id arrayOrSetOrObject))without;
 @end

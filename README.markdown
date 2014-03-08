@@ -461,6 +461,17 @@ code.
 
 `has` was chosen over `contains` or `includes` because it is short and clear.
 
+###NSArray.partition()
+```objc
+id rv = @[@"A", @"B", @"AA"].partition(^(NSString *s){
+    return [s hasPrefix:@"A"];
+});
+//rv => @[@[@"A", @"AA"], @[@"B"]]
+```
+
+Partitions an array into two arrays based on the boolean return value of your
+block.
+
 ###NSDictionary.map()
 ```objc
 id rv = @{@1: @2, @2: @4, @3: @9}.map(^(id key, id obj){

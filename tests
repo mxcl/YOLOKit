@@ -491,6 +491,20 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testPartition {
+    id aa = @[@1, @2, @3, @4].partition(^(NSNumber *n){
+        return n.intValue % 2 == 0;
+    });
+    id bb = @[@[@2, @4], @[@1, @3]];
+    STAssertEqualObjects(aa, bb, @"");
+    
+    aa = @[@"A", @"B", @"AA"].partition(^(NSString *s){
+        return [s hasPrefix:@"A"];
+    });
+    bb = @[@[@"A", @"AA"], @[@"B"]];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 @end
 
 
