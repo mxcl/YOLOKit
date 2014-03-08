@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 OBJC = <<-__EOBJC__
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "YOLO.h"
 
 @interface Thingy : NSObject
@@ -16,12 +16,12 @@ int main() {
     unlink("/tmp/YOLOtests");
 
     @autoreleasepool {
-        SenSelfTestMain();
+        XCTSelfTestMain();
     }
 }
 
 
-@interface GeneralTests : SenTestCase
+@interface GeneralTests : XCTestCase
 @end
 
 
@@ -29,73 +29,73 @@ int main() {
 
 - (void)testIndexOfSuccess {
     NSUInteger u = @[@1, @2, @3].indexOf(@2);
-    STAssertEquals(u, 1ul, @"");
+    XCTAssertEqual(u, 1ul);
 }
 
 - (void)testIndexOfFailure {
     NSUInteger u = @[@1, @2, @3].indexOf(@4);
-    STAssertEquals(u, NSNotFound, @"");
+    XCTAssertEqual(u, NSNotFound);
 }
 
 - (void)testPop {
     NSMutableArray *aa = @[@1, @2, @3].mutableCopy;
     [aa pop];
-    STAssertEquals(aa.count, 2ul, @"");
+    XCTAssertEqual(aa.count, 2ul);
     id bb = @[@1, @2];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testUniq {
     NSArray *aa = @[@1, @2, @3, @3, @2, @2, @1].uniq;
-    STAssertEquals(aa.count, 3ul, @"");
+    XCTAssertEqual(aa.count, 3ul);
     id aaa = @[@1, @2, @3];
-    STAssertEqualObjects(aaa, aa, @"");
+    XCTAssertEqualObjects(aaa, aa);
 }
 
 - (void)testExtendForm1 {
     NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
     id other = dict.extend(@{@3: @5});
-    STAssertEqualObjects(other[@3], @5, @"");
+    XCTAssertEqualObjects(other[@3], @5);
 }
 
 - (void)testExtendForm2 {
     NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
     id other = dict.extend(@3, @9);
-    STAssertEqualObjects(other[@3], @9, @"");
+    XCTAssertEqualObjects(other[@3], @9);
 }
 
 - (void)testConcat {
     NSArray *objs = @[@1, @2, @3];
     objs = objs.concat(objs);
     id objs2 = @[@1, @2, @3, @1, @2, @3];
-    STAssertEqualObjects(objs, objs2, @"");
+    XCTAssertEqualObjects(objs, objs2);
 
     NSArray *aa = @[@1, @2, @3].concat(@[@3, @4, @5]);
     id bb = @[@1, @2, @3, @3, @4, @5];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 
     aa = @[@1, @2, @3, @4, @5];
     aa = aa.skip(2).concat(aa.snip(2));
     bb = @[@3, @4, @5, @1, @2, @3];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testLast {
     id aa = @[@1,@2,@3,@4,@5].last(3);
     id bb = @[@3, @4, @5];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testFirst {
     id aa = @[@1,@2,@3,@4,@5].first(3);
     id bb = @[@1, @2, @3];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testEach {
     __block int x = 0;
     @[@1, @2, @3].each(^(id o){
-        STAssertEqualObjects(o, @(++x), @"");
+        XCTAssertEqualObjects(o, @(++x));
     });
 }
 
@@ -104,26 +104,26 @@ int main() {
         return [o intValue] % 2 == 0;
     });
     id bb = @[@2, @4];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testMin {
     id a = @[@19, @29, @4, @5, @6].min(^NSInteger(id o) {
         return [o integerValue];
     });
-    STAssertEquals([a intValue], 4, @"");
+    XCTAssertEqual([a intValue], 4);
 }
 
 - (void)testMax {
     id a = @[@19, @29, @4, @5, @6].max(^NSInteger(id o) {
         return [o integerValue];
     });
-    STAssertEquals([a intValue], 29, @"");
+    XCTAssertEqual([a intValue], 29);
 }
 
 - (void)testFlatten {
     id a = @[@1, @[@1, @2], @[@1, @[@1, @2, @[@1, @[@2, @3]]], @2]];
-    STAssertEquals([a flatten].count, 10ul, @"");
+    XCTAssertEqual([a flatten].count, 10ul);
 }
 
 - (void)testFlatMap {
@@ -131,7 +131,7 @@ int main() {
         return @[o, @[o]];
     });
     id bb = @[@1, @[@1], @2, @[@2], @3, @[@3]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testGroupBy {
@@ -139,45 +139,45 @@ int main() {
         return @(n.intValue % 2);
     });
     id bb = @{@0: @[@2, @4], @1: @[@1, @3]};
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testReduce {
     NSNumber *sum = @[@1, @2, @3, @4].reduce(^(NSNumber *memo, NSNumber *num){
         return @(num.intValue + memo.intValue);
     });
-    STAssertEquals(sum.intValue, 10, @"");
+    XCTAssertEqual(sum.intValue, 10);
 }
 
 - (void)testSlice {
     id aa = @[@1, @2, @3, @4, @5].slice(1, 2);
     id bb = @[@2, @3];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testOverslice {
     NSArray *aa = @[@1, @2, @3, @4];
     id bb = aa.slice(0, 10);
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testEmptySlice {
     NSArray *bb = @[].slice(3, 10);
-    STAssertEquals(bb.count, 0ul, @"");
+    XCTAssertEqual(bb.count, 0ul);
 }
 
 - (void)testEmptyFirst {
     NSArray *bb = @[].first(3);
-    STAssertEquals(bb.count, 0ul, @"");
+    XCTAssertEqual(bb.count, 0ul);
 }
 
 - (void)testEmptyLast {
     NSArray *bb = @[].last(3);
-    STAssertEquals(bb.count, 0ul, @"");
+    XCTAssertEqual(bb.count, 0ul);
 }
 
 - (void)testGet {
-    STAssertEquals([@{@1:@2}.get(@1) intValue], 2, @"");
+    XCTAssertEqual([@{@1:@2}.get(@1) intValue], 2);
 }
 
 - (void)testPMap {
@@ -189,14 +189,14 @@ int main() {
     id bb = nums.map(^(NSNumber *num){
         return @(num.intValue * num.intValue);
     });
-    STAssertEquals(count, nums.count, @"");
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqual(count, nums.count);
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testUpto {
     id aa = @(4).upTo(6);
     id bb = @[@4, @5, @6];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testPluck {
@@ -205,18 +205,18 @@ int main() {
 
     id aa = @[shape1, shape2].pluck(@"title.uppercaseString");
     id bb = @[@"SHAPE 1", @"SHAPE 2"];
-    STAssertEqualObjects(bb, aa, @"");
+    XCTAssertEqualObjects(bb, aa);
 }
 
 - (void)testSelectClass {
     id bb = @[@1, @"a", @[]].select(NSNumber.class);
-    STAssertEqualObjects(bb, @[@1], @"");
+    XCTAssertEqualObjects(bb, @[@1]);
 }
 
 - (void)testRejectClass {
     id bb = @[@1, @"a", @[]].reject(NSNumber.class);
     id aa =  @[@"a", @[]];
-    STAssertEqualObjects(bb, aa, @"");
+    XCTAssertEqualObjects(bb, aa);
 }
 
 - (void)testSortBy {
@@ -227,54 +227,54 @@ int main() {
         return o.allKeys.firstObject;
     });
     id bb = @[[a copy], [b copy], [c copy]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testReverse {
     id aa = @[@5, @4, @3, @2, @1];
     id bb = @[@1, @2, @3, @4, @5].reverse;
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testJoin {
     NSArray *aa = @[@"a", @1, @"b"];
     id bb = @"a1b";
-    STAssertEqualObjects(aa.join(@""), bb, @"");
-    STAssertEqualObjects(aa.join(nil), bb, @"");
+    XCTAssertEqualObjects(aa.join(@""), bb);
+    XCTAssertEqualObjects(aa.join(nil), bb);
 }
 
 - (void)testTranspose {
     id aa = @[@[@1, @2], @[@3, @4], @[@5, @6]].transpose;
     id bb = @[@[@1, @3, @5], @[@2, @4, @6]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testShift {
     NSMutableArray *aa = [NSMutableArray arrayWithObjects:@1, @2, @3, nil];
-    STAssertEqualObjects(aa.shift, @1, @"");
-    STAssertEquals(aa.count, 2ul, @"");
+    XCTAssertEqualObjects(aa.shift, @1);
+    XCTAssertEqual(aa.count, 2ul);
 }
 
 - (void)testSample {
     id aa = @[@1, @2, @3].sample;
-    STAssertNotNil(aa, @"");
+    XCTAssertNotNil(aa);
 }
 
 - (void)testPush {
     id aa = [NSMutableArray new].push(@1).push(@2).copy;
     id bb = @[@1, @2];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testEmpty {
-    STAssertTrue(@[].empty, @"");
-    STAssertFalse(@[@1].empty, @"");
+    XCTAssertTrue(@[].empty);
+    XCTAssertFalse(@[@1].empty);
 }
 
 - (void)testString {
     id aa = @"1,2,3,4".split(@",");
     id bb = @[@"1", @"2", @"3", @"4"];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (NSArray *)array:(NSUInteger)count {
@@ -290,47 +290,47 @@ int main() {
 
     NSArray *aa = [self array:50];
     NSArray *bb = aa.shuffle;
-    STAssertEquals(aa.count, bb.count, @"");
-    STAssertEqualObjects(aa.sort, bb.sort, @"");
+    XCTAssertEqual(aa.count, bb.count);
+    XCTAssertEqualObjects(aa.sort, bb.sort);
 }
 
 - (void)testUnshift {
     NSMutableArray *aa = @[@4, @5, @6].mutableCopy;
     aa.unshift(@3).unshift(@2).unshift(@1);
     id bb = @[@1, @2, @3, @4, @5, @6];
-    STAssertEqualObjects(bb, aa, @"");
+    XCTAssertEqualObjects(bb, aa);
 }
 
 - (void)testSnip {
     id aa = @[@1, @2, @3, @4, @5].snip(2);
     id bb = @[@1, @2, @3];
-    STAssertEqualObjects(bb, aa, @"");
+    XCTAssertEqualObjects(bb, aa);
 }
 
 - (void)testSkip {
     id aa = @[@1, @2, @3, @4, @5].skip(2);
     id bb = @[@3, @4, @5];
-    STAssertEqualObjects(bb, aa, @"");
+    XCTAssertEqualObjects(bb, aa);
 }
 
 - (void)testRotate {
     id aa = @[@1, @2, @3, @4].rotate(2);
     id bb = @[@3, @4, @1, @2];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 
     id cc = @[@1, @2, @3, @4].rotate(-2);
     id dd = @[@3, @4, @1, @2];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testPushNil {
     NSMutableArray *ma = @[].mutableCopy;
-    STAssertEquals(0ul, ma.push(nil).count, @"");
+    XCTAssertEqual(0ul, ma.push(nil).count);
 }
 
 - (void)testUnshiftNil {
     NSMutableArray *ma = @[@1].mutableCopy;
-    STAssertEquals(1ul, ma.unshift(nil).count, @"");
+    XCTAssertEqual(1ul, ma.unshift(nil).count);
 }
 
 - (void)testMultiSort {
@@ -354,93 +354,93 @@ int main() {
         [zane copy]
     ];
 
-    STAssertEqualObjects(bb, cc, @"");
+    XCTAssertEqualObjects(bb, cc);
 }
 
 - (void)testTransposeWithNonEqualCounts {
     id aa = @[@[@1, @2, @3], @[@1, @2]].transpose;
     id bb = @[@[@1, @1], @[@2, @2], @[@3]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testTransposeNothing {
     id aa = @[].transpose;
     id bb = @[];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testTransposeFlat {
     id aa = @[@1].transpose;
     id bb = @[];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testTransposeOneArray {
     id aa = @[@[@1, @2, @3]].transpose;
     id bb = @[@[@1], @[@2], @[@3]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testMixedSort {
     NSArray *aa = @[@"20", @4, @"3", @5].sort;
     NSArray *bb = @[@"3", @4, @5, @"20"];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testAll {
     BOOL b = @[@1, @2, @3].all(^BOOL(id o){
         return [o intValue] > 0;
     });
-    STAssertTrue(b, @"");
+    XCTAssertTrue(b);
 
     BOOL c = @[@1, @2, @3].all(^BOOL(id o){
         return [o intValue] > 1;
     });
-    STAssertFalse(c, @"");
+    XCTAssertFalse(c);
 }
 
 - (void)testAllClass {
     BOOL d = @[@1, @2, @3].all(NSNumber.class);
-    STAssertTrue(d, @"");
+    XCTAssertTrue(d);
 
     d = @[@"1", @"2", @"3"].all(NSString.class);
-    STAssertTrue(d, @"");
+    XCTAssertTrue(d);
 
     d = @[@"1", @2, @"3"].all(NSString.class);
-    STAssertFalse(d, @"");
+    XCTAssertFalse(d);
 }
 
 - (void)testStringSort {
     id aa = @[@"103", @"11", @"10", @"12"].sort;
     id bb = @[@"10", @"11", @"12", @"103"];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testNone {
     BOOL b = @[@"1", @"2", @"3"].none(NSNumber.class);
-    STAssertTrue(b, @"");
+    XCTAssertTrue(b);
 
     b = @[@1, @"2", @"3"].none(NSNumber.class);
-    STAssertFalse(b, @"");
+    XCTAssertFalse(b);
 
     b = @[@"1", @"2", @"3"].none(NSString.class);
-    STAssertFalse(b, @"");
+    XCTAssertFalse(b);
 }
 
 - (void)testPluckNil {
     NSArray *aa = @[@1];
-    STAssertEqualObjects(aa.pluck(nil), aa, @"");
+    XCTAssertEqualObjects(aa.pluck(nil), aa);
 }
 
 - (void)testPluckEmpty {
     NSArray *aa = @[@1];
-    STAssertEqualObjects(aa.pluck(@""), aa, @"");
+    XCTAssertEqualObjects(aa.pluck(@""), aa);
 }
 
 - (void)testUpToFromNegative {
     NSArray *aa = @(-5).upTo(20);
-    STAssertEquals([aa[0] intValue], -5, @"");
-    STAssertEquals([aa[25] intValue], 20, @"");
+    XCTAssertEqual([aa[0] intValue], -5);
+    XCTAssertEqual([aa[25] intValue], 20);
 }
 
 - (void)testInject {
@@ -449,38 +449,38 @@ int main() {
         return memo;
     });
     id bb = @{@1: @2, @2: @4, @3: @6};
-    STAssertEqualObjects(aa, bb, @"");
-    STAssertFalse([aa isKindOfClass:[NSMutableDictionary class]], @"");
+    XCTAssertEqualObjects(aa, bb);
+    XCTAssertFalse([aa isKindOfClass:[NSMutableDictionary class]]);
 }
 
 - (void)testExtendNil {
     NSDictionary *aa = @{@1: @2};
     id bb = aa.extend(nil);
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testAny {
     NSArray *aa = @[@1, @2, @3, @4];
-    STAssertTrue(aa.any(^BOOL(id o){ return [o intValue] == 4; }), @"");
-    STAssertFalse(aa.any(^BOOL(id o){ return [o intValue] == 5; }), @"");
+    XCTAssertTrue(aa.any(^BOOL(id o){ return [o intValue] == 4; }));
+    XCTAssertFalse(aa.any(^BOOL(id o){ return [o intValue] == 5; }));
 }
 
 - (void)testHas {
     NSArray *aa = @[@1,@2,@3];
-    STAssertTrue(aa.has(@3), @"");
+    XCTAssertTrue(aa.has(@3));
 }
 
 - (void)testSelectNil {
     id aa = @[@1, @2].select(nil);
     id bb = @[];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testDictionaryArray {
     NSDictionary *d = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"};
     id a = d.array.sort.transpose[1];
     id b = @[@"a", @"b", @"c", @"d"];
-    STAssertEqualObjects(a, b, @"");
+    XCTAssertEqualObjects(a, b);
 }
 
 - (void)testDictionaryMap {
@@ -488,24 +488,24 @@ int main() {
         return @([key intValue] + [obj intValue]);
     }).sort;
     id bb = @[@3, @6, @12];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testArrayToDict {
     id aa = @[@[@1, @2], @[@3, @4], @[@5, @6]];
     id dd = [aa dict];
     id ee = @{@1: @2, @3: @4, @5: @6};
-    STAssertEqualObjects(dd, ee, @"");
+    XCTAssertEqualObjects(dd, ee);
 
-    aa = @[@1, @2, @3, @4, @5, @6];
+    aa = @[@1, @2, @3, @4, @5, @6].chunk(2);
     dd = [aa dict];
-    STAssertEqualObjects(dd, ee, @"");
+    XCTAssertEqualObjects(dd, ee);
 }
 
 - (void)testChunk {
     id aa = @[@1, @2, @3, @4].chunk(2);
     id bb = @[@[@1, @2], @[@3, @4]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (void)testPartition {
@@ -513,13 +513,13 @@ int main() {
         return n.intValue % 2 == 0;
     });
     id bb = @[@[@2, @4], @[@1, @3]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
     
     aa = @[@"A", @"B", @"AA"].partition(^(NSString *s){
         return [s hasPrefix:@"A"];
     });
     bb = @[@[@"A", @"AA"], @[@"B"]];
-    STAssertEqualObjects(aa, bb, @"");
+    XCTAssertEqualObjects(aa, bb);
 }
 
 @end
@@ -537,16 +537,15 @@ end
 
 abort unless system <<-EOS
   clang -g -O0 -ObjC -F#{FRAMEWORKS} -I. -fmodules -fobjc-arc \
-        -framework SenTestingKit \
+        -framework XCTest \
         /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
 EOS
 abort unless system <<-EOS
     install_name_tool -change \
-        @rpath/SenTestingKit.framework/Versions/A/SenTestingKit \
-        #{FRAMEWORKS}/SenTestingKit.framework/SenTestingKit \
+        @rpath/XCTest.framework/Versions/A/XCTest \
+        #{FRAMEWORKS}/XCTest.framework/XCTest \
         /tmp/YOLOtests
 EOS
-
 
 require "stringio"
 require "open3"
@@ -557,19 +556,21 @@ def green(s); "\e[32m#{s}\e[0m";end
 def tab(n, s); s.gsub(/^/, " " * n); end
 def log(message); $stdout.write message + "\n";end
 
-document = nil
+
 Open3.popen3("/tmp/YOLOtests") do |stdin, stdout, stderr, wait_thr|
   while line = stderr.gets
     case line
+    when /Test Suite '(.*)' started/
+      log bold($1)
+    when /Test Suite '.*' finished/
     when /\[(\w+) (\w+)\]' started.$/
-      if document != $1
-        log bold("#{$1}")
-      end
-      document = $1
       test_method = $2
     when /\s(passed|failed)\s\((.*)\)/
-      result = red("FAIL")
-      result = green("PASS") if $1 == "passed"
+      result = if $1 == "passed"
+        green("PASS") 
+      else
+        red("FAIL")
+      end
       result = tab(2, result)
       time = $2.gsub(/\sseconds/, "s")
       log "#{result} #{test_method} (#{time})"
@@ -583,6 +584,8 @@ Open3.popen3("/tmp/YOLOtests") do |stdin, stdout, stderr, wait_thr|
         end
         log summary
       end
+    else
+      log line.strip
     end
   end
 end
