@@ -535,12 +535,12 @@ File.open('/tmp/YOLOtests.m', 'w') do |f|
   f.puts(OBJC)
 end
 
-system <<-EOS
+abort unless system <<-EOS
   clang -g -O0 -ObjC -F#{FRAMEWORKS} -I. -fmodules -fobjc-arc \
         -framework SenTestingKit \
         /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
 EOS
-system <<-EOS
+abort unless system <<-EOS
     install_name_tool -change \
         @rpath/SenTestingKit.framework/Versions/A/SenTestingKit \
         #{FRAMEWORKS}/SenTestingKit.framework/SenTestingKit \
