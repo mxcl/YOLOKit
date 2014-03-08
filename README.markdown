@@ -461,6 +461,15 @@ code.
 
 `has` was chosen over `contains` or `includes` because it is short and clear.
 
+###NSArray.chunk()
+```objc
+id rv = @[@1, @2, @3, @4].chunk(2)
+
+// rv => @[@[@1, @2], @[@3, @4]]
+```
+
+Chunks your array into an array of chunk-size arrays.
+
 ###NSArray.partition()
 ```objc
 id rv = @[@"A", @"B", @"AA"].partition(^(NSString *s){

@@ -491,6 +491,12 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testChunk {
+    id aa = @[@1, @2, @3, @4].chunk(2);
+    id bb = @[@[@1, @2], @[@3, @4]];
+    STAssertEqualObjects(aa, bb, @"");
+}
+
 - (void)testPartition {
     id aa = @[@1, @2, @3, @4].partition(^(NSNumber *n){
         return n.intValue % 2 == 0;

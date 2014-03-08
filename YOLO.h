@@ -47,6 +47,7 @@
 @end
 
 @interface NSArray (YOLO)
+- (NSArray *(^)(NSUInteger))chunk;
 - (BOOL)empty;
 - (BOOL (^)(id o))has;
 - (NSArray *(^)(id (^)(id o)))pmap;
