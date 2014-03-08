@@ -491,6 +491,17 @@ int main() {
     STAssertEqualObjects(aa, bb, @"");
 }
 
+- (void)testArrayToDict {
+    id aa = @[@[@1, @2], @[@3, @4], @[@5, @6]];
+    id dd = [aa dict];
+    id ee = @{@1: @2, @3: @4, @5: @6};
+    STAssertEqualObjects(dd, ee, @"");
+
+    aa = @[@1, @2, @3, @4, @5, @6];
+    dd = [aa dict];
+    STAssertEqualObjects(dd, ee, @"");
+}
+
 - (void)testChunk {
     id aa = @[@1, @2, @3, @4].chunk(2);
     id bb = @[@[@1, @2], @[@3, @4]];

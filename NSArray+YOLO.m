@@ -17,6 +17,13 @@
     };
 }
 
+- (NSDictionary *)dict {
+    NSArray *aa = self.transpose;
+    if (aa.count <= 1)
+        return @{};
+    return [NSDictionary dictionaryWithObjects:aa[1] forKeys:aa[0]];
+}
+
 - (NSArray *(^)(id (^)(id o)))pmap {
     return ^NSArray *(id (^block)(id))
     {
