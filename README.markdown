@@ -663,6 +663,12 @@ The Alternatives People Talk About
 * https://github.com/robb/Asterism
 * https://github.com/ReactiveCocoa/ReactiveCocoa
 
+Complementary Projects
+----------------------
+You only live once, so use these too:
+* https://github.com/bendytree/Objective-C-RegEx-Categories
+* https://github.com/dreamwieber/AttributedMarkdown
+
 License
 -------
 I, Max Howell the copyright holder of this work, hereby release it into the
