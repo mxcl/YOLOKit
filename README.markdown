@@ -644,6 +644,12 @@ Xcode (as of 5.1) does not complete YOLOKit well, apparently AppCode works
 better. If you use Xcode, you will just have to remember the arguments that
 YOLOKit blocks take. Someone should radar this.
 
+Also in several cases we accept a block or an object or a class, so completion
+cannot work well. As iOS developers we have become fond of Xcode’s powerful
+completion, but we should admit that for YOLOKit is it less important, we aren't
+completing long multiply-named parameter methods. With YOLOKit all methods are
+short and their parameters easy to remember.
+
 Contribution
 ------------
 Please open issues for suggestions and pull requests for contributions.

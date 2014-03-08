@@ -1,23 +1,31 @@
 #import <Foundation/Foundation.h>
 
 /**
- Documentated online: https://github.com/mxcl/YOLOKit/blob/master/README.markdown
+ Documentated online: http://github.com/mxcl/YOLOKit/blob/master/README.markdown
+
+ This header is NOT good documentation. Often we have `id` where usage requires
+ a block. This is because: that method accepts mutliple types of input or,
+ because clang is pedantic about boolean types and it made using YOLOKit less
+ pleasant.
+
+ As developers in a C based language it may appall you, but YOLOKit is forgiving
+ and will take return and argument types with as much tolerance as is possible.
 **/
 
 @interface NSArray (RubyEnumerable)
 - (BOOL(^)(id blockOrClass))all;
-- (BOOL(^)(BOOL (^)(id o)))any;
+- (BOOL(^)(id))any;
 - (NSArray *(^)(void (^)(id o)))each;
-- (NSArray *(^)(void (^)(id o, uint index)))eachWithIndex;
-- (id(^)(BOOL (^)(id o)))find;
+- (NSArray *(^)(id))eachWithIndex;
+- (id(^)(id))find;
 - (NSArray *)flatten;
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap;
 - (NSDictionary *(^)(id (^)(id o)))groupBy;
 - (NSUInteger (^)(id obj))indexOf;
 - (id(^)(id initial_memo, id (^)(id memo, id obj)))inject;
 - (NSArray *(^)(id (^)(id o)))map;
-- (id(^)(NSInteger (^)(id)))max;
-- (id(^)(NSInteger (^)(id)))min;
+- (id(^)(id))max;
+- (id(^)(id))min;
 - (BOOL(^)(id blockOrClass))none;
 - (NSArray *(^)(id blockOrClass))select;
 - (NSArray *)sort;

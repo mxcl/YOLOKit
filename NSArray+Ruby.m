@@ -44,7 +44,7 @@
     };
 }
 
-- (NSArray *(^)(void (^)(id, uint)))eachWithIndex {
+- (NSArray *(^)(id))eachWithIndex {
     return ^(void (^block)(id, uint)) {
         [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             block(obj, (uint)idx);
@@ -88,7 +88,7 @@
     };
 }
 
-- (id(^)(NSInteger (^)(id)))min {
+- (id(^)(id))min {
     return ^(NSInteger (^block)(id o)) {
         NSInteger value = NSIntegerMax;
         id keeper = nil;
@@ -103,7 +103,7 @@
     };
 }
 
-- (id(^)(NSInteger (^)(id)))max {
+- (id(^)(id))max {
     return ^(NSInteger (^block)(id o)) {
         NSInteger value = NSIntegerMin;
         id keeper = nil;
@@ -118,7 +118,7 @@
     };
 }
 
-- (id(^)(BOOL (^)(id)))find {
+- (id(^)(id))find {
     return ^id(BOOL (^block)(id o)) {
         for (id item in self)
             if (block(item))
@@ -254,7 +254,7 @@
     };
 }
 
-- (BOOL(^)(BOOL(^)(id o)))any {
+- (BOOL(^)(id))any {
     return ^(BOOL(^block)(id o)){
         for (id o in self)
             if (block(o))
