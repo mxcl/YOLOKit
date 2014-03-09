@@ -58,6 +58,11 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
     return @(n.intValue * n.intValue);
 });
 // rv => @[@1, @4, @9, @16]
+
+id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, uint ii){
+    return @(n.intValue * ii);
+});
+// rv => @[@0, @2, @6, @12]
 ```
 
 Notably, if you return nil, we skip that element in the returned array.
@@ -96,16 +101,14 @@ id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
 	NSLog(@"%@", n);
 });
 // => 1\n2\n3\n4\n
+
+@[@4, @3, @2, @1].each(^(id n, int ii){
+	NSLog(@"%d:%@", ii, n);
+});
+// => 0:1\n1:2\n2:3\n3:4\n
 ```
 
-###NSArray.eachWithIndex()
-```objc
-__block NSMutableDictionary *rv = @{}.mutableCopy;
-@[@4, @3, @2, @1].eachWithIndex(^(id n, uint ii){
-    rv[n] = @(ii * ii);
-});
-// rv => @{@1: @16, @2: @9, @3: @4, @4: @1}
-```
+We know how many arguments your block has. x
 
 ###NSArray.reduce()
 ```objc
@@ -136,12 +139,12 @@ id rv = @[@[@1, @2], @3, @[@4]].flatten
 
 ###NSArray.min()
 ```objc
-id rv = @[@4, @2, @1, @3].min(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
     return n.intValue;
 });
 // rv => @1
 
-id rv = @[@4, @2, @1, @3].min(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
     return (n.intValue - 3) * (n.intValue - 3);
 });
 // rv => @3
@@ -149,12 +152,12 @@ id rv = @[@4, @2, @1, @3].min(^int(NSNumber *n){
 
 ###NSArray.max()
 ```objc
-id rv = @[@4, @2, @1, @3].max(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
     return n.intValue;
 });
 // rv => @4
 
-id rv = @[@4, @2, @1, @3].max(^int(NSNumber *n){
+id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
     return (n.intValue - 3) * (n.intValue - 3);
 });
 // rv => @1
@@ -426,7 +429,7 @@ BOOL rv = @[@1, @2, @3].all(NSNumber.class);
 
 ###NSArray.none()
 ```objc
-BOOL rv = @[@1, @2, @3].none(^BOOL(id o){
+BOOL rv = @[@1, @2, @3].none(^(id o){
 	return [o intValue] > 4;
 });
 // rv => YES
@@ -437,7 +440,7 @@ BOOL rv = @[@1, @2, @3].none(NSString.class);
 
 ###NSArray.any()
 ```objc
-BOOL rv = @[@1, @2, @3].any(^BOOL(id o){
+BOOL rv = @[@1, @2, @3].any(^(id o){
 	return [o intValue] == 3;
 });
 // rv => YES
@@ -487,7 +490,7 @@ YOLOKit since we allow easy array flattening.
 
 ###NSArray.partition()
 ```objc
-id rv = @[@"A", @"B", @"AA"].partition(^(NSString *s){
+id rv = @[@"A", @"B", @"AA"].partition(^(id s){
     return [s hasPrefix:@"A"];
 });
 //rv => @[@[@"A", @"AA"], @[@"B"]]
@@ -525,7 +528,7 @@ id rv = @{@1: @1, @2: @4}.get(@2);
 Same as: `[NSDictionary objectForKey:]`. Provided because once you start
 a chain of dot-notations, square brackets at the end are just ugly.
 
-###NSDictionary.array()
+###NSDictionary.array
 ```objc
 id rv = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"}.array.sort.transpose[1]
 

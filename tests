@@ -97,6 +97,12 @@ int main() {
     @[@1, @2, @3].each(^(id o){
         XCTAssertEqualObjects(o, @(++x));
     });
+    @[@1, @2, @3].each(^(id o, NSUInteger ii){
+        XCTAssertEqualObjects(o, @(ii+1));
+    });
+    @[@1, @2, @3].each(^(id o, int ii){
+        XCTAssertEqualObjects(o, @(ii+1));
+    });
 }
 
 - (void)testSelect {
@@ -519,6 +525,14 @@ int main() {
         return [s hasPrefix:@"A"];
     });
     bb = @[@[@"A", @"AA"], @[@"B"]];
+    XCTAssertEqualObjects(aa, bb);
+}
+
+- (void)testMapWithIndex {
+    id aa = @[@"a", @"b", @"c", @"d"].map(^(id o, uint ii){
+        return @(ii);
+    });
+    id bb = @[@0, @1, @2, @3];
     XCTAssertEqualObjects(aa, bb);
 }
 

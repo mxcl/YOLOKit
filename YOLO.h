@@ -15,15 +15,14 @@
 @interface NSArray (RubyEnumerable)
 - (BOOL(^)(id blockOrClass))all;
 - (BOOL(^)(id))any;
-- (NSArray *(^)(void (^)(id o)))each;
-- (NSArray *(^)(id))eachWithIndex;
+- (NSArray *(^)(id block))each;
 - (id(^)(id))find;
 - (NSArray *)flatten;
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap;
 - (NSDictionary *(^)(id (^)(id o)))groupBy;
 - (NSUInteger (^)(id obj))indexOf;
 - (id(^)(id initial_memo, id (^)(id memo, id obj)))inject;
-- (NSArray *(^)(id (^)(id o)))map;
+- (NSArray *(^)(id block))map;
 - (id(^)(id))max;
 - (id(^)(id))min;
 - (BOOL(^)(id blockOrClass))none;

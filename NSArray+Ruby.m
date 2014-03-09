@@ -1,5 +1,6 @@
 #import "YOLO.h"
 #import <objc/runtime.h>
+extern int YOLOArgCount(id);
 
 /**
  The blockToUse variable is necessary or: EXC_BAD_ACCESS
@@ -36,29 +37,33 @@
     };
 }
 
-- (NSArray *(^)(void (^)(id)))each {
-    return ^(void (^block)(id)) {
-        for (id obj in self)
-            block(obj);
+- (NSArray *(^)(id))each {
+    return ^(id frock) {
+        if (YOLOArgCount(frock) == 3) {
+            void (^block)(id, NSUInteger) = frock;
+            NSUInteger ii = 0;
+            for (id obj in self)
+                block(obj, ii++);
+        } else {
+            void (^block)(id) = frock;
+            for (id obj in self)
+                block(obj);
+        }
         return self;
     };
 }
 
-- (NSArray *(^)(id))eachWithIndex {
-    return ^(void (^block)(id, uint)) {
-        [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            block(obj, (uint)idx);
-        }];
-        return self;
-    };
-}
-
-- (NSArray *(^)(id (^)(id)))map {
-    return ^(id (^block)(id)) {
+- (NSArray *(^)(id))map {
+    return ^(id frock) {
+        id (^block)(id o, NSUInteger ii) = frock;
+        if (YOLOArgCount(frock) < 3)
+            block = ^(id obj, NSUInteger ignored){
+                return ((id(^)(id))frock)(obj);
+            };
         id objs[self.count];
-        int ii = 0;
+        int ii = 0, jj = 0;
         for (id item in self) {
-            id o = block(item);
+            id o = block(item, jj++);
             if (o)
                 objs[ii++] = o;
         }
@@ -340,7 +345,7 @@
         [rv addObject:[NSMutableArray new]];
 
     arrays.each(^(NSArray *array){
-        array.eachWithIndex(^(id o, uint ii) {
+        array.each(^(id o, uint ii) {
             [rv[ii] addObject:o];
         });
     });
