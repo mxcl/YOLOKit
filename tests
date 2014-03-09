@@ -281,6 +281,10 @@ int main() {
     id aa = @"1,2,3,4".split(@",");
     id bb = @[@"1", @"2", @"3", @"4"];
     XCTAssertEqualObjects(aa, bb);
+
+    aa = @"1234".split(@"");
+    bb = @[@"1", @"2", @"3", @"4"];
+    XCTAssertEqualObjects(aa, bb);
 }
 
 - (NSArray *)array:(NSUInteger)count {
