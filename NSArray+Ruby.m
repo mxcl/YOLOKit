@@ -40,45 +40,36 @@ extern NSMethodSignature *YOLOMS(id);
 - (NSArray *(^)(id))each {
     return ^(id frock) {
         NSMethodSignature *sig = YOLOMS(frock);
-        switch (sig.numberOfArguments) {
-        case 2: {
-            void (^block)(id) = frock;
-            for (id obj in self)
-                block(obj);
-            break;
+        BOOL const convert = sig.numberOfArguments >= 3 && [sig getArgumentTypeAtIndex:2][0] == '@';
+
+        NSUInteger ii = 0;
+        for (id obj in self) {
+            if (convert)
+                ((void (^)(id, id, id))frock)(obj, @(ii), self);
+            else
+                ((void (^)(id, NSUInteger, id))frock)(obj, ii, self);
+            ++ii;
         }
-        case 3: {
-            void (^block)(id, NSUInteger) = frock;
-
-            if ([sig getArgumentTypeAtIndex:2][0] == '@')
-                block = ^(id o, NSUInteger ii) {
-                    ((void (^)(id, id))frock)(o, @(ii));
-                };
-
-            NSUInteger ii = 0;
-            for (id obj in self)
-                block(obj, ii++);
-            break;
-        }}
         return self;
     };
 }
 
 - (NSArray *(^)(id))map {
     return ^(id frock) {
-        id (^block)(id o, NSUInteger ii) = frock;
-        if (YOLOArgCount(frock) < 3)
-            block = ^(id obj, NSUInteger ignored){
-                return ((id(^)(id))frock)(obj);
-            };
-        id objs[self.count];
-        int ii = 0, jj = 0;
-        for (id item in self) {
-            id o = block(item, jj++);
+        NSMethodSignature *sig = YOLOMS(frock);
+        BOOL const convert = sig.numberOfArguments >= 3 && [sig getArgumentTypeAtIndex:2][0] == '@';
+
+        id mapped[self.count];
+        NSUInteger ii = 0, jj = 0;
+        for (id mappable in self) {
+            id o = convert
+                ? ((id (^)(id, id, id))frock)(mappable, @(ii), self)
+                : ((id (^)(id, NSUInteger, id))frock)(mappable, ii, self);
+            ++ii;
             if (o)
-                objs[ii++] = o;
+                mapped[jj++] = o;
         }
-        return [NSArray arrayWithObjects:objs count:ii];
+        return [NSArray arrayWithObjects:mapped count:jj];
     };
 }
 

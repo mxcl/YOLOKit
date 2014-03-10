@@ -536,11 +536,24 @@ int main() {
     XCTAssertEqualObjects(aa, bb);
 }
 
-- (void)testMapWithIndex {
-    id aa = @[@"a", @"b", @"c", @"d"].map(^(id o, uint ii){
-        return @(ii);
+- (void)testMap {
+    NSArray *aaa = @[@"a", @"b", @"c", @"d"];
+    NSArray *aa = aaa.map(^(id o, uint ii, id array){
+        return @[o, @(ii), array];
     });
-    id bb = @[@0, @1, @2, @3];
+    id bb = @[@[@"a", @0, aaa], @[@"b", @1, aaa], @[@"c", @2, aaa], @[@"d", @3, aaa]];
+    XCTAssertEqualObjects(aa, bb);
+
+    aa = @[@"a", @"b", @"c", @"d"];
+    bb = aa.map(^(id o){
+        return o;
+    });
+    XCTAssertEqualObjects(aa, bb);
+
+    bb = aa.map(^(id o, id i){
+        return [NSString stringWithFormat:@"%@%@", o, i];
+    });
+    aa = @[@"a0", @"b1", @"c2", @"d3"];
     XCTAssertEqualObjects(aa, bb);
 }
 

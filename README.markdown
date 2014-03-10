@@ -85,6 +85,17 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, NSNumber *index){
 
 YOLOKit will convert between types for you depending on your block arguments.
 
+```objc
+id array = @[@1, @2, @3, @4];
+@[@1, @2, @3, @4].map(^(NSNumber *n, uint ii, NSArray *thirdParameter){
+    assert([array isEqualToArray:thirdParameter]);
+});
+```
+
+Like Underscore, the third parameter in your block will be the array itself.
+This can be useful after you have chained and transformed your original data
+structure a few times.
+
 ###NSArray.select()
 ```objc
 id rv = @[@1, @2, @3, @4].select(^(NSNumber *n){
@@ -114,14 +125,24 @@ id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){
 	NSLog(@"%@", n);
 });
 // => 1\n2\n3\n4\n
+```
 
+`each()` also supports two and three parameter versions:
+
+```objc
 @[@4, @3, @2, @1].each(^(id n, int ii){
 	NSLog(@"%d:%@", ii, n);
 });
 // => 0:1\n1:2\n2:3\n3:4\n
-```
 
-We know how many arguments your block has. x
+@[@4, @3, @2, @1].each(^(id n, int ii, NSArray *array){
+	//…
+});
+
+@[@4, @3, @2, @1].each(^(id n, NSNumber *index, NSArray *array){
+	// and automagical conversion between int and NSNumber
+});
+```
 
 ###NSArray.reduce()
 ```objc
