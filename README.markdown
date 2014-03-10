@@ -58,11 +58,6 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
     return @(n.intValue * n.intValue);
 });
 // rv => @[@1, @4, @9, @16]
-
-id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, uint ii){
-    return @(n.intValue * ii);
-});
-// rv => @[@0, @2, @6, @12]
 ```
 
 Notably, if you return nil, we skip that element in the returned array.
@@ -72,9 +67,27 @@ Justification:
 2. We could add NSNull instead, but then we’d be crashy and *YOLOKit is forgiving*
 3. In Objective-C calling a method on nil returns nil. When enumerating an array this is equivalent to just skipping that element. Hence: we skip the element.
 
+```objc
+id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, uint ii){
+    return @(n.intValue * ii);
+});
+// rv => @[@0, @2, @6, @12]
+```
+
+YOLOKit can see how many arguments are in your block.
+
+```objc
+id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, NSNumber *index){
+    return @{index: n};
+});
+// rv => @[@{@0: @1}, @{@1: @2}, @{@2: @3}, @{@3: @4}]
+```
+
+YOLOKit will convert between types for you depending on your block arguments.
+
 ###NSArray.select()
 ```objc
-id rv = @[@1, @2, @3, @4].select(^BOOL(NSNumber *n){
+id rv = @[@1, @2, @3, @4].select(^(NSNumber *n){
     return n.intValue % 2 == 0;
 });
 // rv => @[@2, @4]
@@ -86,7 +99,7 @@ id rv = @[@1, @2, @3, @4].select(^BOOL(NSNumber *n){
 
 ###NSArray.reject()
 ```objc
-id rv = @[@1, @2, @3, @4].reject(^BOOL(NSNumber *n){
+id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){
     return n.intValue % 2 == 0;
 });
 // rv => @[@1, @3]
@@ -251,7 +264,6 @@ id rv = @[@2, @1, @3, @5, @4].sort;
 
 id rv = @[@"20", @"1", @3, @5, @"4"].sort;
 // rv => @[@"1", @3, @"4", @5, @"20"]   // handles mixed object types
-
 ```
 
 ###NSArray.pluck()
@@ -413,12 +425,12 @@ clear and reads more easily than `isEmpty`. Small wins add up.
 
 ###NSArray.all()
 ```objc
-BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+BOOL rv = @[@1, @2, @3].all(^(id o){
 	return [o intValue] > 0;
 });
 // rv => YES
 
-BOOL rv = @[@1, @2, @3].all(^BOOL(id o){
+BOOL rv = @[@1, @2, @3].all(^(id o){
 	return [o intValue] < 3;
 });
 // rv => NO

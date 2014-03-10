@@ -39,7 +39,7 @@ enum CTBlockDescriptionFlags {
     CTBlockDescriptionFlagsHasSignature = (1 << 30)
 };
 
-int YOLOArgCount(id block) {
+NSMethodSignature *YOLOMS(id block) {
     struct CTBlockLiteral *blockRef = (__bridge struct CTBlockLiteral *)block;
     enum CTBlockDescriptionFlags flags = blockRef->flags;
 
@@ -54,7 +54,11 @@ int YOLOArgCount(id block) {
         }
 
         const char *signature = (*(const char **)signatureLocation);
-        return [NSMethodSignature signatureWithObjCTypes:signature].numberOfArguments;
+        return [NSMethodSignature signatureWithObjCTypes:signature];
     }
     return 0;
+}
+
+int YOLOArgCount(id block) {
+    return YOLOMS(block).numberOfArguments;
 }

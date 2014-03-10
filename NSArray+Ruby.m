@@ -1,6 +1,7 @@
 #import "YOLO.h"
 #import <objc/runtime.h>
 extern int YOLOArgCount(id);
+extern NSMethodSignature *YOLOMS(id);
 
 /**
  The blockToUse variable is necessary or: EXC_BAD_ACCESS
@@ -22,7 +23,6 @@ extern int YOLOArgCount(id);
     return [NSArray arrayWithObjects:selected count:ii]
 
 
-
 @implementation NSArray (RubyEnumerable)
 
 - (NSArray *(^)(id))select {
@@ -39,16 +39,27 @@ extern int YOLOArgCount(id);
 
 - (NSArray *(^)(id))each {
     return ^(id frock) {
-        if (YOLOArgCount(frock) == 3) {
-            void (^block)(id, NSUInteger) = frock;
-            NSUInteger ii = 0;
-            for (id obj in self)
-                block(obj, ii++);
-        } else {
+        NSMethodSignature *sig = YOLOMS(frock);
+        switch (sig.numberOfArguments) {
+        case 2: {
             void (^block)(id) = frock;
             for (id obj in self)
                 block(obj);
+            break;
         }
+        case 3: {
+            void (^block)(id, NSUInteger) = frock;
+
+            if ([sig getArgumentTypeAtIndex:2][0] == '@')
+                block = ^(id o, NSUInteger ii) {
+                    ((void (^)(id, id))frock)(o, @(ii));
+                };
+
+            NSUInteger ii = 0;
+            for (id obj in self)
+                block(obj, ii++);
+            break;
+        }}
         return self;
     };
 }

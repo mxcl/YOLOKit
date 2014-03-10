@@ -103,6 +103,10 @@ int main() {
     @[@1, @2, @3].each(^(id o, int ii){
         XCTAssertEqualObjects(o, @(ii+1));
     });
+
+    @[@0, @1, @2].each(^(id o, id ii){
+        XCTAssertEqualObjects(o, ii);
+    });
 }
 
 - (void)testSelect {
