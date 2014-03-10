@@ -118,17 +118,25 @@ int main() {
 }
 
 - (void)testMin {
-    id a = @[@19, @29, @4, @5, @6].min(^NSInteger(id o) {
+    id a = @[@19, @29, @4, @5, @6].min(^(id o) {
         return [o integerValue];
     });
     XCTAssertEqual([a intValue], 4);
+    a = @[@19, @29, @4, @5, @6].min(^(id o) {
+        return o;
+    });
+    XCTAssertEqualObjects(a, @4);
 }
 
 - (void)testMax {
-    id a = @[@19, @29, @4, @5, @6].max(^NSInteger(id o) {
+    id a = @[@19, @29, @4, @5, @6].max(^(id o) {
         return [o integerValue];
     });
     XCTAssertEqual([a intValue], 29);
+    a = @[@19, @29, @4, @5, @6].max(^(id o) {
+        return o;
+    });
+    XCTAssertEqualObjects(a, @29);
 }
 
 - (void)testFlatten {

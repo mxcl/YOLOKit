@@ -173,15 +173,13 @@ id rv = @[@[@1, @2], @3, @[@4]].flatten
 ###NSArray.min()
 ```objc
 id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
-    return n.intValue;
+    return n;
 });
 // rv => @1
-
-id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
-    return (n.intValue - 3) * (n.intValue - 3);
-});
-// rv => @3
 ```
+
+Notably, you can return integral types like `int` and YOLOKit knows what to do,
+just be consistent.
 
 ###NSArray.max()
 ```objc
