@@ -63,9 +63,9 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
 Notably, if you return nil, we skip that element in the returned array.
 Justification:
 
-1. We can’t add nil to NSArray
-2. We could add NSNull instead, but then we’d be crashy and *YOLOKit is forgiving*
-3. In Objective-C calling a method on nil returns nil. When enumerating an array this is equivalent to just skipping that element. Hence: we skip the element.
+1. We can’t add `nil` to `NSArray`
+2. We could add `NSNull` instead, but then we’d be crashy and *YOLOKit is forgiving*
+3. In Objective-C calling a method on `nil` returns `nil`. When enumerating an array this is equivalent to just skipping that element. Hence: we skip the element.
 
 ```objc
 id rv = @[@1, @2, @3, @4].map(^(NSNumber *n, uint ii){
@@ -103,9 +103,8 @@ id rv = @[@1, @2, @3, @4].select(^(NSNumber *n){
 });
 // rv => @[@2, @4]
 
-**id rv = @[@1, @"1", @{}].select(NSNumber.class)
-// rv => @[@1]
-**
+id rv = @[@1, @"1", @{}].select(NSString.class)
+// rv => @[@"1"]
 ```
 
 ###NSArray.reject()
@@ -663,7 +662,7 @@ If it’s possible your *initial* object is nil you need to:
 });
 ```
 
-Or, more controversially:
+Or:
 
 ```objc
 if (campaigns) campaigns.reject(^(PPCampaign *campaign){
@@ -673,20 +672,11 @@ if (campaigns) campaigns.reject(^(PPCampaign *campaign){
 });
 ```
 
-Code is art. Make it look good, make it readable. You don’t have to rigidly
-adhere to rules about how to write an if statement if the resulting code is
-*nice*.
-
 ###Completion
-Xcode (as of 5.1) does not complete YOLOKit well, apparently AppCode works
-better. If you use Xcode, you will just have to remember the arguments that
-YOLOKit blocks take. Someone should radar this.
-
-Also in several cases we accept a block or an object or a class, so completion
-cannot work well. As iOS developers we have become fond of Xcode’s powerful
-completion, but we should admit that for YOLOKit is it less important, we aren't
-completing long multiply-named parameter methods. With YOLOKit all methods are
-short and their parameters easy to remember.
+Xcode doesn’t complete YOLOKit well. In our experience this isn’t a problem.
+Once you’ve written a `map`, `each`, etc. a few times, you’ve got it down. Also
+remember that you never need to specify a return type for a YOLOKit block,
+YOLOKit tries to convert whatever you return to what makes sense.
 
 Contribution
 ------------
