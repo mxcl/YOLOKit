@@ -48,8 +48,13 @@ We are writing iPhone apps. Not space shuttle control modules.
 
 Importing YOLOKit
 -----------------
+Firstly:
 
     pod 'YOLOKit'
+
+Then:
+
+    #import "YOLO.h"
 
 
 Complete Method Index
