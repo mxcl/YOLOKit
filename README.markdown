@@ -20,18 +20,21 @@ campaigns.reject(^(PPCampaign *campaign){
 ```
 
 Many people have done Ruby-like enumeration for Objective-C. It’s not a new
-thing: just search CocoaPods. But everyone else did it with square bracket
-syntax. Square bracket syntax is not conducive to chaining. Ruby-like
-enumeration (practically) demands chaining. So we figured out how to do it with
-dot-notation: and using it feels *great*.
+thing: just search CocoaPods. 
 
-We have also have tried to add a few iOS/Objective-C specific niceties and
-methods that make up for various shortcomings in our platform.
-
-However, we believe in a **lean-library** approach and will resist bloat. Hence our string functions are as minimal as possible and concerned with enumeration
-only.
+The difference is YOLOKit is absolutely, completely and utterly *obsessed* with
+making enumerating Foundation objects as *delightful* as possible. We have
+poured over every method, every parameter, every feature of the runtime. YOLOKit
+is not just Underscore ported to Objective-C, or Ruby Enumerable ported to
+Objective-C. YOLOKit has been inspired by such, but is catered directly to Objective-C development.
 
 YOLOKit is thorough, well-tested and inside apps on the store.
+
+
+YOLOKit is Lean
+---------------
+Good libraries are concise. We will fervently resist bloat. We deliberate
+intensely before adding new methods.
 
 
 YOLOKit is Forgiving
