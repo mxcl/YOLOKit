@@ -509,7 +509,7 @@ id rv = @[@1, @2, @3, @4].chunk(2)
 // rv => @[@[@1, @2], @[@3, @4]]
 ```
 
-Chunks your array into an array of chunk-size arrays.``
+Chunks your array into an array of chunk-size arrays.
 
 ###NSArray.dict
 ```objc
@@ -568,9 +568,13 @@ a chain of dot-notations, square brackets at the end are just ugly.
 
 ###NSDictionary.array
 ```objc
-id rv = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"}.array.sort.transpose[1]
+id rv = @{@3: @"c", @1: @"a", @4: @"d", @2: @"b"}.array
+// rv = [@[@"3", @"c"], @[@1, @"a"], @[@4, @"d"], @[@2, @"b"]]
+// NOTE array order is undefined
 
+rv = rv.sort.transpose[1]
 // rv = [@"a", @"b", @"c", @"d"]
+```
 
 Returns a new array of key, value pairs.
 
