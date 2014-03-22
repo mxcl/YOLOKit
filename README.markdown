@@ -1,13 +1,6 @@
 YOLOKit
 =======
-YOLOKit is a delightful library for enumerating Foundation objects.
-
-You only live once: let’s code expressively.
-
-
-Chainable, Dot-notated, Ruby-like Enumeration
----------------------------------------------
-For example:
+YOLOKit is a *delightful* library for enumerating Foundation objects.
 
 ```objc
 #import "YOLO.h"
@@ -19,8 +12,7 @@ campaigns.reject(^(PPCampaign *campaign){
 });
 ```
 
-Many people have done Ruby-like enumeration for Objective-C. It’s not a new
-thing: just search CocoaPods. 
+Ruby-like enumeration for Objective-C it not a new thing: just search CocoaPods.
 
 The difference is YOLOKit is absolutely, completely and utterly *obsessed* with
 making enumerating Foundation objects as *delightful* as possible. We have
@@ -48,11 +40,11 @@ We are writing iPhone apps. Not space shuttle control modules.
 
 Importing YOLOKit
 -----------------
-Firstly:
+In your `Podfile`:
 
     pod 'YOLOKit'
 
-Then:
+And then in your source files:
 
     #import "YOLO.h"
 

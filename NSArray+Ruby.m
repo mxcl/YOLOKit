@@ -40,16 +40,25 @@ extern NSMethodSignature *YOLOMS(id);
 - (NSArray *(^)(id))each {
     return ^(id frock) {
         NSMethodSignature *sig = YOLOMS(frock);
-        BOOL const convert = sig.numberOfArguments >= 3 && [sig getArgumentTypeAtIndex:2][0] == '@';
+        void (^block)(id, NSUInteger) = ^{
+            switch (sig.numberOfArguments){
+                case 2: return ^(id a, NSUInteger b){ ((void(^)(id))frock)(a); };
+                case 3:
+                    return [sig getArgumentTypeAtIndex:2][0] == '@'
+                        ? ^(id a, NSUInteger b){ ((void(^)(id, id))frock)(a, @(b)); }
+                        : ^(id a, NSUInteger b){ ((void(^)(id, NSUInteger))frock)(a, b); };
+                case 4:
+                    return [sig getArgumentTypeAtIndex:2][0] == '@'
+                        ? ^(id a, NSUInteger b){ ((void(^)(id, id, id))frock)(a, @(b), self); }
+                        : ^(id a, NSUInteger b){ ((void(^)(id, NSUInteger, id))frock)(a, b, self); };
+                default:
+                    @throw @"Invalid argument count to each";
+            }
+        }();
 
         NSUInteger ii = 0;
-        for (id obj in self) {
-            if (convert)
-                ((void (^)(id, id, id))frock)(obj, @(ii), self);
-            else
-                ((void (^)(id, NSUInteger, id))frock)(obj, ii, self);
-            ++ii;
-        }
+        for (id obj in self)
+            block(obj, ii++);
         return self;
     };
 }
@@ -57,15 +66,26 @@ extern NSMethodSignature *YOLOMS(id);
 - (NSArray *(^)(id))map {
     return ^(id frock) {
         NSMethodSignature *sig = YOLOMS(frock);
-        BOOL const convert = sig.numberOfArguments >= 3 && [sig getArgumentTypeAtIndex:2][0] == '@';
+        id (^block)(id, NSUInteger) = ^{
+            switch (sig.numberOfArguments){
+                case 2: return ^(id a, NSUInteger b){ return ((id(^)(id))frock)(a); };
+                case 3:
+                    return [sig getArgumentTypeAtIndex:2][0] == '@'
+                        ? ^(id a, NSUInteger b){ return ((id(^)(id, id))frock)(a, @(b)); }
+                        : ^(id a, NSUInteger b){ return ((id(^)(id, NSUInteger))frock)(a, b); };
+                case 4:
+                    return [sig getArgumentTypeAtIndex:2][0] == '@'
+                        ? ^(id a, NSUInteger b){ return ((id(^)(id, id, id))frock)(a, @(b), self); }
+                        : ^(id a, NSUInteger b){ return ((id(^)(id, NSUInteger, id))frock)(a, b, self); };
+                default:
+                    @throw @"Invalid argument count to map";
+            }
+        }();
 
         id mapped[self.count];
         NSUInteger ii = 0, jj = 0;
         for (id mappable in self) {
-            id o = convert
-                ? ((id (^)(id, id, id))frock)(mappable, @(ii), self)
-                : ((id (^)(id, NSUInteger, id))frock)(mappable, ii, self);
-            ++ii;
+            id o = block(mappable, ii++);
             if (o)
                 mapped[jj++] = o;
         }
