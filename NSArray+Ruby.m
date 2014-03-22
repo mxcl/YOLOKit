@@ -95,7 +95,7 @@ extern NSMethodSignature *YOLOMS(id);
 
 - (id(^)(id, id (^)(id, id)))inject {
     return ^(id initial_memo, id (^block)(id, id)) {
-        BOOL wasNonMutable = [initial_memo isKindOfClass:[NSArray class]] || [initial_memo isKindOfClass:[NSDictionary class]];
+        BOOL wasNonMutable = [initial_memo classForCoder] == [NSArray class] || [initial_memo classForCoder] == [NSDictionary class];
         if (wasNonMutable)
             initial_memo = [initial_memo mutableCopy];
 

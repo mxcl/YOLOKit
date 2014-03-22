@@ -472,7 +472,17 @@ int main() {
     });
     id bb = @{@1: @2, @2: @4, @3: @6};
     XCTAssertEqualObjects(aa, bb);
-    XCTAssertFalse([aa isKindOfClass:[NSMutableDictionary class]]);
+    XCTAssertFalse([aa classForCoder] == [NSMutableDictionary class]);
+
+    id whatWePutIn = [NSMutableDictionary new];
+    aa = @[@1, @2, @3].inject(whatWePutIn, ^(id memo, NSNumber *value){
+        memo[value] = @(value.intValue * 2);
+        return memo;
+    });
+    bb = @{@1: @2, @2: @4, @3: @6};
+    XCTAssertEqualObjects(aa, bb);
+    XCTAssertTrue([aa classForCoder] == [NSMutableDictionary class]);
+    XCTAssertTrue(whatWePutIn == aa);
 }
 
 - (void)testExtendNil {
