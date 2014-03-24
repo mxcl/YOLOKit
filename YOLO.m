@@ -59,6 +59,6 @@ NSMethodSignature *YOLOMS(id block) {
     return 0;
 }
 
-int YOLOArgCount(id block) {
+NSUInteger YOLOArgCount(id block) {
     return YOLOMS(block).numberOfArguments;
 }
