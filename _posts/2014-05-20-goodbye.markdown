@@ -1,0 +1,73 @@
+# `first`, `last`, `skip`, `snip` & `slice`
+
+These methods are related and worth memorizing:
+
+{% highlight objectivec %}
+@[@1, @2, @3, @4, @5].first(2)		// [1,2]
+@[@1, @2, @3, @4, @5].last(2)		// [4,5]
+@[@1, @2, @3, @4, @5].skip(2)		// [3,4,5]
+@[@1, @2, @3, @4, @5].snip(2)		// [1,2,3]
+@[@1, @2, @3, @4, @5].slice(2, 2)	// [3,4]
+{% endhighlight %}
+
+# Real World Examples
+
+{% highlight objectivec %}
+id chicago = [[CLLocation alloc] initWithLatitude:41.905088 longitude:-87.670083];
+id austin = [[CLLocation alloc] initWithLatitude:30.2500 longitude:-97.7500];
+
+[PPAPI GET:@"/campaigns" success:^(NSArray *got) {
+    id closestCity = @[chicago, austin].min(^(id city) {
+        return [locationManager.location distanceFromLocation:city];
+    });
+
+    self.campaigns = got.groupBy(^(PPCampaign *campaign) {
+        return @[chicago, austin].min(^(id city) {
+            return [campaign.location distanceFromLocation:city];
+        });
+    }).get(closestCity);
+}];
+{% endhighlight %}
+
+Please, submit your own real world examples.
+
+# Caveats
+
+## `nil`
+
+You can’t call a variable that represents a block if that variable is nil. This is markedly different to sending a message to nil: you get nil back: no crash. If it’s possible your *initial* object is nil you need to:
+
+{% highlight objectivec %}
+(campaigns ?: @[]).reject(^(PPCampaign *campaign){
+    return campaign.locked;
+}).pluck(@"venues").flatten.each(^(PPVenue *venue){
+    [geofencer startMonitoringForRegion:venue.region];
+});
+{% endhighlight %}
+
+Or:
+
+{% highlight objectivec %}
+if (campaigns) campaigns.reject(^(PPCampaign *campaign){
+    return campaign.locked;
+}).pluck(@"venues").flatten.each(^(PPVenue *venue){
+    [geofencer startMonitoringForRegion:venue.region];
+});
+{% endhighlight %}
+
+## Completion
+
+Xcode doesn’t complete YOLOKit well. In our experience this isn’t a problem. Once you’ve written a `map`, `each`, etc. a few times, you’ve got it down. Also remember that you never need to specify a return type for a YOLOKit block, YOLOKit tries to convert whatever you return to what makes sense.
+
+# Alternatives
+
+There are many. Here’s the famous ones:
+
+* http://underscorem.org
+* https://github.com/robb/Asterism
+* https://github.com/ReactiveCocoa/ReactiveCocoa
+* https://github.com/supermarin/ObjectiveSugar
+
+# License
+
+YOLO, [use the code however you want](https://github.com/mxcl/YOLOKit/blob/master/LICENSE).

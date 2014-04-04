@@ -1,0 +1,37 @@
+---
+category: hello
+---
+# YOLOKit
+
+<h2 id="tagline">Shoving square objects down round holes.</h2>
+
+Quit writing a bazllion lines of code just to get your arrays and ditionaries into the right shape.
+
+YOLOKit is **lean**. Every method is as minimal as it can be without being crap. Every new method is carefully considered before addition. Sometimes a method would make the overal goals of the framework worse, so we reject it.
+
+YOLOKit is **forgiving**. We are writing iPhone apps, not space shuttle control modules. Heaven forbid you ask for the 4th item in an array that is empty: YOLO; let’s not crash.
+
+YOLOKit is **delightful**. Every method is designed for you, a modern iOS developer. It’s designed for your platform. It’s designed to make your code delightful and your smile as wide as a thousand faces.
+
+# Importing YOLOKit
+
+In your `Podfile`:
+
+{% highlight ruby %}
+pod 'YOLOKit'
+{% endhighlight %}
+
+In your `.m` files:
+
+{% highlight objectivec %}
+#import "YOLO.h"
+{% endhighlight %}
+
+YOLOKit is entirely modular. So if you only want a couple of methods:
+
+{% highlight ruby %}
+pod 'YOLOKit/map'
+pod 'YOLOKit/skip'
+{% endhighlight %}
+
+# Complete Method Index
