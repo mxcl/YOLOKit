@@ -575,6 +575,13 @@ int main() {
     XCTAssertEqualObjects(aa, bb);
 }
 
+- (void)testPick {
+    NSDictionary *a = @{@1: @2, @2: @3, @3: @4};
+    id b = a.pick(@1, @2, @5, nil);
+    id c = @{@1: @2, @2: @3};
+    XCTAssertEqualObjects(b, c);    
+}
+
 @end
 
 

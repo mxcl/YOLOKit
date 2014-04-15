@@ -81,6 +81,7 @@
 
 @interface NSDictionary (Underscore)
 - (NSDictionary *(^)(id o, ...))extend;
+- (NSDictionary *(^)(id o, ...))pick;
 @end
 
 @interface NSDictionary (YOLO)
