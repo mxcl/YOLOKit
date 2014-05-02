@@ -56,7 +56,6 @@
 @interface NSArray (YOLO)
 - (NSArray *(^)(NSUInteger))chunk;
 - (NSDictionary *)dict;
-- (BOOL)empty;
 - (BOOL (^)(id o))has;
 - (NSArray *(^)(id (^)(id o)))pmap;
 - (NSSet *)set;

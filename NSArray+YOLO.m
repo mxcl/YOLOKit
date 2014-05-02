@@ -44,10 +44,6 @@
     };
 }
 
-- (BOOL)empty {
-    return self.count == 0;
-}
-
 - (BOOL (^)(id o))has {
     return ^BOOL(id o){
         return [self containsObject:o];

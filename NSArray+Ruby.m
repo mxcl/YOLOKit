@@ -395,7 +395,7 @@ extern NSMethodSignature *YOLOMS(id);
 }
 
 - (NSArray *)transpose {
-    if (self.empty)
+    if (self.count == 0)
         return self;
 
     NSArray *arrays = self.select(^(id o){

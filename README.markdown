@@ -428,19 +428,6 @@ return until everything is done. Typically not worth using unless you have large
 arrays since the overhead of thread-synchronization may be greater than the
 parallel savings otherwise.
 
-###NSArray.empty
-```objc
-BOOL rv = @[@1, @2].empty;
-// rv => NO
-
-BOOL rv = @[].empty;
-// rv => YES
-```
-
-We picked `empty` rather than `isEmpty` because of context. We almost always
-use empty in an if statement, and there the form: `if (array.empty) {}` is
-clear and reads more easily than `isEmpty`. Small wins add up.
-
 ###NSArray.all()
 ```objc
 BOOL rv = @[@1, @2, @3].all(^(id o){
