@@ -217,7 +217,7 @@ extern NSMethodSignature *YOLOMS(id);
     return ^NSArray *(id blockOrKey) {
         if ([blockOrKey isKindOfClass:[NSString class]])
             blockOrKey = ^(id o){
-                return [o valueForKey:blockOrKey];
+                return [o valueForKeyPath:blockOrKey];
             };
 
         #define foo(TYPE) { TYPE (^block)(id) = blockOrKey;\
@@ -251,7 +251,10 @@ extern NSMethodSignature *YOLOMS(id);
                 return [self sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                     obj1 = block(obj1);
                     obj2 = block(obj2);
-                    return [obj1 compare:obj2];
+                    if ([obj1 isKindOfClass:[NSString class]] && [obj2 isKindOfClass:[NSString class]])
+                        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch|NSNumericSearch];
+                    else
+                        return [obj1 compare:obj2];
                 }];
                 break;
             }
