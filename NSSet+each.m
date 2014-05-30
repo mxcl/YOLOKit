@@ -1,6 +1,6 @@
 #import "YOLO.h"
 
-@implementation NSSet (RubyEnumerable)
+@implementation NSSet (YOLO)
 
 - (NSSet *(^)(void (^)(id)))each {
     return ^(void(^block)(id)) {

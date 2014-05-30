@@ -1,6 +1,6 @@
 #import "YOLO.h"
 
-@implementation NSDictionary (RubyEnumerable)
+@implementation NSDictionary (YOLO)
 
 - (NSArray *(^)(id (^)(id, id)))map {
     return ^(id (^block)(id, id)) {

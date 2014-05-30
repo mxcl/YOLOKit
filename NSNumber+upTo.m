@@ -1,7 +1,6 @@
 #import "YOLO.h"
 
-
-@implementation NSNumber (Ruby)
+@implementation NSNumber (YOLO)
 
 - (NSArray *(^)(NSInteger))upTo {
     return ^NSArray *(NSInteger upTo) {

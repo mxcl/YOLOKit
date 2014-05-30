@@ -4,6 +4,8 @@ OBJC = <<-__EOBJC__
 #import <XCTest/XCTest.h>
 #import "YOLO.h"
 
+
+
 @interface Thingy : NSObject
 @property (nonatomic) NSString *title;
 @end
@@ -594,14 +596,64 @@ __EOBJC__
 
 FRAMEWORKS = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
 
+DEFINES = <<-EOS.gsub("\n", " ")
+-DYOLO_ALL
+-DYOLO_ANY
+-DYOLO_ARRAY
+-DYOLO_CHUNK
+-DYOLO_CONCAT
+-DYOLO_DICT
+-DYOLO_EACH
+-DYOLO_EXTEND
+-DYOLO_FIND
+-DYOLO_FIRST
+-DYOLO_FLAT_MAP
+-DYOLO_FLATTEN
+-DYOLO_GET
+-DYOLO_GROUP_BY
+-DYOLO_HAS
+-DYOLO_INDEX_OF
+-DYOLO_INJECT
+-DYOLO_JOIN
+-DYOLO_LAST
+-DYOLO_MAP
+-DYOLO_MAX
+-DYOLO_MIN
+-DYOLO_NONE
+-DYOLO_PARTITION
+-DYOLO_PICK
+-DYOLO_PLUCK
+-DYOLO_PMAP
+-DYOLO_POP
+-DYOLO_PUSH
+-DYOLO_REDUCE
+-DYOLO_REVERSE
+-DYOLO_ROTATE
+-DYOLO_SAMPLE
+-DYOLO_SELECT
+-DYOLO_SHIFT
+-DYOLO_SHUFFLE
+-DYOLO_SKIP
+-DYOLO_SLICE
+-DYOLO_SNIP
+-DYOLO_SORT
+-DYOLO_SPLIT
+-DYOLO_TRANSPOSE
+-DYOLO_UNIQ
+-DYOLO_UNSHIFT
+-DYOLO_UP_TO
+-DYOLO_WITHOUT
+EOS
+
 File.open('/tmp/YOLOtests.m', 'w') do |f|
   f.puts("\n\n")  # make line numbers line up
   f.puts(OBJC)
 end
 
 abort unless system <<-EOS
-  clang -g -O0 -ObjC -F#{FRAMEWORKS} -I. -fmodules -fobjc-arc \
+  clang -g -O0 -ObjC -F#{FRAMEWORKS} #{DEFINES} -I. -fmodules -fobjc-arc \
         -framework XCTest \
+        -Wno-incomplete-implementation \
         /tmp/YOLOtests.m *.m -o /tmp/YOLOtests
 EOS
 abort unless system <<-EOS
