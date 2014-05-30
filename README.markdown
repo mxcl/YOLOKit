@@ -679,6 +679,7 @@ The Alternatives People Talk About
 * http://underscorem.org
 * https://github.com/robb/Asterism
 * https://github.com/ReactiveCocoa/ReactiveCocoa
+* https://github.com/supermarin/ObjectiveSugar
 
 Complementary Projects
 ----------------------
