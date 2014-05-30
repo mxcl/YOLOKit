@@ -1,5 +1,5 @@
 @import Foundation.NSOrderedSet;
-#import "YOLO.h"
+#import "YOLO.ph"
 
 @implementation NSArray (YOLO)
 

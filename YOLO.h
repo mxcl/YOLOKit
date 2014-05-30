@@ -235,7 +235,3 @@
 #endif
 
 @end
-
-
-@import Foundation.NSMethodSignature;
-extern NSMethodSignature *YOLOMS(id);

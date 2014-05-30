@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'base' do |ss|
     ss.source_files = 'YOLO.m', 'YOLO.h'
+    ss.preserve_paths = 'YOLO.ph'
   end
 
   %w{all any array chunk concat dict each extend find first flatMap flatten get
@@ -20,7 +21,10 @@ Pod::Spec.new do |s|
     snip sort split transpose uniq unshift upTo without
   }.each do |subspec|
     s.subspec(subspec) do |ss|
-      ss.compiler_flags = '-Wno-incomplete-implementation'
+
+      # adding this warning fails `pod spec lint`
+      # ss.compiler_flags = '-Wno-incomplete-implementation'
+
       ss.dependency 'YOLOKit/base'
       ss.source_files = "*+#{subspec}.m"
       ss.xcconfig = { GCC_PREPROCESSOR_DEFINITIONS: "$(inherited) YOLO_#{subspec.upcase}=1" }
