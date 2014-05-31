@@ -588,6 +588,13 @@ int main() {
     XCTAssertEqualObjects(a, b);
 }
 
+- (void)testAllBoxes {
+    __block int x = 1;
+    @[@1, @2, @3].all(^(int d){
+        XCTAssertEqual(x++, d);
+    });
+}
+
 @end
 
 
