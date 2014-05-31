@@ -4,6 +4,7 @@
 
 - (NSArray *(^)(NSString *))split {
     return ^NSArray *(NSString *separator){
+        separator = separator.description;
         if (separator.length == 0) {
             const NSUInteger N = self.length;
             id chars[N];
