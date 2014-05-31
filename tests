@@ -60,12 +60,6 @@ int main() {
     XCTAssertEqualObjects(other[@3], @5);
 }
 
-- (void)testExtendForm2 {
-    NSDictionary *dict = @{@1: @2, @3: @4, @5: @6};
-    id other = dict.extend(@3, @9);
-    XCTAssertEqualObjects(other[@3], @9);
-}
-
 - (void)testConcat {
     NSArray *objs = @[@1, @2, @3];
     objs = objs.concat(objs);
