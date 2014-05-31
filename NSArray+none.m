@@ -7,7 +7,7 @@
     return ^(id arg){
         BOOL (^block)(id o) = nil;
 
-        if (arg == NSString.class /*or segfaults!*/ || class_isMetaClass(object_getClass(arg))) {
+        if (arg == NSString.class /*or segfaults!*/ || YOLOIsClass(arg)) {
             Class cls = arg;
             block = ^(id o){
                 return [o isKindOfClass:cls];

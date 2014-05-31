@@ -11,7 +11,7 @@ extern NSMethodSignature *YOLOMS(id);
 #define YOLOSelectReject(logic) \
     if (!input) return @[]; \
     BOOL (^blockToUse)(); \
-    if (class_isMetaClass(object_getClass(input))) { \
+    if (YOLOIsClass(input)) { \
         blockToUse = ^(id o){ \
             return [o isKindOfClass:input]; \
         }; \
