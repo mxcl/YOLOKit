@@ -1,5 +1,8 @@
+# NSString
 
-## NSString `-split`
+
+## NSString.split
+
 
 Returns a new array of the strings in the receiver that are separated by
 the given separator.

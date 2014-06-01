@@ -1,5 +1,8 @@
+# NSArray
 
-## NSArray `-all`
+
+## NSArray.all
+
 
 Invokes the given block for each element in the receiver. Should the
 block return `NO`, the method immediately returns `NO`, ceasing
@@ -26,7 +29,8 @@ BOOL rv = @[@1, @2, @3].all(NSNumber.class);
 // rv => YES
 {% endhighlight %}
 
-## NSArray `-any`
+## NSArray.any
+
 
 {% highlight objectivec %}
 BOOL rv = @[@1, @2, @3].any(^(id o){
@@ -42,7 +46,8 @@ BOOL rv = @[@1, @2, @3].any(NSNumber.class);
 // rv => YES
 {% endhighlight %}
 
-## NSArray `-chunk`
+## NSArray.chunk
+
 
 Chunks the receiver into a new array of chunk-size arrays.
 
@@ -54,7 +59,8 @@ id rv = @[@1, @2, @3, @4].chunk(2)
 // rv => @[@[@1, @2], @[@3, @4]]
 {% endhighlight %}
 
-## NSArray `-concat`
+## NSArray.concat
+
 
 Returns a new array that is the receiver with the given array
 concatenated to the end.
@@ -67,7 +73,8 @@ id rv = @[@1, @2].concat(@[@3, @4]);
 // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
-## NSArray `-dict`
+## NSArray.dict
+
 
 Convert an array of key/value pairs into a dictionary.
 
@@ -87,7 +94,8 @@ lead to bugs when your array is not in the shape you expect, and those
 sorts of errors occur more commonly with tools like YOLOKit since we
 allow easy array flattening.
 
-## NSArray `-each`
+## NSArray.each
+
 
 Calls the given block once for each element in the receiver, passing
 that element as the parameter.
@@ -120,7 +128,8 @@ NSLog(@"%d:%@", ii, n);
 });
 {% endhighlight %}
 
-## NSArray `-find`
+## NSArray.find
+
 
 Passes each entry in enum to block, returning the first for which block
 is not `NO`. If no object matches, returns `nil`.
@@ -132,7 +141,8 @@ return [n isEqual:@3];
 // rv => @3
 {% endhighlight %}
 
-## NSArray `-first`
+## NSArray.first
+
 
 Returns the first `n` elements of the receiver.
 
@@ -147,7 +157,8 @@ id rv = @[@1, @2, @3, @4, @5, @6].first(2);
 PROTIP: YOLOKit is forgiving if the array doesn’t have enough elements,
 `first` returns as many as it can.
 
-## NSArray `-flatMap`
+## NSArray.flatMap
+
 
 Returns a new array that is a recursive, one-dimensional flattening of
 the receiver.
@@ -186,7 +197,8 @@ PROTIP: Useful over vanilla map followed by a flatten because flatten is
 recursive, and you may want to preserve array relationships beyond the
 first level. Also, `flatMap` is technically more efficient.
 
-## NSArray `-groupBy`
+## NSArray.groupBy
+
 
 Groups the collection by result of the given block.
 
@@ -197,7 +209,8 @@ return @(n.intValue % 2);
 // rv => @{@0: @[@1, @3], @1: @[@2, @4]}
 {% endhighlight %}
 
-## NSArray `-has`
+## NSArray.has
+
 
 {% highlight objectivec %}
 BOOL rv = @[@1, @2, @3].has(@2)
@@ -217,7 +230,8 @@ the clearest code.
 `has` was chosen over *contains* or *includes* because it is short and
 clear.
 
-## NSArray `-indexOf`
+## NSArray.indexOf
+
 
 Returns the index of the given object in the receiver or `NSNotFound` if
 the object was not found.
@@ -234,7 +248,8 @@ PROTIP: `NSNotFound` has the value `NSIntegerMax` so you don’t need to
 directly check for it, you can instead check if the returned value is
 less than the count of the receiver.
 
-## NSArray `-inject`
+## NSArray.inject
+
 
 Combines all elements of the receiver by applying a binary operation.
 
@@ -250,7 +265,8 @@ PROTIP: If you feed `inject` a non-mutable dictionary or array YOLOKit
 mutates it for your block, and then finally returns a non-mutable copy.
 
 
-## NSArray `-join`
+## NSArray.join
+
 
 Returns a string of all the receiver’s elements joined with the provided
 separator string.
@@ -267,7 +283,8 @@ id rv = @[@1, @2, @3, @4].join(@"");
 
 PROTIP: `-description` is called on all objects before joining them.
 
-## NSArray `-last`
+## NSArray.last
+
 
 Returns the last `n` elements from receiver.
 
@@ -282,7 +299,8 @@ id rv = @[@1, @2, @3, @4, @5, @6].last(2);
 PROTIP: If there are insufficient elements in the array, YOLOKit returns
 as many as it can.
 
-## NSArray `-map`
+## NSArray.map
+
 
 Invokes the given block once for each element of self. Creates a new
 array containing the values returned by the block.
@@ -298,7 +316,8 @@ The given block can have up to three parameters, the first is an element
 in the array, the second that element’s index, and the third the array
 itself.
 
-## NSArray `-max`
+## NSArray.max
+
 
 Returns the element for which the given block returns the largest
 integer.
@@ -320,7 +339,8 @@ return (n.intValue - 3) * (n.intValue - 3);
 NOTE: currently you must return an integer, we plan to allow you to
 return whatever you like.
 
-## NSArray `-min`
+## NSArray.min
+
 
 Returns the element for which the given block returns the smallest
 integer.
@@ -335,7 +355,8 @@ return n;
 NOTE: currently you must return an integer, we plan to allow you to
 return whatever you like.
 
-## NSArray `-none`
+## NSArray.none
+
 
 {% highlight objectivec %}
 BOOL rv = @[@1, @2, @3].none(^(id o){
@@ -351,7 +372,8 @@ BOOL rv = @[@1, @2, @3].none(NSNumber.class);
 // rv => NO
 {% endhighlight %}
 
-## NSArray `-partition`
+## NSArray.partition
+
 
 Partitions the receiver into two arrays based on the boolean return
 value of the given block.
@@ -363,7 +385,8 @@ return [s hasPrefix:@"A"];
 //rv => @[@[@"A", @"AA"], @[@"B"]]
 {% endhighlight %}
 
-## NSArray `-pluck`
+## NSArray.pluck
+
 
 Returns a new array that is the result of calling the given method on
 each element in the receiver.
@@ -387,7 +410,8 @@ id rv = @[rhombas, ellipse, hexagon].pluck(@"title.uppercaseString")
 NOTE: This is a convenience function for the common case of mapping
 (`-map`) an array to the result of a method call on each element.
 
-## NSArray `-pmap`
+## NSArray.pmap
+
 
 Map, but run in parallel. Obviously: be thread safe in your block. The
 call waits for all elements to be processed. Typically not worth using
@@ -396,7 +420,8 @@ thread-synchronization may be greater than the parallel savings
 otherwise.
 
 
-## NSArray `-reduce`
+## NSArray.reduce
+
 
 Reduces the receiver to a single value.
 
@@ -424,7 +449,8 @@ return memo.length > word.length ? memo : word;
 @param obj the value for each element in the receiver, though never the first object.
 
 
-## NSArray `-reject`
+## NSArray.reject
+
 
 Returns a new array containing all elements for which the given block
 returns `YES`.
@@ -444,7 +470,8 @@ id rv = @[@1, @"1", @{}].reject(NSNumber.class)
 {% endhighlight %}
 
 
-## NSArray `-reverse`
+## NSArray.reverse
+
 
 Returns a new array that is the receiver, reversed.
 
@@ -460,7 +487,8 @@ NOTE: Did you know about `array.reverseEnumerator.allObjects`? We don’t
 use that in fact to save allocations, but you could do that on projects
 without YOLOKit.
 
-## NSArray `-rotate`
+## NSArray.rotate
+
 
 Returns a new array rotated about the provided index.
 
@@ -474,11 +502,13 @@ id rv = @[@1, @2, @3, @4, @5, @6].rotate(-2);
 // rv => @[@5, @6, @1, @2, @3, @4]
 {% endhighlight %}
 
-## NSArray `-sample`
+## NSArray.sample
+
 
 Returns a random element from the receiver.
 
-## NSArray `-select`
+## NSArray.select
+
 
 Returns a new array containing all elements for which the given block
 returns `YES`.
@@ -506,13 +536,15 @@ self.view.subviews.select(UITextField.class);
 Though you may need an `allSubviews` pod.
 
 
-## NSArray `-shuffle`
+## NSArray.shuffle
+
 
 Returns a new array that is shuffled.
 
 NOTE: Uses the Fisher–Yates shuffle algorithm.
 
-## NSArray `-skip`
+## NSArray.skip
+
 
 Skips the first `n` elements and returns the rest of the array.
 
@@ -525,7 +557,8 @@ id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
 {% endhighlight %}
 
 
-## NSArray `-slice`
+## NSArray.slice
+
 
 Returns a subarray consisting of the given number of elements from the
 given starting index.
@@ -544,7 +577,8 @@ to. If you find yourself writing `array.slice(0, 4)` then consider
 shorter to boot.
 
 
-## NSArray `-snip`
+## NSArray.snip
+
 
 Snips the end off the array. Returns the receiver *without* the last `n`
 elements.
@@ -558,7 +592,8 @@ id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
 {% endhighlight %}
 
 
-## NSArray `-sort`
+## NSArray.sort
+
 
 Returns the receiver, sorted.
 
@@ -578,7 +613,8 @@ id rv = @[@"20", @"1", @3, @5, @"4"].sort;
 PROTIP: Internally attempts to sort all objects using `-compare:` but if
 that fails, calls `-description` on all objects and uses `-sortBy`.
 
-## NSArray `-sortBy`
+## NSArray.sortBy
+
 
 Sorts all objects using the return value of the given block as the
 sorting criteria.
@@ -627,7 +663,8 @@ PROTIP: Returning an array from your block will sort the receiver so
 that the first object is the first sorting criteria, and the second
 object is the second sorting criteria, et cetera.
 
-## NSArray `-transpose`
+## NSArray.transpose
+
 
 Assumes that the receiver is an array of arrays and transposes the rows
 and columns.
@@ -643,7 +680,8 @@ id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 PROTIP: `transpose` is surprisingly useful, if you think laterally about
 your problem.
 
-## NSArray `-uniq`
+## NSArray.uniq
+
 
 Returns a new array by removing duplicate values in the receiver.
 
@@ -658,7 +696,8 @@ id rv = @[@1, @1, @2].uniq;
 PROTIP: Order is preserved.
 PROTIP: Equality is determined via `-hash` and `-isEqual:`.
 
-## NSArray `-without`
+## NSArray.without
+
 
 Returns a new array where objects in the given array are removed from
 the receiver.

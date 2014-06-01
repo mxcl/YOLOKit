@@ -35,3 +35,5 @@ pod 'YOLOKit/skip'
 {% endhighlight %}
 
 # Complete Method Index
+
+The following documentation is literally taken from `YOLO.h`. Thus it is available in Xcode by ⌥ clicking the method.

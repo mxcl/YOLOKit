@@ -1,5 +1,8 @@
+# NSDictionary
 
-## NSDictionary `-array`
+
+## NSDictionary.array
+
 
 Returns a new array of arrays of key, value pairs.
 
@@ -15,7 +18,8 @@ rv = rv.sort.transpose[1]
 // NOTE `rv.allValues.sort` would be more efficient
 {% endhighlight %}
 
-## NSDictionary `-extend`
+## NSDictionary.extend
+
 
 Returns a new, merged dictionary.
 
@@ -30,7 +34,8 @@ id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
 // rv => @{@1: @9, @2: @4, @10: @100}
 {% endhighlight %}
 
-## NSDictionary `-map`
+## NSDictionary.map
+
 
 Returns the value associated with a given key.
 
@@ -62,6 +67,7 @@ return @([key intValue] + [obj intValue]);
 // NOTE `sort` called illustratively because dictionary order is undefined.
 {% endhighlight %}
 
-## NSDictionary `-pick`
+## NSDictionary.pick
+
 
 Returns a new dictionary consisting of the given keys.
