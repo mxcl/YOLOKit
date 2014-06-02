@@ -1,7 +1,7 @@
 # NSDictionary
 
 
-## NSDictionary.array
+## <span style='color:lightgray'>NSDictionary.</span>array
 
 
 Returns a new array of arrays of key, value pairs.
@@ -18,7 +18,7 @@ rv = rv.sort.transpose[1]
 // NOTE `rv.allValues.sort` would be more efficient
 {% endhighlight %}
 
-## NSDictionary.extend
+## <span style='color:lightgray'>NSDictionary.</span>extend
 
 
 Returns a new, merged dictionary.
@@ -34,7 +34,7 @@ id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
 // rv => @{@1: @9, @2: @4, @10: @100}
 {% endhighlight %}
 
-## NSDictionary.map
+## <span style='color:lightgray'>NSDictionary.</span>get
 
 
 Returns the value associated with a given key.
@@ -47,12 +47,10 @@ id rv = @{@1: @1, @2: @4}.get(@2);
 // rv => @4
 {% endhighlight %}
 
-*/
-- (id (^)(id))get;
-#endif
 
-#ifdef YOLO_MAP
-/**
+## <span style='color:lightgray'>NSDictionary.</span>map
+
+
 Invokes the given block once for each key, value pair in the receiver.
 Returns an array containing the values returned by the block.
 
@@ -67,7 +65,7 @@ return @([key intValue] + [obj intValue]);
 // NOTE `sort` called illustratively because dictionary order is undefined.
 {% endhighlight %}
 
-## NSDictionary.pick
+## <span style='color:lightgray'>NSDictionary.</span>pick
 
 
 Returns a new dictionary consisting of the given keys.

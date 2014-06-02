@@ -68,3 +68,8 @@ pre code {
   color: #9a9a9a;
   margin: 0.75rem;
 }
+
+.protip {
+  background: blue;
+  color: white;
+}

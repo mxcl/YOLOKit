@@ -1,7 +1,7 @@
 # NSString
 
 
-## NSString.split
+## <span style='color:lightgray'>NSString.</span>split
 
 
 Returns a new array of the strings in the receiver that are separated by

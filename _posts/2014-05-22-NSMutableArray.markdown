@@ -1,7 +1,7 @@
 # NSMutableArray
 
 
-## NSMutableArray.pop
+## <span style='color:lightgray'>NSMutableArray.</span>pop
 
 
 Treats receiver like a stack and removes the last object, returning it.
@@ -13,7 +13,7 @@ id rv = aa.push(@1).push(@2).push(@3).pop()
 {% endhighlight %}
 
 
-## NSMutableArray.push
+## <span style='color:lightgray'>NSMutableArray.</span>push
 
 
 Treats receiver like a stack and adds the given object to the end of the
@@ -26,7 +26,7 @@ id rv = aa.push(@1).push(@2).push(@3)
 {% endhighlight %}
 
 
-## NSMutableArray.shift
+## <span style='color:lightgray'>NSMutableArray.</span>shift
 
 
 Removes the receiver’s first object and returns it.
@@ -38,7 +38,7 @@ id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
 {% endhighlight %}
 
 
-## NSMutableArray.unshift
+## <span style='color:lightgray'>NSMutableArray.</span>unshift
 
 
 Inserts the given object at the front of receiver, moving all other
