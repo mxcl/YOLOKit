@@ -53,9 +53,6 @@ BOOL rv = @[@1, @2, @3].any(NSNumber.class);
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4].chunk(2)
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@[@1, @2], @[@3, @4]]
 {% endhighlight %}
 
@@ -67,9 +64,6 @@ id rv = @[@1, @2, @3, @4].chunk(2)
 
 {% highlight objectivec %}
 id rv = @[@1, @2].concat(@[@3, @4]);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
@@ -148,9 +142,6 @@ id rv = @[@1, @2, @3, @4].find(^(id n){
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4, @5, @6].first(2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@1, @2]
 {% endhighlight %}
 
@@ -161,14 +152,11 @@ id rv = @[@1, @2, @3, @4, @5, @6].first(2);
 ## <span style='color:lightgray'>NSArray.</span>flatten
 
 
- Returns a new array that is a recursive, one-dimensional flattening of
+ Returns a new, one-dimensional array that is a recursive flattening of
  the receiver.
 
 {% highlight objectivec %}
-id rv = @[@[@1, @2], @3, @[@4]].flatten
-{% endhighlight %}
-
-{% highlight objectivec %}
+id rv = @[@[@1, @[@2]], @3, @[@4]].flatten
 // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
@@ -238,9 +226,6 @@ clear.
 
 {% highlight objectivec %}
 uint rv = @[@1, @2, @3, @4].indexOf(@2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => 1
 {% endhighlight %}
 
@@ -292,9 +277,6 @@ id rv = @[@1, @2, @3, @4].join(@"");
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4, @5, @6].last(2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@5, @6]
 {% endhighlight %}
 
@@ -315,9 +297,20 @@ id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
 // rv => @[@1, @4, @9, @16]
 {% endhighlight %}
 
+ If the given block returns nil, that element is skipped in the returned
+ array.
+
  The given block can have up to three parameters, the first is an element
  in the array, the second that element’s index, and the third the array
  itself.
+
+ The second parameter can be a primitive (eg. `int`), or an `NSNumber *`:
+
+{% highlight objectivec %}
+@"YOLO".split(@"").map(^(NSString *letter, int index){
+    //…
+});
+{% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>max
 
@@ -480,9 +473,6 @@ id rv = @[@1, @"1", @{}].reject(NSNumber.class)
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4].reverse;
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@4, @3, @2, @1]
 {% endhighlight %}
 
@@ -553,9 +543,6 @@ self.view.subviews.select(UITextField.class);
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@3, @4, @5, @6]
 {% endhighlight %}
 
@@ -568,9 +555,6 @@ id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@3, @4]
 {% endhighlight %}
 
@@ -588,9 +572,6 @@ id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
@@ -676,9 +657,6 @@ id rv = @[
 
 {% highlight objectivec %}
 id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 {% endhighlight %}
 
@@ -693,13 +671,11 @@ id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 
 {% highlight objectivec %}
 id rv = @[@1, @1, @2].uniq;
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @[@1, @2]
 {% endhighlight %}
 
 <p class='protip'> PROTIP: Order is preserved.
+</p>
 <p class='protip'> PROTIP: Equality is determined via `-hash` and `-isEqual:`.
 </p>
 
