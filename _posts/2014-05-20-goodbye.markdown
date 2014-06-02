@@ -63,10 +63,10 @@ Xcode doesn’t complete YOLOKit well. In our experience this isn’t a problem.
 
 There are many. Here’s the famous ones:
 
-* http://underscorem.org
-* https://github.com/robb/Asterism
-* https://github.com/ReactiveCocoa/ReactiveCocoa
-* https://github.com/supermarin/ObjectiveSugar
+* [Underscore](http://underscorem.org)
+* [Asterism](https://github.com/robb/Asterism)
+* [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)
+* [ObjectiveSugar](https://github.com/supermarin/ObjectiveSugar)
 
 # License
 
