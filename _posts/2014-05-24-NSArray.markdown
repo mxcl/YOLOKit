@@ -634,12 +634,12 @@ id rv = @[
     return @[o[@"name"], o[@"age"]];
 });
 // rv => @[
-    @{@"name": @"bob", @"age": @54},
-    @{@"name": @"frank", @"age": @12},
-    @{@"name": @"frank", @"age": @31},
-    @{@"name": @"frank", @"age": @32},
-    @{@"name": @"zane", @"age": @1}
-];
+//     @{@"name": @"bob", @"age": @54},
+//     @{@"name": @"frank", @"age": @12},
+//     @{@"name": @"frank", @"age": @31},
+//     @{@"name": @"frank", @"age": @32},
+//     @{@"name": @"zane", @"age": @1}
+// ];
 
 {% endhighlight %}
 
