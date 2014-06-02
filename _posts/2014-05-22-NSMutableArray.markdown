@@ -1,7 +1,5 @@
-# NSMutableArray
 
-
-## <span style='color:lightgray'>NSMutableArray.</span>pop
+### <span style='color:lightgray'>NSMutableArray.</span>pop
 
 
  Treats receiver like a stack and removes the last object, returning it.
@@ -10,10 +8,10 @@
 NSMutableArray *aa = [NSMutableArray new];
 id rv = aa.push(@1).push(@2).push(@3).pop()
 // rv => @3
+
 {% endhighlight %}
 
-
-## <span style='color:lightgray'>NSMutableArray.</span>push
+### <span style='color:lightgray'>NSMutableArray.</span>push
 
 
  Treats receiver like a stack and adds the given object to the end of the
@@ -23,10 +21,10 @@ id rv = aa.push(@1).push(@2).push(@3).pop()
 NSMutableArray *aa = [NSMutableArray new];
 id rv = aa.push(@1).push(@2).push(@3)
 // rv => @[@1, @2, @3]
+
 {% endhighlight %}
 
-
-## <span style='color:lightgray'>NSMutableArray.</span>shift
+### <span style='color:lightgray'>NSMutableArray.</span>shift
 
 
  Removes the receiver’s first object and returns it.
@@ -35,10 +33,10 @@ id rv = aa.push(@1).push(@2).push(@3)
 NSMutableArray *aa = [NSMutableArray new];
 id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
 // rv => @3
+
 {% endhighlight %}
 
-
-## <span style='color:lightgray'>NSMutableArray.</span>unshift
+### <span style='color:lightgray'>NSMutableArray.</span>unshift
 
 
  Inserts the given object at the front of receiver, moving all other
@@ -48,5 +46,5 @@ id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
 NSMutableArray *aa = [NSMutableArray new];
 id rv = aa.unshift(@1).unshift(@2).unshift(@3);
 // rv => @[@3, @2, @1]
-{% endhighlight %}
 
+{% endhighlight %}

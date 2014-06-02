@@ -70,6 +70,12 @@ pre code {
 }
 
 .protip {
-  background: blue;
+  color: #7D26CD;
+}
+.protip b {
+  background: #7D26CD;
   color: white;
+  padding: 3px 4px 1px 4px;
+  opacity: 0.5;
+  font-family: "Marker Felt";
 }

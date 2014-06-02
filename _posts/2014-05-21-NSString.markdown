@@ -1,7 +1,5 @@
-# NSString
 
-
-## <span style='color:lightgray'>NSString.</span>split
+### <span style='color:lightgray'>NSString.</span>split
 
 
  Returns a new array of the strings in the receiver that are separated by
@@ -10,6 +8,7 @@
 {% highlight objectivec %}
 id rv = @"1,2,3,4,5,6".split(@",");
 // rv => @[@"1", @"2", @"3", @"4", @"5", @"6"]
+
 {% endhighlight %}
 
  If you ask to separate by `@""` or `nil` you will get an array of the
