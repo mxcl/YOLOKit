@@ -8,14 +8,14 @@
  the given separator.
 
 {% highlight objectivec %}
-    id rv = @"1,2,3,4,5,6".split(@",");
-    // rv => @[@"1", @"2", @"3", @"4", @"5", @"6"]
+id rv = @"1,2,3,4,5,6".split(@",");
+// rv => @[@"1", @"2", @"3", @"4", @"5", @"6"]
 {% endhighlight %}
 
  If you ask to separate by `@""` or `nil` you will get an array of the
  strings individual characters (as determined by `-substringWithRange`).
 
 {% highlight objectivec %}
-    id rv = @"123456".split(@"");
-    // rv => @[@"1", @"2", @"3", @"4", @"5", @"6"]
+id rv = @"123456".split(@"");
+// rv => @[@"1", @"2", @"3", @"4", @"5", @"6"]
 {% endhighlight %}

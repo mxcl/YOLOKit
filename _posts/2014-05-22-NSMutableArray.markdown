@@ -7,9 +7,9 @@
  Treats receiver like a stack and removes the last object, returning it.
 
 {% highlight objectivec %}
-    NSMutableArray *aa = [NSMutableArray new];
-    id rv = aa.push(@1).push(@2).push(@3).pop()
-    // rv => @3
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.push(@1).push(@2).push(@3).pop()
+// rv => @3
 {% endhighlight %}
 
 
@@ -20,9 +20,9 @@
  receiver.
 
 {% highlight objectivec %}
-    NSMutableArray *aa = [NSMutableArray new];
-    id rv = aa.push(@1).push(@2).push(@3)
-    // rv => @[@1, @2, @3]
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.push(@1).push(@2).push(@3)
+// rv => @[@1, @2, @3]
 {% endhighlight %}
 
 
@@ -32,9 +32,9 @@
  Removes the receiver’s first object and returns it.
 
 {% highlight objectivec %}
-    NSMutableArray *aa = [NSMutableArray new];
-    id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
-    // rv => @3
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.unshift(@1).unshift(@2).unshift(@3).shift();
+// rv => @3
 {% endhighlight %}
 
 
@@ -45,8 +45,8 @@
  objects in the receiver up one index.
 
 {% highlight objectivec %}
-    NSMutableArray *aa = [NSMutableArray new];
-    id rv = aa.unshift(@1).unshift(@2).unshift(@3);
-    // rv => @[@3, @2, @1]
+NSMutableArray *aa = [NSMutableArray new];
+id rv = aa.unshift(@1).unshift(@2).unshift(@3);
+// rv => @[@3, @2, @1]
 {% endhighlight %}
 
