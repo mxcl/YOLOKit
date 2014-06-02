@@ -142,7 +142,7 @@ id rv = @[@1, @2, @3, @4, @5, @6].first(2);
 
 {% endhighlight %}
 
-<p class='protip'><b>PROTIP</b> YOLOKit is forgiving if the array doesn’t have enough elements,
+<p class='protip'><b>PROTIP</b> YOLOKit is forgiving; if the array doesn’t have enough elements,
  `first` returns as many as it can.
 </p>
 
@@ -562,8 +562,8 @@ id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
 
 {% endhighlight %}
 
-<p class='protip'><b>PROTIP</b> Use slice instead of first, last, skip and snip… when you have
- to. If you find yourself writing `array.slice(0, 4)` then consider
+<p class='protip'><b>PROTIP</b> Use slice instead of `first`, `last`, `skip` and `snip`… when
+ you must. If you find yourself writing `array.slice(0, 4)` then consider
  `array.first(4)` instead: it’s more expressive, more explicit and
  shorter to boot.
 </p>
@@ -600,8 +600,9 @@ id rv = @[@"20", @"1", @3, @5, @"4"].sort;
 
 {% endhighlight %}
 
-<p class='protip'><b>PROTIP</b> Internally attempts to sort all objects using `-compare:` but if
- that fails, calls `-description` on all objects and uses `-sortBy`.
+<p class='protip'><b>PROTIP</b> Internally `sort` attempts to sort all objects using `-compare:`
+ but if that fails, it calls `-description` on all objects and uses
+ `-sortBy`.
 </p>
 
 ### <span style='color:lightgray'>NSArray.</span>sortBy
