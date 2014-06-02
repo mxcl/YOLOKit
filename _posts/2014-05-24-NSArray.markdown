@@ -6,7 +6,8 @@
 
  Invokes the given block for each element in the receiver. Should the
  block return `NO`, the method immediately returns `NO`, ceasing
- enumeration. If the block returns only `YES`, the method returns `YES`.
+ enumeration. If all executions of the block return `YES`, `all`
+ returns `YES`.
 
 {% highlight objectivec %}
 BOOL rv = @[@1, @2, @3].all(^(id o){
@@ -70,7 +71,7 @@ id rv = @[@1, @2].concat(@[@3, @4]);
 ## <span style='color:lightgray'>NSArray.</span>dict
 
 
- Convert an array of key/value pairs into a dictionary.
+ Convert an array of key/value pairs into the logical dictionary.
 
 {% highlight objectivec %}
 id rv = @[@[@1, @2], @[@3, @4]].dict
@@ -125,8 +126,9 @@ id rv = @[@1, @2, @3, @4].chunk(2).dict
 ## <span style='color:lightgray'>NSArray.</span>find
 
 
- Passes each entry in enum to block, returning the first for which block
- is not `NO`. If no object matches, returns `nil`.
+ Passes each entry in the arry to the given block, returning the first
+ element for which block is not `NO`. If no object matches, returns
+ `nil`.
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4].find(^(id n){
@@ -449,7 +451,7 @@ id longest = @[@"cat", @"sheep", @"bear"].reduce(^(NSString *memo, NSString *wor
 
 
  Returns a new array containing all elements for which the given block
- returns `YES`.
+ returns `NO`.
 
 {% highlight objectivec %}
 id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){

@@ -28,9 +28,6 @@ rv = rv.sort.transpose[1]
 
 {% highlight objectivec %}
 id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @{@1: @9, @2: @4, @10: @100}
 {% endhighlight %}
 
@@ -41,9 +38,6 @@ id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
 
 {% highlight objectivec %}
 id rv = @{@1: @1, @2: @4}.get(@2);
-{% endhighlight %}
-
-{% highlight objectivec %}
 // rv => @4
 {% endhighlight %}
 
