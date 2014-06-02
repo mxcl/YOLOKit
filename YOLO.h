@@ -11,7 +11,8 @@
 /**
  Invokes the given block for each element in the receiver. Should the
  block return `NO`, the method immediately returns `NO`, ceasing
- enumeration. If the block returns only `YES`, the method returns `YES`.
+ enumeration. If all executions of the block return `YES`, `all`
+ returns `YES`.
 
     BOOL rv = @[@1, @2, @3].all(^(id o){
         return [o intValue] > 0;
@@ -51,7 +52,6 @@
  Chunks the receiver into a new array of chunk-size arrays.
 
     id rv = @[@1, @2, @3, @4].chunk(2)
-
     // rv => @[@[@1, @2], @[@3, @4]]
 */
 - (NSArray *(^)(NSUInteger))chunk;
@@ -63,7 +63,6 @@
  concatenated to the end.
 
     id rv = @[@1, @2].concat(@[@3, @4]);
-
     // rv => @[@1, @2, @3, @4]
 */
 - (NSArray *(^)(NSArray *other_array))concat;
@@ -71,7 +70,7 @@
 
 #ifdef YOLO_DICT
 /**
- Convert an array of key/value pairs into a dictionary.
+ Convert an array of key/value pairs into the logical dictionary.
 
     id rv = @[@[@1, @2], @[@3, @4]].dict
     // rv => @{@1: @2, @3: @4}
@@ -118,8 +117,9 @@
 
 #ifdef YOLO_FIND
 /**
- Passes each entry in enum to block, returning the first for which block
- is not `NO`. If no object matches, returns `nil`.
+ Passes each entry in the arry to the given block, returning the first
+ element for which block is not `NO`. If no object matches, returns
+ `nil`.
 
     id rv = @[@1, @2, @3, @4].find(^(id n){
         return [n isEqual:@3];
@@ -134,10 +134,9 @@
  Returns the first `n` elements of the receiver.
 
     id rv = @[@1, @2, @3, @4, @5, @6].first(2);
-
     // rv => @[@1, @2]
 
- PROTIP: YOLOKit is forgiving if the array doesn’t have enough elements,
+ PROTIP: YOLOKit is forgiving; if the array doesn’t have enough elements,
  `first` returns as many as it can.
 */
 - (NSArray *(^)(NSUInteger))first;
@@ -149,7 +148,6 @@
  the receiver.
 
     id rv = @[@[@1, @[@2]], @3, @[@4]].flatten
-
     // rv => @[@1, @2, @3, @4]
 */
 - (NSArray *)flatten;
@@ -216,7 +214,6 @@ clear.
  the object was not found.
 
     uint rv = @[@1, @2, @3, @4].indexOf(@2);
-
     // rv => 1
 
  PROTIP: `NSNotFound` has the value `NSIntegerMax` so you don’t need to
@@ -265,7 +262,6 @@ clear.
  Returns the last `n` elements from receiver.
 
     id rv = @[@1, @2, @3, @4, @5, @6].last(2);
-
     // rv => @[@5, @6]
 
  PROTIP: If there are insufficient elements in the array, YOLOKit returns
@@ -430,7 +426,7 @@ clear.
 #ifdef YOLO_SELECT
 /**
  Returns a new array containing all elements for which the given block
- returns `YES`.
+ returns `NO`.
 
     id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){
         return n.intValue % 2 == 0;
@@ -452,7 +448,6 @@ clear.
  Returns a new array that is the receiver, reversed.
 
     id rv = @[@1, @2, @3, @4].reverse;
-
     // rv => @[@4, @3, @2, @1]
 
  NOTE: Did you know about `array.reverseEnumerator.allObjects`? We don’t
@@ -522,7 +517,6 @@ clear.
  Skips the first `n` elements and returns the rest of the array.
 
     id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
-
     // rv => @[@3, @4, @5, @6]
 
  @see -first
@@ -539,11 +533,10 @@ clear.
  given starting index.
 
     id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
-
     // rv => @[@3, @4]
 
- PROTIP: Use slice instead of first, last, skip and snip… when you have
- to. If you find yourself writing `array.slice(0, 4)` then consider
+ PROTIP: Use slice instead of `first`, `last`, `skip` and `snip`… when
+ you must. If you find yourself writing `array.slice(0, 4)` then consider
  `array.first(4)` instead: it’s more expressive, more explicit and
  shorter to boot.
 
@@ -561,7 +554,6 @@ clear.
  elements.
 
     id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
-
     // rv => @[@1, @2, @3, @4]
 
  @see -first
@@ -586,8 +578,9 @@ clear.
 
  @see -sortBy
 
- PROTIP: Internally attempts to sort all objects using `-compare:` but if
- that fails, calls `-description` on all objects and uses `-sortBy`.
+ PROTIP: Internally `sort` attempts to sort all objects using `-compare:`
+ but if that fails, it calls `-description` on all objects and uses
+ `-sortBy`.
 */
 - (NSArray *)sort;
 
@@ -617,12 +610,12 @@ clear.
         return @[o[@"name"], o[@"age"]];
     });
     // rv => @[
-        @{@"name": @"bob", @"age": @54},
-        @{@"name": @"frank", @"age": @12},
-        @{@"name": @"frank", @"age": @31},
-        @{@"name": @"frank", @"age": @32},
-        @{@"name": @"zane", @"age": @1}
-    ];
+    //     @{@"name": @"bob", @"age": @54},
+    //     @{@"name": @"frank", @"age": @12},
+    //     @{@"name": @"frank", @"age": @31},
+    //     @{@"name": @"frank", @"age": @32},
+    //     @{@"name": @"zane", @"age": @1}
+    // ];
 
  PROTIP: You will need you to implement a compare: method for any custom
  objects you return.
@@ -640,7 +633,6 @@ clear.
  and columns.
 
     id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
-
     // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 
  PROTIP: `transpose` is surprisingly useful, if you think laterally about
@@ -654,7 +646,6 @@ clear.
  Returns a new array by removing duplicate values in the receiver.
 
     id rv = @[@1, @1, @2].uniq;
-
     // rv => @[@1, @2]
 
  PROTIP: Order is preserved.
@@ -780,7 +771,6 @@ clear.
  receiver. If any keys conflict, the values in this dictionary take precendence.
 
     id rv = @{@1: @1, @2: @4}.extend(@{@1: @9, @10: @100});
-
     // rv => @{@1: @9, @2: @4, @10: @100}
 */
 - (NSDictionary *(^)(NSDictionary *higherPriorityDictionary))extend;
@@ -791,7 +781,6 @@ clear.
  Returns the value associated with a given key.
 
     id rv = @{@1: @1, @2: @4}.get(@2);
-
     // rv => @4
 
  @see -objectForKey:
@@ -833,7 +822,6 @@ clear.
  including) the given number.
 
     id rv = @1.upTo(6);
-
     // rv => @[@1, @2, @3, @4, @5, @6]
 */
 - (NSArray *(^)(NSInteger))upTo;
