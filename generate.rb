@@ -36,7 +36,7 @@ $1.gsub(%r{/\*\*(.*?)\*/\s*\n- (.*?;)}m) do
       protipping = false
       print "</p>"
     end
-    puts ln.strip
+    puts ln
   end
   
   puts "{% endhighlight %}" if highlight

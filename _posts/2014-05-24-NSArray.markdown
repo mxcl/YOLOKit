@@ -4,217 +4,217 @@
 ## <span style='color:lightgray'>NSArray.</span>all
 
 
-Invokes the given block for each element in the receiver. Should the
-block return `NO`, the method immediately returns `NO`, ceasing
-enumeration. If the block returns only `YES`, the method returns `YES`.
+ Invokes the given block for each element in the receiver. Should the
+ block return `NO`, the method immediately returns `NO`, ceasing
+ enumeration. If the block returns only `YES`, the method returns `YES`.
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].all(^(id o){
-return [o intValue] > 0;
-});
-// rv => YES
+    BOOL rv = @[@1, @2, @3].all(^(id o){
+        return [o intValue] > 0;
+    });
+    // rv => YES
 {% endhighlight %}
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].all(^(int d){
-return d < 3;
-});
-// rv => NO
+    BOOL rv = @[@1, @2, @3].all(^(int d){
+        return d < 3;
+    });
+    // rv => NO
 {% endhighlight %}
 
-Instead of a block, you can pass a `Class` object.
+ Instead of a block, you can pass a `Class` object.
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].all(NSNumber.class);
-// rv => YES
+    BOOL rv = @[@1, @2, @3].all(NSNumber.class);
+    // rv => YES
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>any
 
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].any(^(id o){
-return [o intValue] == 3;
-});
-// rv => YES
+    BOOL rv = @[@1, @2, @3].any(^(id o){
+        return [o intValue] == 3;
+    });
+    // rv => YES
 {% endhighlight %}
 
-Instead of a block, you can pass a `Class` object.
+ Instead of a block, you can pass a `Class` object.
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].any(NSNumber.class);
-// rv => YES
+    BOOL rv = @[@1, @2, @3].any(NSNumber.class);
+    // rv => YES
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>chunk
 
 
-Chunks the receiver into a new array of chunk-size arrays.
+ Chunks the receiver into a new array of chunk-size arrays.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].chunk(2)
+    id rv = @[@1, @2, @3, @4].chunk(2)
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@[@1, @2], @[@3, @4]]
+    // rv => @[@[@1, @2], @[@3, @4]]
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>concat
 
 
-Returns a new array that is the receiver with the given array
-concatenated to the end.
+ Returns a new array that is the receiver with the given array
+ concatenated to the end.
 
 {% highlight objectivec %}
-id rv = @[@1, @2].concat(@[@3, @4]);
+    id rv = @[@1, @2].concat(@[@3, @4]);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@1, @2, @3, @4]
+    // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>dict
 
 
-Convert an array of key/value pairs into a dictionary.
+ Convert an array of key/value pairs into a dictionary.
 
 {% highlight objectivec %}
-id rv = @[@[@1, @2], @[@3, @4]].dict
-// rv => @{@1: @2, @3: @4}
+    id rv = @[@[@1, @2], @[@3, @4]].dict
+    // rv => @{@1: @2, @3: @4}
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].chunk(2).dict
-// rv => @{@1: @2, @3: @4}
+    id rv = @[@1, @2, @3, @4].chunk(2).dict
+    // rv => @{@1: @2, @3: @4}
 {% endhighlight %}
 
-If you have a flat array you can call `chunk(2)` before `dict`. It was
-decided not to allow flat arrays to be immediately converted as it can
-lead to bugs when your array is not in the shape you expect, and those
-sorts of errors occur more commonly with tools like YOLOKit since we
-allow easy array flattening.
+ If you have a flat array you can call `chunk(2)` before `dict`. It was
+ decided not to allow flat arrays to be immediately converted as it can
+ lead to bugs when your array is not in the shape you expect, and those
+ sorts of errors occur more commonly with tools like YOLOKit since we
+ allow easy array flattening.
 
 ## <span style='color:lightgray'>NSArray.</span>each
 
 
-Calls the given block once for each element in the receiver, passing
-that element as the parameter.
+ Calls the given block once for each element in the receiver, passing
+ that element as the parameter.
 
 {% highlight objectivec %}
-@[@1, @2, @3, @4].each(^(id n){
-NSLog(@"%@", n);
-});
-// => 1\n2\n3\n4\n
+    @[@1, @2, @3, @4].each(^(id n){
+        NSLog(@"%@", n);
+    });
+    // => 1\n2\n3\n4\n
 {% endhighlight %}
 
-`each` also supports two and three parameter versions:
+ `each` also supports two and three parameter versions:
 
 {% highlight objectivec %}
-@[@4, @3, @2, @1].each(^(id n, int ii){
-NSLog(@"%d:%@", ii, n);
-});
-// => 0:1\n1:2\n2:3\n3:4\n
-{% endhighlight %}
-
-{% highlight objectivec %}
-@[@4, @3, @2, @1].each(^(id n, int ii, NSArray *array){
-//…
-});
+    @[@4, @3, @2, @1].each(^(id n, int ii){
+        NSLog(@"%d:%@", ii, n);
+    });
+    // => 0:1\n1:2\n2:3\n3:4\n
 {% endhighlight %}
 
 {% highlight objectivec %}
-@[@4, @3, @2, @1].each(^(id n, NSNumber *index, NSArray *array){
-// and automagical conversion between int and NSNumber
-});
+    @[@4, @3, @2, @1].each(^(id n, int ii, NSArray *array){
+        //…
+    });
+{% endhighlight %}
+
+{% highlight objectivec %}
+    @[@4, @3, @2, @1].each(^(id n, NSNumber *index, NSArray *array){
+        // and automagical conversion between int and NSNumber
+    });
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>find
 
 
-Passes each entry in enum to block, returning the first for which block
-is not `NO`. If no object matches, returns `nil`.
+ Passes each entry in enum to block, returning the first for which block
+ is not `NO`. If no object matches, returns `nil`.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].find(^(id n){
-return [n isEqual:@3];
-});
-// rv => @3
+    id rv = @[@1, @2, @3, @4].find(^(id n){
+        return [n isEqual:@3];
+    });
+    // rv => @3
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>first
 
 
-Returns the first `n` elements of the receiver.
+ Returns the first `n` elements of the receiver.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].first(2);
+    id rv = @[@1, @2, @3, @4, @5, @6].first(2);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@1, @2]
+    // rv => @[@1, @2]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: YOLOKit is forgiving if the array doesn’t have enough elements,
-`first` returns as many as it can.
+<p class='protip'> PROTIP: YOLOKit is forgiving if the array doesn’t have enough elements,
+ `first` returns as many as it can.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>flatten
 
 
-Returns a new array that is a recursive, one-dimensional flattening of
-the receiver.
+ Returns a new array that is a recursive, one-dimensional flattening of
+ the receiver.
 
 {% highlight objectivec %}
-id rv = @[@[@1, @2], @3, @[@4]].flatten
+    id rv = @[@[@1, @2], @3, @[@4]].flatten
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@1, @2, @3, @4]
+    // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>flatMap
 
 
-Returns a new array with the concatenated results of running block once
-for every element in the receiver.
+ Returns a new array with the concatenated results of running block once
+ for every element in the receiver.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].flatMap(^(id n){
-return @[n, n];
-});
-// rv => @[@1, @1, @2, @2, @3, @3, @4, @4]
+    id rv = @[@1, @2, @3, @4].flatMap(^(id n){
+        return @[n, n];
+    });
+    // rv => @[@1, @1, @2, @2, @3, @3, @4, @4]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].flatMap(^(id n){
-return @[n, @[n]];
-});
-// rv => @[@1, @[@1], @2, @[@2], @3, @[@3], @4, @[@4]]
+    id rv = @[@1, @2, @3, @4].flatMap(^(id n){
+        return @[n, @[n]];
+    });
+    // rv => @[@1, @[@1], @2, @[@2], @3, @[@3], @4, @[@4]]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: Useful over vanilla map followed by a flatten because flatten is
-recursive, and you may want to preserve array relationships beyond the
-first level. Also, `flatMap` is technically more efficient.
+<p class='protip'> PROTIP: Useful over vanilla map followed by a flatten because flatten is
+ recursive, and you may want to preserve array relationships beyond the
+ first level. Also, `flatMap` is technically more efficient.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>groupBy
 
 
-Groups the collection by result of the given block.
+ Groups the collection by result of the given block.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].groupBy(^(NSNumber *n) {
-return @(n.intValue % 2);
-});
-// rv => @{@0: @[@1, @3], @1: @[@2, @4]}
+    id rv = @[@1, @2, @3, @4].groupBy(^(NSNumber *n) {
+        return @(n.intValue % 2);
+    });
+    // rv => @{@0: @[@1, @3], @1: @[@2, @4]}
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>has
 
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].has(@2)
-// rv => YES
+    BOOL rv = @[@1, @2, @3].has(@2)
+    // rv => YES
 {% endhighlight %}
 
 Short-hand for containsObject:. Provided because doing a map, then a
@@ -233,488 +233,488 @@ clear.
 ## <span style='color:lightgray'>NSArray.</span>indexOf
 
 
-Returns the index of the given object in the receiver or `NSNotFound` if
-the object was not found.
+ Returns the index of the given object in the receiver or `NSNotFound` if
+ the object was not found.
 
 {% highlight objectivec %}
-uint rv = @[@1, @2, @3, @4].indexOf(@2);
+    uint rv = @[@1, @2, @3, @4].indexOf(@2);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => 1
+    // rv => 1
 {% endhighlight %}
 
-<p class='protip'>PROTIP: `NSNotFound` has the value `NSIntegerMax` so you don’t need to
-directly check for it, you can instead check if the returned value is
-less than the count of the receiver.
+<p class='protip'> PROTIP: `NSNotFound` has the value `NSIntegerMax` so you don’t need to
+ directly check for it, you can instead check if the returned value is
+ less than the count of the receiver.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>inject
 
 
-Combines all elements of the receiver by applying a binary operation.
+ Combines all elements of the receiver by applying a binary operation.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].inject(@{}, ^(NSMutableDictionary *memo, NSNumber *n){
-memo[n] = @(n.intValue * n.intValue);
-return memo;
-});
-// rv => @{@1: @1, @2: @4, @3: @9, @4: @16}
+    id rv = @[@1, @2, @3, @4].inject(@{}, ^(NSMutableDictionary *memo, NSNumber *n){
+        memo[n] = @(n.intValue * n.intValue);
+        return memo;
+    });
+    // rv => @{@1: @1, @2: @4, @3: @9, @4: @16}
 {% endhighlight %}
 
-<p class='protip'>PROTIP: If you feed `inject` a non-mutable dictionary or array YOLOKit
-mutates it for your block, and then finally returns a non-mutable copy.
+<p class='protip'> PROTIP: If you feed `inject` a non-mutable dictionary or array YOLOKit
+ mutates it for your block, and then finally returns a non-mutable copy.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>join
 
 
-Returns a string of all the receiver’s elements joined with the provided
-separator string.
+ Returns a string of all the receiver’s elements joined with the provided
+ separator string.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].join(@",");
-// rv => @"1,2,3,4"
+    id rv = @[@1, @2, @3, @4].join(@",");
+    // rv => @"1,2,3,4"
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].join(@"");
-// rv => @"1234"
+    id rv = @[@1, @2, @3, @4].join(@"");
+    // rv => @"1234"
 {% endhighlight %}
 
-<p class='protip'>PROTIP: `-description` is called on all objects before joining them.
+<p class='protip'> PROTIP: `-description` is called on all objects before joining them.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>last
 
 
-Returns the last `n` elements from receiver.
+ Returns the last `n` elements from receiver.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].last(2);
+    id rv = @[@1, @2, @3, @4, @5, @6].last(2);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@5, @6]
+    // rv => @[@5, @6]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: If there are insufficient elements in the array, YOLOKit returns
-as many as it can.
+<p class='protip'> PROTIP: If there are insufficient elements in the array, YOLOKit returns
+ as many as it can.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>map
 
 
-Invokes the given block once for each element of self. Creates a new
-array containing the values returned by the block.
+ Invokes the given block once for each element of self. Creates a new
+ array containing the values returned by the block.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
-return @(n.intValue * n.intValue);
-});
-// rv => @[@1, @4, @9, @16]
+    id rv = @[@1, @2, @3, @4].map(^(NSNumber *n){
+        return @(n.intValue * n.intValue);
+    });
+    // rv => @[@1, @4, @9, @16]
 {% endhighlight %}
 
-The given block can have up to three parameters, the first is an element
-in the array, the second that element’s index, and the third the array
-itself.
+ The given block can have up to three parameters, the first is an element
+ in the array, the second that element’s index, and the third the array
+ itself.
 
 ## <span style='color:lightgray'>NSArray.</span>max
 
 
-Returns the element for which the given block returns the largest
-integer.
+ Returns the element for which the given block returns the largest
+ integer.
 
 {% highlight objectivec %}
-id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
-return n.intValue;
-});
-// rv => @4
+    id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
+        return n.intValue;
+    });
+    // rv => @4
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
-return (n.intValue - 3) * (n.intValue - 3);
-});
-// rv => @1
+    id rv = @[@4, @2, @1, @3].max(^(NSNumber *n){
+        return (n.intValue - 3) * (n.intValue - 3);
+    });
+    // rv => @1
 {% endhighlight %}
 
-NOTE: currently you must return an integer, we plan to allow you to
-return whatever you like.
+ NOTE: currently you must return an integer, we plan to allow you to
+ return whatever you like.
 
 ## <span style='color:lightgray'>NSArray.</span>min
 
 
-Returns the element for which the given block returns the smallest
-integer.
+ Returns the element for which the given block returns the smallest
+ integer.
 
 {% highlight objectivec %}
-id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
-return n;
-});
-// rv => @1
+    id rv = @[@4, @2, @1, @3].min(^(NSNumber *n){
+        return n;
+    });
+    // rv => @1
 {% endhighlight %}
 
-NOTE: currently you must return an integer, we plan to allow you to
-return whatever you like.
+ NOTE: currently you must return an integer, we plan to allow you to
+ return whatever you like.
 
 ## <span style='color:lightgray'>NSArray.</span>none
 
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].none(^(id o){
-return [o intValue] > 4;
-});
-// rv => YES
+    BOOL rv = @[@1, @2, @3].none(^(id o){
+        return [o intValue] > 4;
+    });
+    // rv => YES
 {% endhighlight %}
 
-Instead of a block, you can pass a `Class` object.
+ Instead of a block, you can pass a `Class` object.
 
 {% highlight objectivec %}
-BOOL rv = @[@1, @2, @3].none(NSNumber.class);
-// rv => NO
+    BOOL rv = @[@1, @2, @3].none(NSNumber.class);
+    // rv => NO
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>partition
 
 
-Partitions the receiver into two arrays based on the boolean return
-value of the given block.
+ Partitions the receiver into two arrays based on the boolean return
+ value of the given block.
 
 {% highlight objectivec %}
-id rv = @[@"A", @"B", @"AA"].partition(^(id s){
-return [s hasPrefix:@"A"];
-});
-//rv => @[@[@"A", @"AA"], @[@"B"]]
+    id rv = @[@"A", @"B", @"AA"].partition(^(id s){
+        return [s hasPrefix:@"A"];
+    });
+    //rv => @[@[@"A", @"AA"], @[@"B"]]
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>pluck
 
 
-Returns a new array that is the result of calling the given method on
-each element in the receiver.
+ Returns a new array that is the result of calling the given method on
+ each element in the receiver.
 
 {% highlight objectivec %}
-MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
-MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
-MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
+    MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
+    MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
+    MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[rhombas, ellipse, hexagon].pluck(@"title")
-// rv => @[@"rhombas", @"ellipse", @"hexagon"]
+    id rv = @[rhombas, ellipse, hexagon].pluck(@"title")
+    // rv => @[@"rhombas", @"ellipse", @"hexagon"]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[rhombas, ellipse, hexagon].pluck(@"title.uppercaseString")
-// rv => @[@"RHOMBAS", @"ELLIPSE", @"HEXAGON"]
+    id rv = @[rhombas, ellipse, hexagon].pluck(@"title.uppercaseString")
+    // rv => @[@"RHOMBAS", @"ELLIPSE", @"HEXAGON"]
 {% endhighlight %}
 
-NOTE: This is a convenience function for the common case of mapping
-(`-map`) an array to the result of a method call on each element.
+ NOTE: This is a convenience function for the common case of mapping
+ (`-map`) an array to the result of a method call on each element.
 
 ## <span style='color:lightgray'>NSArray.</span>pmap
 
 
-Map, but run in parallel. Obviously: be thread safe in your block. The
-call waits for all elements to be processed. Typically not worth using
-unless you have large arrays since the overhead of
-thread-synchronization may be greater than the parallel savings
-otherwise.
+ Map, but run in parallel. Obviously: be thread safe in your block. The
+ call waits for all elements to be processed. Typically not worth using
+ unless you have large arrays since the overhead of
+ thread-synchronization may be greater than the parallel savings
+ otherwise.
 
 
 ## <span style='color:lightgray'>NSArray.</span>reduce
 
 
-Reduces the receiver to a single value.
+ Reduces the receiver to a single value.
 
-The usual example of reduce is to sum all values in an array.
-
-{% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].reduce(^(NSNumber *memo, NSNumber *obj){
-return @(memo.intValue + obj.intValue);
-});
-// rv => @10
-{% endhighlight %}
-
-Generally `-inject` is more useful. Though, when appropriate, `reduce`
-is more elegant.
+ The usual example of reduce is to sum all values in an array.
 
 {% highlight objectivec %}
-// find the longest word
-id longest = @[@"cat", @"sheep", @"bear"].reduce(^(NSString *memo, NSString *word){
-return memo.length > word.length ? memo : word;
-});
-// longest => @"sheep"
+    id rv = @[@1, @2, @3, @4].reduce(^(NSNumber *memo, NSNumber *obj){
+        return @(memo.intValue + obj.intValue);
+    });
+    // rv => @10
 {% endhighlight %}
 
-@param memo initialized to the first value in receiver, but on subsequent iterations is the value returned from the given block.
-@param obj the value for each element in the receiver, though never the first object.
+ Generally `-inject` is more useful. Though, when appropriate, `reduce`
+ is more elegant.
+
+{% highlight objectivec %}
+    // find the longest word
+    id longest = @[@"cat", @"sheep", @"bear"].reduce(^(NSString *memo, NSString *word){
+        return memo.length > word.length ? memo : word;
+    });
+    // longest => @"sheep"
+{% endhighlight %}
+
+ @param memo initialized to the first value in receiver, but on subsequent iterations is the value returned from the given block.
+ @param obj the value for each element in the receiver, though never the first object.
 
 
 ## <span style='color:lightgray'>NSArray.</span>reject
 
 
-Returns a new array containing all elements for which the given block
-returns `YES`.
+ Returns a new array containing all elements for which the given block
+ returns `YES`.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){
-return n.intValue % 2 == 0;
-});
-// rv => @[@1, @3]
+    id rv = @[@1, @2, @3, @4].reject(^(NSNumber *n){
+        return n.intValue % 2 == 0;
+    });
+    // rv => @[@1, @3]
 {% endhighlight %}
 
-Alternatively pass a `Class` object:
+ Alternatively pass a `Class` object:
 
 {% highlight objectivec %}
-id rv = @[@1, @"1", @{}].reject(NSNumber.class)
-// rv => @[@"1", @{}]
+    id rv = @[@1, @"1", @{}].reject(NSNumber.class)
+    // rv => @[@"1", @{}]
 {% endhighlight %}
 
 
 ## <span style='color:lightgray'>NSArray.</span>reverse
 
 
-Returns a new array that is the receiver, reversed.
+ Returns a new array that is the receiver, reversed.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].reverse;
+    id rv = @[@1, @2, @3, @4].reverse;
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@4, @3, @2, @1]
+    // rv => @[@4, @3, @2, @1]
 {% endhighlight %}
 
-NOTE: Did you know about `array.reverseEnumerator.allObjects`? We don’t
-use that in fact to save allocations, but you could do that on projects
-without YOLOKit.
+ NOTE: Did you know about `array.reverseEnumerator.allObjects`? We don’t
+ use that in fact to save allocations, but you could do that on projects
+ without YOLOKit.
 
 ## <span style='color:lightgray'>NSArray.</span>rotate
 
 
-Returns a new array rotated about the provided index.
+ Returns a new array rotated about the provided index.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].rotate(2);
-// rv => @[@3, @4, @5, @6, @1, @2]
+    id rv = @[@1, @2, @3, @4, @5, @6].rotate(2);
+    // rv => @[@3, @4, @5, @6, @1, @2]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].rotate(-2);
-// rv => @[@5, @6, @1, @2, @3, @4]
+    id rv = @[@1, @2, @3, @4, @5, @6].rotate(-2);
+    // rv => @[@5, @6, @1, @2, @3, @4] 
 {% endhighlight %}
 
 ## <span style='color:lightgray'>NSArray.</span>sample
 
 
-Returns a random element from the receiver.
+ Returns a random element from the receiver.
 
 ## <span style='color:lightgray'>NSArray.</span>select
 
 
-Returns a new array containing all elements for which the given block
-returns `YES`.
+ Returns a new array containing all elements for which the given block
+ returns `YES`.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4].select(^(NSNumber *n){
-return n.intValue % 2 == 0;
-});
-// rv => @[@2, @4]
+    id rv = @[@1, @2, @3, @4].select(^(NSNumber *n){
+        return n.intValue % 2 == 0;
+    });
+    // rv => @[@2, @4]
 {% endhighlight %}
 
-Alternatively pass a `Class` object:
+ Alternatively pass a `Class` object:
 
 {% highlight objectivec %}
-id rv = @[@1, @"1", @{}].select(NSString.class)
-// rv => @[@"1"]
+    id rv = @[@1, @"1", @{}].select(NSString.class)
+    // rv => @[@"1"]
 {% endhighlight %}
 
-Convenient when searching for specifc subviews.
+ Convenient when searching for specifc subviews.
 
 {% highlight objectivec %}
-self.view.subviews.select(UITextField.class);
+    self.view.subviews.select(UITextField.class);
 {% endhighlight %}
 
-Though you may need an `allSubviews` pod.
+ Though you may need an `allSubviews` pod.
 
 
 ## <span style='color:lightgray'>NSArray.</span>shuffle
 
 
-Returns a new array that is shuffled.
+ Returns a new array that is shuffled.
 
-NOTE: Uses the Fisher–Yates shuffle algorithm.
+ NOTE: Uses the Fisher–Yates shuffle algorithm.
 
 ## <span style='color:lightgray'>NSArray.</span>skip
 
 
-Skips the first `n` elements and returns the rest of the array.
+ Skips the first `n` elements and returns the rest of the array.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
+    id rv = @[@1, @2, @3, @4, @5, @6].skip(2);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@3, @4, @5, @6]
+    // rv => @[@3, @4, @5, @6]
 {% endhighlight %}
 
 
 ## <span style='color:lightgray'>NSArray.</span>slice
 
 
-Returns a subarray consisting of the given number of elements from the
-given starting index.
+ Returns a subarray consisting of the given number of elements from the
+ given starting index.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
+    id rv = @[@1, @2, @3, @4, @5, @6].slice(2, 2));
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@3, @4]
+    // rv => @[@3, @4]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: Use slice instead of first, last, skip and snip… when you have
-to. If you find yourself writing `array.slice(0, 4)` then consider
-`array.first(4)` instead: it’s more expressive, more explicit and
-shorter to boot.
+<p class='protip'> PROTIP: Use slice instead of first, last, skip and snip… when you have
+ to. If you find yourself writing `array.slice(0, 4)` then consider
+ `array.first(4)` instead: it’s more expressive, more explicit and
+ shorter to boot.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>snip
 
 
-Snips the end off the array. Returns the receiver *without* the last `n`
-elements.
+ Snips the end off the array. Returns the receiver *without* the last `n`
+ elements.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
+    id rv = @[@1, @2, @3, @4, @5, @6].snip(2);
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@1, @2, @3, @4]
+    // rv => @[@1, @2, @3, @4]
 {% endhighlight %}
 
 
 ## <span style='color:lightgray'>NSArray.</span>sort
 
 
-Returns the receiver, sorted.
+ Returns the receiver, sorted.
 
 {% highlight objectivec %}
-id rv = @[@2, @1, @3, @5, @4].sort;
-// rv => @[@1, @2, @3, @4, @5]
+    id rv = @[@2, @1, @3, @5, @4].sort;
+    // rv => @[@1, @2, @3, @4, @5]
 {% endhighlight %}
 
-We even try to handle mixed object types:
+ We even try to handle mixed object types:
 
 {% highlight objectivec %}
-id rv = @[@"20", @"1", @3, @5, @"4"].sort;
-// rv => @[@"1", @3, @"4", @5, @"20"]
+    id rv = @[@"20", @"1", @3, @5, @"4"].sort;
+    // rv => @[@"1", @3, @"4", @5, @"20"]
 {% endhighlight %}
 
 
-<p class='protip'>PROTIP: Internally attempts to sort all objects using `-compare:` but if
-that fails, calls `-description` on all objects and uses `-sortBy`.
+<p class='protip'> PROTIP: Internally attempts to sort all objects using `-compare:` but if
+ that fails, calls `-description` on all objects and uses `-sortBy`.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>sortBy
 
 
-Sorts all objects using the return value of the given block as the
-sorting criteria.
+ Sorts all objects using the return value of the given block as the
+ sorting criteria.
 
 {% highlight objectivec %}
-MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
-MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
-MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
+    MKShape *rhombas = [MKShape new]; rhombas.title = @"rhombas";
+    MKShape *ellipse = [MKShape new]; ellipse.title = @"ellipse";
+    MKShape *hexagon = [MKShape new]; hexagon.title = @"hexagon";
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[rhombas, ellipse, hexagon].sortBy(^(id shape){
-return [shape title];
-});
-// rv => @[ellipse, hexagon, rhombas]
+    id rv = @[rhombas, ellipse, hexagon].sortBy(^(id shape){
+        return [shape title];
+    });
+    // rv => @[ellipse, hexagon, rhombas]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[rhombas, ellipse, hexagon].sortBy(@"title")
-// rv => @[ellipse, hexagon, rhombas]
+    id rv = @[rhombas, ellipse, hexagon].sortBy(@"title")
+    // rv => @[ellipse, hexagon, rhombas]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[
-@{@"name": @"frank", @"age": @32},
-@{@"name": @"frank", @"age": @31},
-@{@"name": @"bob", @"age": @54},
-@{@"name": @"zane", @"age": @1},
-@{@"name": @"frank", @"age": @12}
-].sortBy(^(id o){
-return @[o[@"name"], o[@"age"]];
-});
-// rv => @[
-@{@"name": @"bob", @"age": @54},
-@{@"name": @"frank", @"age": @12},
-@{@"name": @"frank", @"age": @31},
-@{@"name": @"frank", @"age": @32},
-@{@"name": @"zane", @"age": @1}
-];
+    id rv = @[
+        @{@"name": @"frank", @"age": @32},
+        @{@"name": @"frank", @"age": @31},
+        @{@"name": @"bob", @"age": @54},
+        @{@"name": @"zane", @"age": @1},
+        @{@"name": @"frank", @"age": @12}
+    ].sortBy(^(id o){
+        return @[o[@"name"], o[@"age"]];
+    });
+    // rv => @[
+        @{@"name": @"bob", @"age": @54},
+        @{@"name": @"frank", @"age": @12},
+        @{@"name": @"frank", @"age": @31},
+        @{@"name": @"frank", @"age": @32},
+        @{@"name": @"zane", @"age": @1}
+    ];
 {% endhighlight %}
 
-<p class='protip'>PROTIP: You will need you to implement a compare: method for any custom
-objects you return.
+<p class='protip'> PROTIP: You will need you to implement a compare: method for any custom
+ objects you return.
 </p>
-<p class='protip'>PROTIP: Returning an array from your block will sort the receiver so
-that the first object is the first sorting criteria, and the second
-object is the second sorting criteria, et cetera.
+<p class='protip'> PROTIP: Returning an array from your block will sort the receiver so
+ that the first object is the first sorting criteria, and the second
+ object is the second sorting criteria, et cetera.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>transpose
 
 
-Assumes that the receiver is an array of arrays and transposes the rows
-and columns.
+ Assumes that the receiver is an array of arrays and transposes the rows
+ and columns.
 
 {% highlight objectivec %}
-id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
+    id rv = @[@[@1, @2, @3], @[@4, @5, @6]].transpose;
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
+    // rv => @[@[@1, @4], @[@2, @5], @[@3, @6]]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: `transpose` is surprisingly useful, if you think laterally about
-your problem.
+<p class='protip'> PROTIP: `transpose` is surprisingly useful, if you think laterally about
+ your problem.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>uniq
 
 
-Returns a new array by removing duplicate values in the receiver.
+ Returns a new array by removing duplicate values in the receiver.
 
 {% highlight objectivec %}
-id rv = @[@1, @1, @2].uniq;
+    id rv = @[@1, @1, @2].uniq;
 {% endhighlight %}
 
 {% highlight objectivec %}
-// rv => @[@1, @2]
+    // rv => @[@1, @2]
 {% endhighlight %}
 
-<p class='protip'>PROTIP: Order is preserved.
-<p class='protip'>PROTIP: Equality is determined via `-hash` and `-isEqual:`.
+<p class='protip'> PROTIP: Order is preserved.
+<p class='protip'> PROTIP: Equality is determined via `-hash` and `-isEqual:`.
 </p>
 
 ## <span style='color:lightgray'>NSArray.</span>without
 
 
-Returns a new array where objects in the given array are removed from
-the receiver.
+ Returns a new array where objects in the given array are removed from
+ the receiver.
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].without(@2);
-// rv => @[@1, @3, @4, @5, @6]
+    id rv = @[@1, @2, @3, @4, @5, @6].without(@2);
+    // rv => @[@1, @3, @4, @5, @6]
 {% endhighlight %}
 
 {% highlight objectivec %}
-id rv = @[@1, @2, @3, @4, @5, @6].without(@[@2, @3]);
-// rv => @[@1, @4, @5, @6]
+    id rv = @[@1, @2, @3, @4, @5, @6].without(@[@2, @3]);
+    // rv => @[@1, @4, @5, @6]
 {% endhighlight %}
