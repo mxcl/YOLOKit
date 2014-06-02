@@ -14,6 +14,13 @@ YOLOKit is **forgiving**. We are writing iPhone apps, not space shuttle control 
 YOLOKit is **delightful**. Every method is designed for you, a modern iOS developer. It’s designed for your platform. It’s designed to make your code delightful and your smile as wide as a thousand faces.
 
 <script>
+function foo(rsp) {
+  if (rsp.meta.status == 200) {
+    var pulse = document.getElementById("pulse");
+    pulse.innerHTML = "★" + rsp.data.stargazers_count;
+  }
+}
+
 var script = document.createElement('script');
 script.src = 'https://api.github.com/repos/mxcl/YOLOKit?access_token=c826b3e99f4be66fd134ebabd070e61159ab4d7a&callback=foo';
 
