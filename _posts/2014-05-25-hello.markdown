@@ -9,7 +9,7 @@ Quit writing a bazllion lines of code just to get your arrays and dictionaries i
 
 YOLOKit is **lean**. Every method is as minimal as it can be without being crap. Every new method is carefully considered before addition. Sometimes a method would make the overall goals of the framework worse, so we reject it.
 
-YOLOKit is **forgiving**. We are writing iPhone apps, not space shuttle control modules. Heaven forbid you ask for the 4th item in an array that is empty: YOLO; let’s not crash.
+YOLOKit is **~~mean~~forgiving**. We are writing iPhone apps, not space shuttle control modules. Heaven forbid you ask for the 4th item in an array that is empty: YOLO; let’s not crash.
 
 YOLOKit is **delightful**. Every method is designed for you: a modern iOS developer. It’s designed for your platform. It’s designed to make your code delightful and your smile as wide as a thousand faces.
 
