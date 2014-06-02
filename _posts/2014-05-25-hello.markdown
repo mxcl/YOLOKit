@@ -20,7 +20,7 @@ script.src = 'https://api.github.com/repos/mxcl/YOLOKit?access_token=c826b3e99f4
 document.getElementsByTagName('head')[0].appendChild(script);
 </script>
 
-<a class="github" href="https://github.com/mxcl/YOLOKit">PromiseKit on GitHub</a> <span id="pulse"></span>
+<a class="github" href="https://github.com/mxcl/YOLOKit">YOLOKit on GitHub</a> <span id="pulse"></span>
 
 
 # Importing YOLOKit
