@@ -1,4 +1,4 @@
 permalink: /:title
 highlighter: true
-paginate: 4
+paginate: 8
 markdown: kramdown
