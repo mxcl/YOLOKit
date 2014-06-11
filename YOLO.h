@@ -153,7 +153,7 @@
 - (NSArray *)flatten;
 #endif
 
-#ifdef YOLO_FLAT_MAP
+#ifdef YOLO_FLATMAP
 /**
  Returns a new array with the concatenated results of running block once
  for every element in the receiver.
@@ -175,7 +175,7 @@
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap;
 #endif
 
-#ifdef YOLO_GROUP_BY
+#ifdef YOLO_GROUPBY
 /**
  Groups the collection by result of the given block.
 
@@ -208,7 +208,7 @@ clear.
 - (BOOL (^)(id o))has;
 #endif
 
-#ifdef YOLO_INDEX_OF
+#ifdef YOLO_INDEXOF
 /**
  Returns the index of the given object in the receiver or `NSNotFound` if
  the object was not found.
@@ -816,7 +816,7 @@ clear.
 
 @interface NSNumber (YOLO)
 
-#ifdef YOLO_UP_TO
+#ifdef YOLO_UPTO
 /**
  Returns an array of consequentive numbers from receiver up to (and
  including) the given number.
