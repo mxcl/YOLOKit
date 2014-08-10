@@ -1,7 +1,7 @@
-@import Foundation.NSArray;
-@import Foundation.NSDictionary;
-@import Foundation.NSSet;
-@import Foundation.NSString;
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSSet.h>
+#import <Foundation/NSString.h>
 
 
 

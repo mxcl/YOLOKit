@@ -1,6 +1,6 @@
 #import "YOLO.h"
 
-@import Foundation.NSMethodSignature;
+#import <Foundation/NSMethodSignature.h>
 extern NSMethodSignature *YOLOMS(id);
 
 
