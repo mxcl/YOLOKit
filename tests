@@ -18,7 +18,10 @@ int main() {
     unlink("/tmp/YOLOtests");
 
     @autoreleasepool {
+      #pragma clang diagnostic push
+      #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         XCTSelfTestMain();
+      #pragma clang diagnostic pop
     }
 }
 
@@ -595,7 +598,14 @@ int main() {
 
 __EOBJC__
 
-FRAMEWORKS = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+FRAMEWORKS = begin
+  attempt1 = "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+  if File.directory? "#{attempt1}/XCTest.framework"
+    attempt1
+  else
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+  end
+end
 
 File.open('/tmp/YOLOtests.m', 'w') do |f|
   f.puts("\n\n")  # make line numbers line up
