@@ -570,6 +570,32 @@ int main() {
     XCTAssertEqualObjects(aa, bb);
 }
 
+- (void)testArrayFmap {
+    NSArray *aaa = @[@"a", @"b", @"c", @"d"];
+    NSArray *aa = aaa.fmap(^(id o, uint ii, id array){
+        return @[o, @(ii), array];
+    });
+    id bb = @[@[@"a", @0, aaa], @[@"b", @1, aaa], @[@"c", @2, aaa], @[@"d", @3, aaa]];
+    XCTAssertEqualObjects(aa, bb);
+    XCTAssertFalse([aa isKindOfClass:[NSMutableArray class]]);
+
+    aa = @[@"a", @"b", @"c", @"d"];
+    bb = aa.fmap(^(id o){
+        return o;
+    });
+    XCTAssertEqualObjects(aa, bb);
+    
+    bb = aa.fmap(^(id o, id i){
+        return [NSString stringWithFormat:@"%@%@", o, i];
+    });
+    aa = @[@"a0", @"b1", @"c2", @"d3"];
+    XCTAssertEqualObjects(aa, bb);
+
+    bb = ((NSArray *)aa.mutableCopy).fmap(^(id o) { return o; });
+    XCTAssertEqualObjects(aa, bb);
+    XCTAssertTrue([bb isKindOfClass:[NSMutableArray class]]);
+}
+
 - (void)testDictionaryFmap {
     XCTAssertEqualObjects(@{}, (@{}.fmap(^(id obj) { return obj; })));
 
