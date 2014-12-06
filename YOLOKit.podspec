@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     ss.preserve_paths = 'YOLO.ph'
   end
 
-  %w{all any array chunk concat dict each extend find first flatMap flatten get
+  %w{all any array chunk concat dict each extend find first flatMap flatten fmap get
     groupBy has indexOf inject join last map max min none partition pick pluck
     pmap pop push reduce reverse rotate sample select shift shuffle skip slice
     snip sort split transpose uniq unshift upTo without

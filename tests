@@ -570,6 +570,30 @@ int main() {
     XCTAssertEqualObjects(aa, bb);
 }
 
+- (void)testDictionaryFmap {
+    XCTAssertEqualObjects(@{}, (@{}.fmap(^(id obj) { return obj; })));
+
+    NSDictionary *aa = @{@1: @2, @2: @4, @3: @9};
+    XCTAssertEqualObjects(aa, (aa.fmap(^(id obj) { return obj; })));
+
+    id bb = aa.fmap(^(id obj){
+        return @([obj intValue] * 2);
+    });
+    XCTAssertEqualObjects(bb, (@{@1: @4, @2: @8, @3: @18}));
+    XCTAssertFalse([bb isKindOfClass:[NSMutableDictionary class]]);
+
+    bb = aa.fmap(^(id obj, id key){
+        return @([obj intValue] * 2 + [key intValue]);
+    });
+    XCTAssertEqualObjects(bb, (@{@1: @5, @2: @10, @3: @21}));
+
+    bb = ((NSDictionary *)aa.mutableCopy).fmap(^(id obj){
+        return @([obj intValue] * 2);
+    });
+    XCTAssertEqualObjects(bb, (@{@1: @4, @2: @8, @3: @18}));
+    XCTAssertTrue([bb isKindOfClass:[NSMutableDictionary class]]);
+}
+
 - (void)testPick {
     NSDictionary *a = @{@1: @2, @2: @3, @3: @4};
     id b = a.pick(@1, @2, @5, nil);
