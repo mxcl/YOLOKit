@@ -770,6 +770,13 @@ clear.
 - (NSSet *(^)(void (^)(id o)))each;
 #endif
 
+#ifdef YOLO_FMAP
+/**
+ @see NSArray's -fmap
+*/
+- (NSSet *(^)(id (^)(id obj)))fmap;
+#endif
+
 @end
 
 
