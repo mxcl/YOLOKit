@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
         ss.dependency 'YOLOKit/slice'
       when 'dict'
         ss.dependency 'YOLOKit/transpose'
+      when 'fmap'
+        ss.dependency 'YOLOKit/map'
       when 'join'
         ss.dependency 'YOLOKit/pluck'
       when 'reduce'
