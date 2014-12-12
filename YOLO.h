@@ -175,6 +175,34 @@
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap;
 #endif
 
+#ifdef YOLO_FMAP
+/**
+ Invokes the given block once for each element of self. Creates a new
+ array containing the values returned by the block.
+
+    id rv = @[@1, @2, @3, @4].fmap(^(NSNumber *n){
+        return @(n.intValue * n.intValue);
+    });
+    // rv => @[@1, @4, @9, @16]
+
+ If the given block returns nil, that element is skipped in the returned
+ array.
+
+ The given block can have up to three parameters, the first is an element
+ in the array, the second that element’s index, and the third the array
+ itself.
+
+ The second parameter can be a primitive (eg. `int`), or an `NSNumber *`:
+
+     @"YOLO".split(@"").fmap(^(NSString *letter, int index){
+         //…
+     });
+
+ @see -map
+*/
+- (NSArray *(^)(id block))fmap;
+#endif
+
 #ifdef YOLO_GROUPBY
 /**
  Groups the collection by result of the given block.
@@ -742,6 +770,13 @@ clear.
 - (NSSet *(^)(void (^)(id o)))each;
 #endif
 
+#ifdef YOLO_FMAP
+/**
+ @see NSArray's -fmap
+*/
+- (NSSet *(^)(id (^)(id obj)))fmap;
+#endif
+
 @end
 
 
@@ -774,6 +809,28 @@ clear.
     // rv => @{@1: @9, @2: @4, @10: @100}
 */
 - (NSDictionary *(^)(NSDictionary *higherPriorityDictionary))extend;
+#endif
+
+#ifdef YOLO_FMAP
+/**
+ Invokes the given block once for each key, value pair in the receiver.
+ Returns a dictionary containing the values returned by the block.
+
+    id rv = @{@1: @2, @2: @4, @3: @9}.fmap(^(id obj){
+        return @([obj intValue] * 2);
+    });
+    // rv = @{@1: @4, @2: @8, @3: @18}
+
+ If the given block returns nil, that element is skipped in the returned
+ dictionary.
+
+ The given block can have up to three parameters, the first is an element
+ in the dictionary, the second that element’s key, and the third the dictionary
+ itself.
+
+ @see -map
+*/
+- (NSDictionary *(^)(id block))fmap;
 #endif
 
 #ifdef YOLO_GET

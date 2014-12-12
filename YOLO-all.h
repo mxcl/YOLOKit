@@ -10,6 +10,7 @@
 #define YOLO_FIRST
 #define YOLO_FLATMAP
 #define YOLO_FLATTEN
+#define YOLO_FMAP
 #define YOLO_GET
 #define YOLO_GROUPBY
 #define YOLO_HAS
