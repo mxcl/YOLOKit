@@ -28,7 +28,11 @@
             if (o)
                 mapped[jj++] = o;
         }
-        return [[self.class alloc] initWithObjects:mapped count:jj];
+
+        Class immutableClass = [NSArray class];
+        Class mutableClass = [NSMutableArray class];
+        Class cls = [self isKindOfClass:mutableClass] ? mutableClass : immutableClass;
+        return [[cls alloc] initWithObjects:mapped count:jj];
     };
 }
 
