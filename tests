@@ -570,6 +570,13 @@ int main() {
     XCTAssertEqualObjects(aa, bb);
 }
 
+- (void)testUniqedArrayMap {
+    NSArray *aaa = @[@"a", @"b", @"a"];
+    NSArray *aa = @[@"a", @"b"];
+    id bb = aaa.uniq.map(^(id o) { return o; });
+    XCTAssertEqualObjects(aa, bb);
+}
+
 - (void)testArrayFmap {
     NSArray *aaa = @[@"a", @"b", @"c", @"d"];
     NSArray *aa = aaa.fmap(^(id o, uint ii, id array){
