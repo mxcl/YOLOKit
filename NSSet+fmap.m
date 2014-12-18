@@ -11,7 +11,7 @@
             if (o)
                 mapped[ii++] = o;
         }
-        return [[self.class alloc] initWithObjects:mapped count:ii];
+        return [NSSet setWithObjects:mapped count:ii];
     };
 }
 

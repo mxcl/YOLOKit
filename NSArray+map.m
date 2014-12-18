@@ -28,7 +28,7 @@
             if (o)
                 mapped[jj++] = o;
         }
-        return [[self.class alloc] initWithObjects:mapped count:jj];
+        return [NSArray arrayWithObjects:mapped count:jj];
     };
 }
 

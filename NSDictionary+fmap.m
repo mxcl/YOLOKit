@@ -25,7 +25,7 @@
                 objs[ii++] = o;
             }
         }
-        return [[self.class alloc] initWithObjects:objs forKeys:keys count:ii];
+        return [NSDictionary dictionaryWithObjects:objs forKeys:keys count:ii];
     };
 }
 
