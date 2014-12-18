@@ -600,7 +600,6 @@ int main() {
 
     bb = ((NSArray *)aa.mutableCopy).fmap(^(id o) { return o; });
     XCTAssertEqualObjects(aa, bb);
-    XCTAssertTrue([bb isKindOfClass:[NSMutableArray class]]);
 }
 
 - (void)testSetFmap {
@@ -619,7 +618,6 @@ int main() {
         return @([obj intValue] * [obj intValue]);
     });
     XCTAssertEqualObjects(bb, ([NSSet setWithObjects:@1, @4, @9, nil]));
-    XCTAssertTrue([bb isKindOfClass:[NSMutableSet class]]);
 }
 
 - (void)testDictionaryFmap {
@@ -643,7 +641,6 @@ int main() {
         return @([obj intValue] * 2);
     });
     XCTAssertEqualObjects(bb, (@{@1: @4, @2: @8, @3: @18}));
-    XCTAssertTrue([bb isKindOfClass:[NSMutableDictionary class]]);
 }
 
 - (void)testPick {
