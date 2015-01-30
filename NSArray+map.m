@@ -3,7 +3,7 @@
 @implementation NSArray (YOLO)
 
 - (NSArray *(^)(id))map {
-    return ^(id frock) {
+    return ^id(id frock) {
         NSMethodSignature *sig = YOLOMS(frock);
         id (^block)(id, NSUInteger) = ^{
             switch (sig.numberOfArguments){
@@ -28,7 +28,14 @@
             if (o)
                 mapped[jj++] = o;
         }
-        return [[self.class alloc] initWithObjects:mapped count:jj];
+        
+        if ([self respondsToSelector:@selector(initWithObjects:count:)]) {
+            return [[self.class alloc] initWithObjects:mapped count:jj];
+        } else {
+            // some secret implementations of NSArray don't respond to the
+            // above selector.
+            return [NSArray arrayWithObjects:mapped count:jj];
+        }
     };
 }
 

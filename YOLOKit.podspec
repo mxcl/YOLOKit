@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'YOLOKit'
-  s.version      = '11.1'
+  s.version      = '11.1.1'
   s.source       = { :git => 'https://github.com/mxcl/YOLOKit.git', :tag => s.version }
   s.requires_arc = true
   s.summary      = 'A delightful library for enumerating Foundation objects.'
