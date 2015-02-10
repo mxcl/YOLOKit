@@ -27,8 +27,7 @@
             id o = block(mappable, ii++);
             if (o)
                 mapped[jj++] = o;
-        }
-        
+        }        
         if ([self respondsToSelector:@selector(initWithObjects:count:)]) {
             return [[self.class alloc] initWithObjects:mapped count:jj];
         } else {
