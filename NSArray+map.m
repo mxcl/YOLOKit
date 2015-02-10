@@ -28,13 +28,7 @@
             if (o)
                 mapped[jj++] = o;
         }        
-        if ([self respondsToSelector:@selector(initWithObjects:count:)]) {
-            return [[self.class alloc] initWithObjects:mapped count:jj];
-        } else {
-            // some secret implementations of NSArray don't respond to the
-            // above selector.
-            return [NSArray arrayWithObjects:mapped count:jj];
-        }
+        return [NSArray arrayWithObjects:mapped count:jj];
     };
 }
 
