@@ -1,7 +1,7 @@
 @import Foundation.NSKeyValueCoding;
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOPluck)
 
 - (NSArray *(^)(NSString *))pluck {
     return ^NSArray *(NSString *key) {

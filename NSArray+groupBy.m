@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOGroupBy)
 
 - (NSDictionary *(^)(id (^)(id o)))groupBy {
     return ^id(id (^block)(id)) {

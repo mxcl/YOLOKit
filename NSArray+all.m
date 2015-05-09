@@ -1,7 +1,7 @@
 #import "YOLO.ph"
 
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOAll)
 
 - (BOOL(^)(id o))all {
     return ^(id arg){

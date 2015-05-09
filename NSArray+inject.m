@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOInject)
 
 - (id(^)(id, id (^)(id, id)))inject {
     return ^(id initial_memo, id (^block)(id, id)) {

@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSDictionary (YOLO)
+@implementation NSDictionary (YOLOPick)
 
 - (NSDictionary *(^)(id, ...))pick {
     return ^(id arg0, ...) {

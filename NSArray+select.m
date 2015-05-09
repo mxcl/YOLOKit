@@ -1,10 +1,7 @@
 #import "YOLO.ph"
 #import <objc/runtime.h>
 
-extern int YOLOArgCount(id);
-extern NSMethodSignature *YOLOMS(id);
-
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSelect)
 
 // The blockToUse variable is necessary or: EXC_BAD_ACCESS
 

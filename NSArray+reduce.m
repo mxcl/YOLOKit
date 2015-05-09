@@ -1,6 +1,7 @@
+#import "NSArray+last.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOReduce)
 
 - (id(^)(id (^)(id, id)))reduce {
     return ^(id (^block)(id, id)) {

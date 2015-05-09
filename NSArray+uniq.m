@@ -1,7 +1,7 @@
 @import Foundation.NSOrderedSet;
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOUniq)
 
 - (id)uniq {
     return [[NSOrderedSet orderedSetWithArray:self] array];

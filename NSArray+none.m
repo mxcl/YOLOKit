@@ -1,7 +1,7 @@
 #import "YOLO.ph"
 #import <objc/runtime.h>
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLONone)
 
 - (BOOL(^)(id o))none {
     return ^(id arg){

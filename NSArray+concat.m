@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOConcat)
 
 - (NSArray *(^)(NSArray *))concat {
     return ^(id other_array) {

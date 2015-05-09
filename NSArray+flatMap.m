@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOFlatMap)
 
 - (NSArray *(^)(NSArray *(^)(id o)))flatMap {
     return ^(NSArray *(^block)(id o)){

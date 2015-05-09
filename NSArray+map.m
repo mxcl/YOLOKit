@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOMap)
 
 - (NSArray *(^)(id))map {
     return ^id(id frock) {

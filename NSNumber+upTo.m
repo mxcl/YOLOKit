@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSNumber (YOLO)
+@implementation NSNumber (YOLOUpTo)
 
 - (NSArray *(^)(NSInteger))upTo {
     return ^NSArray *(NSInteger upTo) {

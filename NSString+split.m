@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSString (YOLO)
+@implementation NSString (YOLOSplit)
 
 - (NSArray *(^)(NSString *))split {
     return ^NSArray *(NSString *separator){

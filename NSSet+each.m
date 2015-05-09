@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSSet (YOLO)
+@implementation NSSet (YOLOEach)
 
 - (NSSet *(^)(void (^)(id)))each {
     return ^(void(^block)(id)) {

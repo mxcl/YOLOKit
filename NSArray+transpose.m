@@ -1,6 +1,9 @@
+#import "NSArray+each.h"
+#import "NSArray+select.h"
+#import "NSArray+max.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOTranspose)
 
 - (NSArray *)transpose {
     if (self.count == 0)

@@ -1,6 +1,7 @@
+#import "NSArray+pluck.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOJoin)
 
 - (NSString *(^)(NSString *))join {
     return ^(NSString *separator) {

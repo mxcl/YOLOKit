@@ -1,6 +1,7 @@
+#import "NSArray+transpose.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLODict)
 
 - (NSDictionary *)dict {
     NSArray *aa = self.transpose;

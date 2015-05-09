@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOPartition)
 
 - (NSArray *(^)(id o))partition {
     return ^NSArray *(BOOL(^block)(id o)) {

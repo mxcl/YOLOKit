@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSSet (YOLO)
+@implementation NSSet (YOLOFMap)
 
 - (NSSet *(^)(id (^)(id)))fmap {
     return ^id(id (^block)(id)) {

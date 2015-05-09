@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSMutableArray (YOLO)
+@implementation NSMutableArray (YOLOUnshift)
 
 - (NSMutableArray *(^)(id o))unshift {
     return ^(id o){

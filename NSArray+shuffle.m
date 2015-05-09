@@ -1,7 +1,7 @@
 #import <stdlib.h>
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOShuffle)
 
 - (id)shuffle {
     switch (self.count) {

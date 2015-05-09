@@ -1,7 +1,9 @@
 @import Foundation.NSKeyValueCoding;
+#import "NSArray+all.h"
+#import "NSArray+transpose.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSort)
 
 - (NSArray *)sort {
     @try {

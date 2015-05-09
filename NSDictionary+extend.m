@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSDictionary (YOLO)
+@implementation NSDictionary (YOLOExtend)
 
 - (NSDictionary *(^)(NSDictionary *))extend {
     return ^NSDictionary *(NSDictionary *key) {

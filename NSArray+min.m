@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOMin)
 
 - (id(^)(id))min {
     return ^(NSInteger (^block)(id o)) {

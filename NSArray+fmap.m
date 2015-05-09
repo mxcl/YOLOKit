@@ -1,6 +1,7 @@
+#import "NSArray+map.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOFMap)
 
 - (NSArray *(^)(id))fmap {
     return self.map;

@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOWithout)
 
 - (NSArray *(^)(id))without {
     return ^NSArray *(id arrayOrSet) {

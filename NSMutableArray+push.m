@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSMutableArray (YOLO)
+@implementation NSMutableArray (YOLOPush)
 
 - (NSMutableArray *(^)(id))push {
     return ^(id o){

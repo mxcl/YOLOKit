@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSlice)
 
 - (NSArray *(^)(NSUInteger, NSUInteger))slice {
     return ^id(NSUInteger start, NSUInteger length) {

@@ -1,6 +1,7 @@
+#import "NSArray+slice.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSnip)
 
 - (NSArray *(^)(NSUInteger numberToTrim))snip {
     return ^(NSUInteger num){

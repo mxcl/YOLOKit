@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'YOLOKit'
-  s.version      = '11.1.2'
+  s.version      = '11.1.3'
   s.source       = { :git => 'https://github.com/mxcl/YOLOKit.git', :tag => s.version }
   s.requires_arc = true
   s.summary      = 'A delightful library for enumerating Foundation objects.'
@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Public Domain' }
 
   s.subspec 'base' do |ss|
+    ss.public_header_files = 'YOLO.h'
     ss.source_files = 'YOLO.m', 'YOLO.h'
     ss.preserve_paths = 'YOLO.ph'
   end
@@ -24,9 +25,8 @@ Pod::Spec.new do |s|
       # ss.compiler_flags = '-Wno-incomplete-implementation'
 
       ss.dependency 'YOLOKit/base'
-      ss.source_files = "*+#{subspec}.m"
-      ss.xcconfig = { GCC_PREPROCESSOR_DEFINITIONS: "$(inherited) YOLO_#{subspec.upcase}=1" }
-      
+      ss.source_files = "*+#{subspec}.{m,h}"
+
       case subspec
       when 'chunk', 'first', 'last', 'snip'
         ss.dependency 'YOLOKit/slice'

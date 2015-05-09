@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOIndexOf)
 
 - (NSUInteger (^)(id obj))indexOf {
     return ^NSUInteger(id obj) {

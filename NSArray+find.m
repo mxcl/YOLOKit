@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOFind)
 
 - (id(^)(id))find {
     return ^id(BOOL (^block)(id o)) {

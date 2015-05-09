@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOMax)
 
 - (id(^)(id))max {
     return ^(NSInteger (^block)(id o)) {

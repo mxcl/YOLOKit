@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSMutableArray (YOLO)
+@implementation NSMutableArray (YOLOShift)
 
 - (id)shift {
     if (self.count == 0)

@@ -1,7 +1,7 @@
 #import <stdlib.h>
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSample)
 
 - (id)sample {
     return self.count == 0

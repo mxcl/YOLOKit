@@ -1,6 +1,7 @@
+#import "NSArray+slice.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOChunk)
 
 - (NSArray *(^)(NSUInteger))chunk {
     return ^(NSUInteger size){

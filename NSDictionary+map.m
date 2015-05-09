@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSDictionary (YOLO)
+@implementation NSDictionary (YOLOMap)
 
 - (NSArray *(^)(id (^)(id, id)))map {
     return ^(id (^block)(id, id)) {

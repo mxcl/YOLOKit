@@ -1,6 +1,7 @@
+#import "NSArray+last.h"
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOSkip)
 
 - (NSArray *(^)(NSUInteger numberToTrim))skip {
     return ^(NSUInteger num){

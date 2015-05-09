@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOReverse)
 
 - (NSArray *)reverse {
     NSMutableArray *aa = self.mutableCopy;

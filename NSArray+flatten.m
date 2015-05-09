@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOFlatten)
 
 - (id)flatten {
     NSMutableArray *aa = [NSMutableArray array];

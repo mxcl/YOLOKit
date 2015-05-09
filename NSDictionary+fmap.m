@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSDictionary (YOLO)
+@implementation NSDictionary (YOLOFMap)
 
 - (NSDictionary *(^)(id))fmap {
     return ^(id frock) {

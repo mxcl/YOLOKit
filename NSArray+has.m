@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOHas)
 
 - (BOOL (^)(id o))has {
     return ^BOOL(id o){

@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSMutableArray (YOLO)
+@implementation NSMutableArray (YOLOPop)
 
 - (id)pop {
     if (self.count) {

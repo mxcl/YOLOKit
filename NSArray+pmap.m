@@ -1,7 +1,7 @@
-#import "YOLO.ph"
 @import Foundation.NSPointerArray;
+#import "YOLO.ph"
 
-@implementation NSArray (YOLO)
+@implementation NSArray (YOLOPMap)
 
 - (NSArray *(^)(id (^)(id o)))pmap {
     return ^NSArray *(id (^block)(id))

@@ -1,6 +1,6 @@
 #import "YOLO.ph"
 
-@implementation NSDictionary (YOLO)
+@implementation NSDictionary (YOLOArray)
 
 - (NSArray *)array {
     NSMutableArray *array = [NSMutableArray new];
