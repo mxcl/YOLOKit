@@ -1,7 +1,7 @@
 Enough with the bazillion lines of array parsing logic. YOLO.
 
 ```objc
-#import "YOLO.h"
+@import YOLOKit;
 
 campaigns.reject(^(PPCampaign *campaign){
     return campaign.locked;
