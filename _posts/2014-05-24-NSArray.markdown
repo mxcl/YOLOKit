@@ -120,7 +120,7 @@ id rv = @[@1, @2, @3, @4].chunk(2).dict
 ### <span style='color:lightgray'>NSArray.</span>find
 
 
- Passes each entry in the arry to the given block, returning the first
+ Passes each entry in the array to the given block, returning the first
  element for which block is not `NO`. If no object matches, returns
  `nil`.
 
