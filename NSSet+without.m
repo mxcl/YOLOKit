@@ -3,15 +3,15 @@
 @implementation NSSet (YOLOWithout)
 
 - (NSSet *(^)(id))without {
-    return ^NSSet *(id arrayOrSet) {
-        if (!arrayOrSet)
+    return ^NSSet *(id arrayOrSetOrObject) {
+        if (!arrayOrSetOrObject)
             return self;
 
-        id objs = [arrayOrSet isKindOfClass:[NSSet class]]
-                ? [arrayOrSet allObjects]
-                : [arrayOrSet isKindOfClass:[NSArray class]]
-                ? arrayOrSet
-                : @[arrayOrSet];
+        id objs = [arrayOrSetOrObject isKindOfClass:[NSSet class]]
+                ? [arrayOrSetOrObject allObjects]
+                : [arrayOrSetOrObject isKindOfClass:[NSArray class]]
+                ? arrayOrSetOrObject
+                : @[arrayOrSetOrObject];
         id rv = self.mutableCopy;
         [rv removeObjectsInArray:objs];
         return rv;

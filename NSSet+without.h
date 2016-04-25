@@ -3,8 +3,8 @@
 @interface NSSet (YOLOWithout)
 
 /**
- Returns a new array where objects in the given array are removed from
- the receiver.
+ Returns a new set where objects in the given set/array/object
+ are removed from the receiver.
 
     id rv = @[@1, @2, @3, @4, @5, @6].without(@2);
     // rv => @[@1, @3, @4, @5, @6]
