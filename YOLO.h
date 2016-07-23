@@ -142,11 +142,62 @@
 #if __has_include(<YOLOKit/NSNumber+upTo.h>)
   #import <YOLOKit/NSNumber+upTo.h>
 #endif
+#if __has_include(<YOLOKit/NSSet+all.h>)
+  #import <YOLOKit/NSSet+all.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+any.h>)
+  #import <YOLOKit/NSSet+any.h>
+#endif
 #if __has_include(<YOLOKit/NSSet+each.h>)
   #import <YOLOKit/NSSet+each.h>
 #endif
+#if __has_include(<YOLOKit/NSSet+find.h>)
+  #import <YOLOKit/NSSet+find.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+flatMap.h>)
+  #import <YOLOKit/NSSet+flatMap.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+flatten.h>)
+  #import <YOLOKit/NSSet+flatten.h>
+#endif
 #if __has_include(<YOLOKit/NSSet+fmap.h>)
   #import <YOLOKit/NSSet+fmap.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+groupBy.h>)
+  #import <YOLOKit/NSSet+groupBy.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+has.h>)
+  #import <YOLOKit/NSSet+has.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+inject.h>)
+  #import <YOLOKit/NSSet+inject.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+join.h>)
+  #import <YOLOKit/NSSet+join.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+map.h>)
+  #import <YOLOKit/NSSet+map.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+max.h>)
+  #import <YOLOKit/NSSet+max.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+min.h>)
+  #import <YOLOKit/NSSet+min.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+none.h>)
+  #import <YOLOKit/NSSet+none.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+partition.h>)
+  #import <YOLOKit/NSSet+partition.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+pluck.h>)
+  #import <YOLOKit/NSSet+pluck.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+select.h>)
+  #import <YOLOKit/NSSet+select.h>
+#endif
+#if __has_include(<YOLOKit/NSSet+without.h>)
+  #import <YOLOKit/NSSet+without.h>
 #endif
 #if __has_include(<YOLOKit/NSString+split.h>)
   #import <YOLOKit/NSString+split.h>
